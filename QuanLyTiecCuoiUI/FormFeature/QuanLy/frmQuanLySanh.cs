@@ -46,7 +46,7 @@ namespace QuanLyTiecCuoiUI
         void txtSoLuongBanTD_TextChanged(object sender, EventArgs e)
         {
             if (txtSoLuongBanTD.Text == " " || txtSoLuongBanTD.Text == "0")
-                txtSoLuongBanTD.Text = "";  
+                txtSoLuongBanTD.Text = "";
         }
 
         private void frmQuanLySanh_Load(object sender, EventArgs e)
@@ -135,6 +135,8 @@ namespace QuanLyTiecCuoiUI
         private void btnThem_Click(object sender, EventArgs e)
         {
             SetDisplayControls(MODE.INSERT);
+            ClearAllInputs();
+            dgvQuanLySanh.ClearSelection();
             mCurrentMode = MODE.INSERT;
         }
 
@@ -159,7 +161,7 @@ namespace QuanLyTiecCuoiUI
             if ((txtTenSanh.Text != "" || txtSoLuongBanTD.Text != "" || txtGhiChu.Text != "")
                 && (mCurrentMode == MODE.EDIT || mCurrentMode == MODE.INSERT))
             {
-                DialogResult dr = MessageBox.Show("Bạn có muốn hủy không", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBox.Show("Bạn có muốn hủy không?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.No)
                     return;
             }
@@ -181,9 +183,16 @@ namespace QuanLyTiecCuoiUI
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
-            if (txtTenSanh.Text == "" || txtSoLuongBanTD.Text == "")
+            if (txtTenSanh.Text == "")
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ! (có thể không nhập phần Ghi Chú)", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtTenSanh.Focus();
+                return;
+            }
+            if (txtSoLuongBanTD.Text == "")
+            {
+                MessageBox.Show("Vui lòng nhập đầy đủ! (có thể không nhập phần Ghi Chú)", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtSoLuongBanTD.Focus();
                 return;
             }
             int temp;
@@ -195,7 +204,7 @@ namespace QuanLyTiecCuoiUI
                 return;
             }
 
-            DialogResult dr = MessageBox.Show("Bạn có muốn lưu không", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult dr = MessageBox.Show("Bạn có muốn lưu không?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dr == DialogResult.No)
                 return;
 
