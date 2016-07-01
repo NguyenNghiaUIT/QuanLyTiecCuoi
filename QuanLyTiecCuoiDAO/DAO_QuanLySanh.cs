@@ -12,7 +12,7 @@ namespace DAO
     {
         public static DataTable GetQLSanhTable()
         {
-            string sqlCommand = @"SELECT MaSanh, TenSanh, LoaiSanh.MaLoaiSanh, SoLuongBanToiDa, DonGiaBanToiThieu, GhiChu FROM LoaiSanh, Sanh WHERE LoaiSanh.MaLoaiSanh = Sanh.MaLoaiSanh";
+            string sqlCommand = @"SELECT MaSanh, TenSanh, LoaiSanh.TenLoaiSanh, SoLuongBanToiDa, DonGiaBanToiThieu, GhiChu FROM LoaiSanh, Sanh WHERE LoaiSanh.MaLoaiSanh = Sanh.MaLoaiSanh";
             return DatabaseHelper.GetData(sqlCommand);
         }
         public static void DeleteSanh(DTO_Sanh sanh)
@@ -27,7 +27,7 @@ namespace DAO
         }
         public static bool InsertSanh(DTO_Sanh sanh)
         {
-            string sqlCommand = string.Format(@"INSERT INTO Sanh (TenSanh, MaLoaiSanh, SoLuongBanToiDa, GhiChu) VALUES (N'{0}','{1}',{2},N'{3}')"
+            string sqlCommand = string.Format(@"INSERT INTO Sanh (TenSanh, MaLoaiSanh, SoLuongBanToiDa, GhiChu) VALUES (N'{0}', {1}, {2}, N'{3}')"
                 , sanh.tenSanh, sanh.maLoaiSanh, sanh.soLuongBanToiDa, sanh.ghiChu);
 
             if (DatabaseHelper.ExcuteSql(sqlCommand) == 1)
@@ -36,7 +36,7 @@ namespace DAO
         }
         public static int UpdateSanh(DTO_Sanh sanh)
         {
-            string sqlCommand = String.Format(@"UPDATE Sanh SET TenSanh=N'{0}', MaLoaiSanh='{1}', SoLuongBanToiDa={2}, GhiChu=N'{3}' WHERE MaSanh={4}",
+            string sqlCommand = String.Format(@"UPDATE Sanh SET TenSanh=N'{0}', MaLoaiSanh={1}, SoLuongBanToiDa={2}, GhiChu=N'{3}' WHERE MaSanh={4}",
                 sanh.tenSanh, sanh.maLoaiSanh, sanh.soLuongBanToiDa, sanh.ghiChu, sanh.maSanh);
             return DatabaseHelper.ExcuteSql(sqlCommand);
         }
