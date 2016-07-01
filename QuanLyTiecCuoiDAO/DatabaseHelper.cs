@@ -53,10 +53,20 @@ namespace DAO
         public static int ExcuteSql(String sql)
         {
             OpenConnection();
+            int rowEffect = -1;
             mCommand = new SqlCommand();
             mCommand.Connection = sCon;
             mCommand.CommandText = sql;
-            int rowEffect = mCommand.ExecuteNonQuery();
+            try
+            {
+                rowEffect = mCommand.ExecuteNonQuery();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                CloseConnection();
+            }
+             
             CloseConnection();
             return rowEffect;
         }
@@ -72,7 +82,6 @@ namespace DAO
                 adapter.Fill(dt);
             }
             CloseConnection();
-
             return dt;
         }
 

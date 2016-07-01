@@ -51,6 +51,7 @@
     <Compile Include="BUS_QuanLyLoaiSanh.cs" />
     <Compile Include="BUS_QuanLySanh.cs" />
     <Compile Include="BUS_QuanLyTiecCuoi.cs" />
+    <Compile Include="BUS_ThamSo.cs" />
     <Compile Include="BUS_TiepNhanSanh.cs" />
     <Compile Include="BUS_TraCuu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

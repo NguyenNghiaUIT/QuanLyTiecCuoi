@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BUS;
@@ -48,20 +49,22 @@ namespace QuanLyTiecCuoiUI
 
         void txtSoLuongBanTD_TextChanged(object sender, EventArgs e)
         {
-            CheckConstrainTextBox(txtSoLuongBanTD);   
+            CheckConstrainTextBox(txtSoLuongBanTD);
         }
 
         private void frmQuanLySanh_Load(object sender, EventArgs e)
         {
             SetDisplayControls(MODE.NORMAL);
-            dgvQuanLySanh.DataSource = BUS_QuanLySanh.GetQLSanhTable();
 
+            dgvQuanLySanh.DataSource = BUS_QuanLySanh.GetQLSanhTable();
             dgvQuanLySanh.Columns[0].Visible = false;
             dgvQuanLySanh.Columns[1].HeaderText = "Tên sảnh";
             dgvQuanLySanh.Columns[2].HeaderText = "Loại sảnh";
             dgvQuanLySanh.Columns[3].HeaderText = "Số lượng bàn tối đa";
             dgvQuanLySanh.Columns[4].HeaderText = "Đơn giá bàn tối thiểu";
             dgvQuanLySanh.Columns[5].HeaderText = "Ghi chú";
+
+
 
             cbbLoaiSanh.DataSource = BUS_QuanLySanh.GetListMaLoaiSanh();
             cbbDonGiaBanTT.DataSource = BUS_QuanLySanh.GetListDonGiaBanTT();
