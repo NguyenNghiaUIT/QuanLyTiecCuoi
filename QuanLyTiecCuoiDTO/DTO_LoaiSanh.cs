@@ -14,7 +14,7 @@ namespace DTO
             this.maLoaiSanh = maLoaiSanh;
             this.donGiaBanToiThieu = donGiaBanToiThieu;
         }
-        public char maLoaiSanh;
-        public string donGiaBanToiThieu;
+        public char maLoaiSanh { get; set; }
+        public string donGiaBanToiThieu { get; set; }
     }
 }

@@ -16,10 +16,10 @@ namespace DTO
             this.soLuongBanToiDa = soLuongBanToiDa;
             this.ghiChu = ghiChu;
         }
-        public int maSanh;
-        public string tenSanh;
-        public int maLoaiSanh;
-        public int soLuongBanToiDa;
-        public string ghiChu;
+        public int maSanh { get; set; }
+        public string tenSanh { get; set; }
+        public int maLoaiSanh { get; set; }
+        public int soLuongBanToiDa { get; set; }
+        public string ghiChu { get; set; }
     }
 }
