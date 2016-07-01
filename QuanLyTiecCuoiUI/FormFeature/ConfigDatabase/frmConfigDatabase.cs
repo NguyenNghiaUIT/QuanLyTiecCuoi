@@ -22,8 +22,9 @@ namespace QuanLyTiecCuoiUI.FormFeature.ConfigDatabase
         private void Connect_Click(object sender, EventArgs e)
         {
             String dataSouce = txtDataSouce.Text;
+            String databaseName = txtDatabaseName.Text;
            
-            DatabaseHelper.CONNECTION_STRING = DatabaseHelper.CreateConnectionString(dataSouce);
+            DatabaseHelper.CONNECTION_STRING = DatabaseHelper.CreateConnectionString(dataSouce, databaseName);
             Debug.WriteLine(DatabaseHelper.CONNECTION_STRING);
             QuanLyTiecCuoiUI.Properties.Settings.Default.ConnectionString = DatabaseHelper.CONNECTION_STRING;
             QuanLyTiecCuoiUI.Properties.Settings.Default.Save();
@@ -43,6 +44,7 @@ namespace QuanLyTiecCuoiUI.FormFeature.ConfigDatabase
               if (result == DialogResult.OK)
               {
                   txtDataSouce.Text = "";
+                  txtDatabaseName.Text = "";
               }
             }
         }

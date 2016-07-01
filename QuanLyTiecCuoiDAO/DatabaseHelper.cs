@@ -20,7 +20,7 @@ namespace DAO
         /// <returns></returns>
         public static bool OpenConnection()
         {
-            if(sCon == null)
+            if (sCon == null)
                 sCon = new SqlConnection(CONNECTION_STRING);
             try
             {
@@ -45,9 +45,9 @@ namespace DAO
             }
         }
 
-        public static String CreateConnectionString(String datasource)
+        public static String CreateConnectionString(String datasource, String databaseName)
         {
-            return "Data Source=" + datasource + ";Initial Catalog=QuanLyTiecCuoi;Integrated Security=True";
+            return "Data Source=" + datasource + ";Initial Catalog=" + databaseName + ";Integrated Security=True";
         }
 
         public static int ExcuteSql(String sql)
