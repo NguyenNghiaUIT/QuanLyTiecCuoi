@@ -8,9 +8,10 @@ namespace DTO
 {
     public class DTO_MonAn
     {
-        public string MaMonAn { get; set; }
+        public int MaMonAn { get; set; }
         public string TenMonAn { get; set; }
         public decimal DonGia { get; set; }
         public string GhiChu { get; set; }
+        public string HinhAnh { get; set; }
     }
 }

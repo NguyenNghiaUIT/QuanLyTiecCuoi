@@ -31,26 +31,7 @@ namespace QuanLyTiecCuoiUI
             InitializeComponent();
             ResultTable = BUS_MonAn.GetDataTableMonAn();
         }
-        //Get next ID 
-        //Convert Number to string for index
-        private string ConvertNumber(int state)
-        {
-            if (state <= 9) return '0' + state.ToString();
-            else
-                return state.ToString();
-        }
-        //Get next index in table
-        private string GetNextID(DataTable result)
-        {
-            try
-            {
-                return IDTable + (ConvertNumber(Int32.Parse(result.Rows[ResultTable.Rows.Count - 1].ItemArray[0].ToString().Substring(2)) + 1));
-            }
-            catch (Exception ex)
-            {
-                return IDTable + "01";
-            }
-        }
+
         //Controls
         private void EnableInputsControl(bool flag)
         {
@@ -79,8 +60,8 @@ namespace QuanLyTiecCuoiUI
             }
             else if (selected == SELECTED.CELLSELECTED)
             {
-                btnThem.Enabled = btnLuu.Enabled = false;
-                btnSua.Enabled = btnXoa.Enabled = btnHuy.Enabled = true;
+                btnLuu.Enabled = false;
+                btnThem.Enabled = btnSua.Enabled = btnXoa.Enabled = btnHuy.Enabled = true;
                 EnableInputsControl(false);
             }
         }
@@ -117,7 +98,7 @@ namespace QuanLyTiecCuoiUI
             if (confirm == DialogResult.Yes)
             {
                 int selectedRow = dgvDanhSachMonAn.SelectedRows[0].Index;
-                monAn.MaMonAn = dgvDanhSachMonAn[0, selectedRow].Value.ToString();
+                monAn.MaMonAn = int.Parse(dgvDanhSachMonAn[0, selectedRow].Value.ToString());
                 BUS_MonAn.DeleteMonAn(monAn);
                 ResultTable = BUS_MonAn.GetDataTableMonAn();
                 dgvDanhSachMonAn.DataSource = ResultTable;
@@ -156,7 +137,7 @@ namespace QuanLyTiecCuoiUI
                     txtDonGia.ResetText();
                     return;
                 }
-                monAn.MaMonAn = GetNextID(ResultTable);
+                // monAn.MaMonAn = GetNextID(ResultTable);
                 monAn.TenMonAn = txtTenMonAn.Text;
                 monAn.DonGia = Convert.ToDecimal(txtDonGia.Text.ToString());
                 monAn.GhiChu = txtGhiChu.Text;
@@ -230,7 +211,7 @@ namespace QuanLyTiecCuoiUI
             txtTenMonAn.Text = dgvDanhSachMonAn[1, row].Value.ToString();
             txtDonGia.Text = dgvDanhSachMonAn[2, row].Value.ToString();
             txtGhiChu.Text = dgvDanhSachMonAn[3, row].Value.ToString();
-            monAn.MaMonAn = dgvDanhSachMonAn["MaMonAn", row].Value.ToString();
+            monAn.MaMonAn = int.Parse(dgvDanhSachMonAn["MaMonAn", row].Value.ToString());
         }
 
         //On Loading
