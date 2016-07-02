@@ -27,6 +27,7 @@ namespace QuanLyTiecCuoiUI
         {
             InitializeComponent();
             BUS_QuanLySanh.Init();
+            
             myToolTip.SetToolTip(txtSoLuongBanTD, "Số lượng bàn tối đa từ 1 đến " + MaxSLBanToiDa);
             myToolTip.SetToolTip(lblSoLuongBanTD, "Số lượng bàn tối đa từ 1 đến " + MaxSLBanToiDa);
             txtSoLuongBanTD.TextChanged += txtSoLuongBanTD_TextChanged;
@@ -310,6 +311,15 @@ namespace QuanLyTiecCuoiUI
             if (e.Control && e.KeyCode == Keys.A)
             {
                 ((TextBox)sender).SelectAll();
+            }
+        }
+
+        private void frmQuanLySanh_Shown(object sender, EventArgs e)
+        {
+            if (BUS_QuanLySanh.mIsLoaiSanhDataEmpty)
+            {
+                MessageBox.Show("Không có dữ liệu Loại Sảnh nào, vui lòng thêm vào để sử dụng chức năng này!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
             }
         }
     }

@@ -364,6 +364,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "QUẢN LÝ SẢNH";
             this.Load += new System.EventHandler(this.frmQuanLySanh_Load);
+            this.Shown += new System.EventHandler(this.frmQuanLySanh_Shown);
             this.grpChucNang.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuanLySanh)).EndInit();
             this.grpThongTinSanh.ResumeLayout(false);
