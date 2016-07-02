@@ -97,6 +97,7 @@
     </Compile>
     <Compile Include="FormFeature\QuanLy\frmQuanLySanh.cs">
       <SubType>Form</SubType>
+      <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="FormFeature\QuanLy\frmQuanLySanh.designer.cs">
       <DependentUpon>frmQuanLySanh.cs</DependentUpon>

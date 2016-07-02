@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.grpChucNang = new System.Windows.Forms.GroupBox();
             this.btnThem = new System.Windows.Forms.Button();
             this.btnSua = new System.Windows.Forms.Button();
@@ -43,7 +44,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtSoLuongBanTD = new System.Windows.Forms.TextBox();
             this.lblGhiChu = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
+            this.lblSoLuongBanTD = new System.Windows.Forms.Label();
             this.lblDonGiaBanTT = new System.Windows.Forms.Label();
             this.lblLoaiSanh = new System.Windows.Forms.Label();
             this.lblTenSanh = new System.Windows.Forms.Label();
@@ -52,6 +53,7 @@
             this.cbbLoaiSanh = new System.Windows.Forms.ComboBox();
             this.txtTenSanh = new System.Windows.Forms.TextBox();
             this.grpDanhSachSanh = new System.Windows.Forms.GroupBox();
+            this.myToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.grpChucNang.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuanLySanh)).BeginInit();
             this.grpThongTinSanh.SuspendLayout();
@@ -80,6 +82,7 @@
             this.btnThem.Size = new System.Drawing.Size(100, 30);
             this.btnThem.TabIndex = 5;
             this.btnThem.Text = "Thêm";
+            this.myToolTip.SetToolTip(this.btnThem, "Thêm sảnh mới");
             this.btnThem.UseVisualStyleBackColor = true;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
@@ -156,7 +159,7 @@
             this.grpThongTinSanh.Controls.Add(this.label1);
             this.grpThongTinSanh.Controls.Add(this.txtSoLuongBanTD);
             this.grpThongTinSanh.Controls.Add(this.lblGhiChu);
-            this.grpThongTinSanh.Controls.Add(this.label11);
+            this.grpThongTinSanh.Controls.Add(this.lblSoLuongBanTD);
             this.grpThongTinSanh.Controls.Add(this.lblDonGiaBanTT);
             this.grpThongTinSanh.Controls.Add(this.lblLoaiSanh);
             this.grpThongTinSanh.Controls.Add(this.lblTenSanh);
@@ -250,15 +253,15 @@
             this.lblGhiChu.TabIndex = 39;
             this.lblGhiChu.Text = "Ghi chú";
             // 
-            // label11
+            // lblSoLuongBanTD
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(7, 120);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(131, 17);
-            this.label11.TabIndex = 38;
-            this.label11.Text = "Số lượng bàn tối đa";
+            this.lblSoLuongBanTD.AutoSize = true;
+            this.lblSoLuongBanTD.Location = new System.Drawing.Point(7, 120);
+            this.lblSoLuongBanTD.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSoLuongBanTD.Name = "lblSoLuongBanTD";
+            this.lblSoLuongBanTD.Size = new System.Drawing.Size(131, 17);
+            this.lblSoLuongBanTD.TabIndex = 38;
+            this.lblSoLuongBanTD.Text = "Số lượng bàn tối đa";
             // 
             // lblDonGiaBanTT
             // 
@@ -302,6 +305,7 @@
             // 
             // cbbDonGiaBanTT
             // 
+            this.cbbDonGiaBanTT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbbDonGiaBanTT.FormattingEnabled = true;
             this.cbbDonGiaBanTT.Location = new System.Drawing.Point(174, 86);
             this.cbbDonGiaBanTT.Margin = new System.Windows.Forms.Padding(4);
@@ -312,6 +316,7 @@
             // 
             // cbbLoaiSanh
             // 
+            this.cbbLoaiSanh.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbbLoaiSanh.FormattingEnabled = true;
             this.cbbLoaiSanh.Location = new System.Drawing.Point(174, 54);
             this.cbbLoaiSanh.Margin = new System.Windows.Forms.Padding(4);
@@ -383,7 +388,7 @@
         private System.Windows.Forms.ComboBox cbbLoaiSanh;
         private System.Windows.Forms.TextBox txtTenSanh;
         private System.Windows.Forms.Label lblGhiChu;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label lblSoLuongBanTD;
         private System.Windows.Forms.Label lblDonGiaBanTT;
         private System.Windows.Forms.Label lblLoaiSanh;
         private System.Windows.Forms.Label lblTenSanh;
@@ -394,6 +399,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ToolTip myToolTip;
 
 
     }

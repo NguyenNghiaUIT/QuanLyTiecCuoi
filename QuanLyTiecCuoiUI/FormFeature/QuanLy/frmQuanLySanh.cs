@@ -15,6 +15,7 @@ namespace QuanLyTiecCuoiUI
     public partial class frmQuanLySanh : Form
     {
         private MODE mCurrentMode = MODE.NORMAL;
+        private const int MaxSLBanToiDa = 300;
         enum MODE
         {
             NORMAL,
@@ -26,6 +27,8 @@ namespace QuanLyTiecCuoiUI
         {
             InitializeComponent();
             BUS_QuanLySanh.Init();
+            myToolTip.SetToolTip(txtSoLuongBanTD, "Số lượng bàn tối đa từ 1 đến " + MaxSLBanToiDa);
+            myToolTip.SetToolTip(lblSoLuongBanTD, "Số lượng bàn tối đa từ 1 đến " + MaxSLBanToiDa);
             txtSoLuongBanTD.TextChanged += txtSoLuongBanTD_TextChanged;
             txtTenSanh.TextChanged += txtTenSanh_TextChanged;
             txtGhiChu.TextChanged += txtGhiChu_TextChanged;
@@ -46,7 +49,15 @@ namespace QuanLyTiecCuoiUI
         void txtSoLuongBanTD_TextChanged(object sender, EventArgs e)
         {
             if (txtSoLuongBanTD.Text == " " || txtSoLuongBanTD.Text == "0")
+            {
                 txtSoLuongBanTD.Text = "";
+                return;
+            }
+            if (txtSoLuongBanTD.Text != "" && int.Parse(txtSoLuongBanTD.Text) > MaxSLBanToiDa)
+            {
+                txtSoLuongBanTD.Text = MaxSLBanToiDa.ToString();
+                txtSoLuongBanTD.SelectionStart = txtSoLuongBanTD.Text.Length;
+            }
         }
 
         private void frmQuanLySanh_Load(object sender, EventArgs e)
@@ -77,6 +88,7 @@ namespace QuanLyTiecCuoiUI
                         btnSua.Enabled = false;
                         btnLuu.Enabled = false;
                         btnHuy.Enabled = false;
+                        dgvQuanLySanh.Enabled = true;
                         break;
                     }
                 case MODE.INSERT:
@@ -88,6 +100,7 @@ namespace QuanLyTiecCuoiUI
                         btnLuu.Enabled = true;
                         btnHuy.Enabled = true;
                         txtTenSanh.Focus();
+                        dgvQuanLySanh.Enabled = false;
                         break;
                     }
                 case MODE.EDIT:
@@ -98,6 +111,7 @@ namespace QuanLyTiecCuoiUI
                         btnSua.Enabled = false;
                         btnLuu.Enabled = true;
                         btnHuy.Enabled = true;
+                        dgvQuanLySanh.Enabled = false;
                         break;
                     }
                 case MODE.CELLSELECTED:
@@ -108,6 +122,7 @@ namespace QuanLyTiecCuoiUI
                         btnSua.Enabled = true;
                         btnLuu.Enabled = false;
                         btnHuy.Enabled = true;
+                        dgvQuanLySanh.Enabled = true;
                         break;
                     }
                 default:
@@ -152,6 +167,7 @@ namespace QuanLyTiecCuoiUI
                 sanh.maSanh = int.Parse(dgvQuanLySanh.CurrentRow.Cells["MaSanh"].Value.ToString());
                 BUS_QuanLySanh.DeleteSanh(sanh);
                 dgvQuanLySanh.DataSource = BUS_QuanLySanh.GetQLSanhTable();
+                ClearAllInputs();
                 MessageBox.Show("Xóa thành công sảnh '" + tenSanh + "' !");
             }
         }
@@ -185,13 +201,13 @@ namespace QuanLyTiecCuoiUI
         {
             if (txtTenSanh.Text == "")
             {
-                MessageBox.Show("Vui lòng nhập đầy đủ! (có thể không nhập phần Ghi Chú)", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng nhập đầy đủ!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtTenSanh.Focus();
                 return;
             }
             if (txtSoLuongBanTD.Text == "")
             {
-                MessageBox.Show("Vui lòng nhập đầy đủ! (có thể không nhập phần Ghi Chú)", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng nhập đầy đủ!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtSoLuongBanTD.Focus();
                 return;
             }
@@ -217,7 +233,6 @@ namespace QuanLyTiecCuoiUI
                         BUS_QuanLySanh.InsertSanh(sanh);
 
                         dgvQuanLySanh.DataSource = BUS_QuanLySanh.GetQLSanhTable();
-                        ClearAllInputs();
                         MessageBox.Show("Thêm thành công sảnh '" + sanh.tenSanh + "' !");
                         SetDisplayControls(MODE.NORMAL);
                         mCurrentMode = MODE.NORMAL;
@@ -231,7 +246,6 @@ namespace QuanLyTiecCuoiUI
                         BUS_QuanLySanh.UpdateSanh(sanh);
 
                         dgvQuanLySanh.DataSource = BUS_QuanLySanh.GetQLSanhTable();
-                        ClearAllInputs();
                         MessageBox.Show("Sửa thành công sảnh '" + sanh.tenSanh + "' !");
                         SetDisplayControls(MODE.NORMAL);
                         mCurrentMode = MODE.NORMAL;
@@ -240,6 +254,7 @@ namespace QuanLyTiecCuoiUI
                 default:
                     break;
             }
+            ClearAllInputs();
             dgvQuanLySanh.ClearSelection();
         }
 
