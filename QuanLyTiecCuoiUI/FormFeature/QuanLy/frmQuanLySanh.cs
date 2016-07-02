@@ -19,36 +19,34 @@ namespace QuanLyTiecCuoiUI
         {
             NORMAL,
             INSERT,
-            EDIT
+            EDIT,
+            CELLSELECTED
         }
         public frmQuanLySanh()
         {
             InitializeComponent();
+            BUS_QuanLySanh.Init();
             txtSoLuongBanTD.TextChanged += txtSoLuongBanTD_TextChanged;
             txtTenSanh.TextChanged += txtTenSanh_TextChanged;
             txtGhiChu.TextChanged += txtGhiChu_TextChanged;
-
         }
 
         void txtGhiChu_TextChanged(object sender, EventArgs e)
         {
-            CheckConstrainTextBox(txtGhiChu);
+            if (txtGhiChu.Text == " ")
+                txtGhiChu.Text = "";
         }
 
         void txtTenSanh_TextChanged(object sender, EventArgs e)
         {
-            CheckConstrainTextBox(txtTenSanh);
-        }
-
-        private void CheckConstrainTextBox(TextBox textBox)
-        {
-            if (textBox.Text == "0" || textBox.Text == " ")
-                textBox.Text = "";
+            if (txtTenSanh.Text == " ")
+                txtTenSanh.Text = "";
         }
 
         void txtSoLuongBanTD_TextChanged(object sender, EventArgs e)
         {
-            CheckConstrainTextBox(txtSoLuongBanTD);   
+            if (txtSoLuongBanTD.Text == " " || txtSoLuongBanTD.Text == "0")
+                txtSoLuongBanTD.Text = "";
         }
 
         private void frmQuanLySanh_Load(object sender, EventArgs e)
@@ -63,7 +61,7 @@ namespace QuanLyTiecCuoiUI
             dgvQuanLySanh.Columns[4].HeaderText = "Đơn giá bàn tối thiểu";
             dgvQuanLySanh.Columns[5].HeaderText = "Ghi chú";
 
-            cbbLoaiSanh.DataSource = BUS_QuanLySanh.GetListMaLoaiSanh();
+            cbbLoaiSanh.DataSource = BUS_QuanLySanh.GetListTenLoaiSanh();
             cbbDonGiaBanTT.DataSource = BUS_QuanLySanh.GetListDonGiaBanTT();
         }
 
@@ -75,8 +73,8 @@ namespace QuanLyTiecCuoiUI
                     {
                         DisableAllInputs();
                         btnThem.Enabled = true;
-                        btnXoa.Enabled = true;
-                        btnSua.Enabled = true;
+                        btnXoa.Enabled = false;
+                        btnSua.Enabled = false;
                         btnLuu.Enabled = false;
                         btnHuy.Enabled = false;
                         break;
@@ -102,6 +100,16 @@ namespace QuanLyTiecCuoiUI
                         btnHuy.Enabled = true;
                         break;
                     }
+                case MODE.CELLSELECTED:
+                    {
+                        DisableAllInputs();
+                        btnThem.Enabled = true;
+                        btnXoa.Enabled = true;
+                        btnSua.Enabled = true;
+                        btnLuu.Enabled = false;
+                        btnHuy.Enabled = true;
+                        break;
+                    }
                 default:
                     break;
             }
@@ -109,24 +117,26 @@ namespace QuanLyTiecCuoiUI
 
         private void DisableAllInputs()
         {
-            txtTenSanh.Enabled = false;
+            txtTenSanh.ReadOnly = true;
             cbbLoaiSanh.Enabled = false;
             cbbDonGiaBanTT.Enabled = false;
-            txtSoLuongBanTD.Enabled = false;
-            txtGhiChu.Enabled = false;
+            txtSoLuongBanTD.ReadOnly = true;
+            txtGhiChu.ReadOnly = true;
         }
         private void EnableAllInputs()
         {
-            txtTenSanh.Enabled = true;
+            txtTenSanh.ReadOnly = false;
             cbbLoaiSanh.Enabled = true;
             cbbDonGiaBanTT.Enabled = true;
-            txtSoLuongBanTD.Enabled = true;
-            txtGhiChu.Enabled = true;
+            txtSoLuongBanTD.ReadOnly = false;
+            txtGhiChu.ReadOnly = false;
         }
 
         private void btnThem_Click(object sender, EventArgs e)
         {
             SetDisplayControls(MODE.INSERT);
+            ClearAllInputs();
+            dgvQuanLySanh.ClearSelection();
             mCurrentMode = MODE.INSERT;
         }
 
@@ -139,7 +149,7 @@ namespace QuanLyTiecCuoiUI
             {
                 int i = dgvQuanLySanh.CurrentCell.RowIndex;
                 DTO_Sanh sanh = new DTO_Sanh();
-                sanh.maSanh = dgvQuanLySanh.CurrentRow.Cells["MaSanh"].Value.ToString();
+                sanh.maSanh = int.Parse(dgvQuanLySanh.CurrentRow.Cells["MaSanh"].Value.ToString());
                 BUS_QuanLySanh.DeleteSanh(sanh);
                 dgvQuanLySanh.DataSource = BUS_QuanLySanh.GetQLSanhTable();
                 MessageBox.Show("Xóa thành công sảnh '" + tenSanh + "' !");
@@ -148,7 +158,16 @@ namespace QuanLyTiecCuoiUI
 
         private void btnHuy_Click(object sender, EventArgs e)
         {
+            if ((txtTenSanh.Text != "" || txtSoLuongBanTD.Text != "" || txtGhiChu.Text != "")
+                && (mCurrentMode == MODE.EDIT || mCurrentMode == MODE.INSERT))
+            {
+                DialogResult dr = MessageBox.Show("Bạn có muốn hủy không?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.No)
+                    return;
+            }
+
             SetDisplayControls(MODE.NORMAL);
+            dgvQuanLySanh.ClearSelection();
             ClearAllInputs();
         }
 
@@ -164,9 +183,16 @@ namespace QuanLyTiecCuoiUI
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
-            if (txtTenSanh.Text == "" || txtSoLuongBanTD.Text == "")
+            if (txtTenSanh.Text == "")
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ! (có thể không nhập phần Ghi Chú)", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtTenSanh.Focus();
+                return;
+            }
+            if (txtSoLuongBanTD.Text == "")
+            {
+                MessageBox.Show("Vui lòng nhập đầy đủ! (có thể không nhập phần Ghi Chú)", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtSoLuongBanTD.Focus();
                 return;
             }
             int temp;
@@ -178,11 +204,16 @@ namespace QuanLyTiecCuoiUI
                 return;
             }
 
+            DialogResult dr = MessageBox.Show("Bạn có muốn lưu không?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == DialogResult.No)
+                return;
+
             switch (mCurrentMode)
             {
                 case MODE.INSERT:
                     {
-                        DTO_Sanh sanh = new DTO_Sanh(txtTenSanh.Text, cbbLoaiSanh.Text[0], int.Parse(txtSoLuongBanTD.Text), txtGhiChu.Text);
+                        int maloaiSanh = int.Parse(BUS_QuanLySanh.GetListMaLoaiSanh()[cbbLoaiSanh.SelectedIndex]);
+                        DTO_Sanh sanh = new DTO_Sanh(txtTenSanh.Text, maloaiSanh, int.Parse(txtSoLuongBanTD.Text), txtGhiChu.Text);
                         BUS_QuanLySanh.InsertSanh(sanh);
 
                         dgvQuanLySanh.DataSource = BUS_QuanLySanh.GetQLSanhTable();
@@ -194,8 +225,9 @@ namespace QuanLyTiecCuoiUI
                     }
                 case MODE.EDIT:
                     {
-                        DTO_Sanh sanh = new DTO_Sanh(txtTenSanh.Text, cbbLoaiSanh.Text[0], int.Parse(txtSoLuongBanTD.Text), txtGhiChu.Text);
-                        sanh.maSanh = dgvQuanLySanh.CurrentRow.Cells["MaSanh"].Value.ToString();
+                        int maloaiSanh = int.Parse(BUS_QuanLySanh.GetListMaLoaiSanh()[cbbLoaiSanh.SelectedIndex]);
+                        DTO_Sanh sanh = new DTO_Sanh(txtTenSanh.Text, maloaiSanh, int.Parse(txtSoLuongBanTD.Text), txtGhiChu.Text);
+                        sanh.maSanh = int.Parse(dgvQuanLySanh.CurrentRow.Cells["MaSanh"].Value.ToString());
                         BUS_QuanLySanh.UpdateSanh(sanh);
 
                         dgvQuanLySanh.DataSource = BUS_QuanLySanh.GetQLSanhTable();
@@ -208,6 +240,7 @@ namespace QuanLyTiecCuoiUI
                 default:
                     break;
             }
+            dgvQuanLySanh.ClearSelection();
         }
 
         private void ClearAllInputs()
@@ -233,6 +266,36 @@ namespace QuanLyTiecCuoiUI
         private void txtSoLuongBanTD_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar);
+        }
+
+        private void dgvQuanLySanh_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            dgvQuanLySanh.ClearSelection();
+        }
+
+        private void dgvQuanLySanh_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1)
+                return;
+
+            SetDisplayControls(mCurrentMode = MODE.CELLSELECTED);
+
+            int row = e.RowIndex;
+            txtTenSanh.Text = dgvQuanLySanh[1, row].Value.ToString();
+            cbbLoaiSanh.Text = dgvQuanLySanh[2, row].Value.ToString();
+            txtSoLuongBanTD.Text = dgvQuanLySanh[3, row].Value.ToString();
+            txtGhiChu.Text = dgvQuanLySanh[5, row].Value.ToString();
+        }
+
+        private void txtGhiChu_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (sender == null)
+                return;
+
+            if (e.Control && e.KeyCode == Keys.A)
+            {
+                ((TextBox)sender).SelectAll();
+            }
         }
     }
 }

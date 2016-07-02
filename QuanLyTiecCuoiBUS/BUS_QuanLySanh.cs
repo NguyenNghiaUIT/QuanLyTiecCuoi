@@ -11,9 +11,10 @@ namespace BUS
 {
     public class BUS_QuanLySanh
     {
-        private static List<string> mListMaLoaiSanh;
+        private static List<string> mListTenLoaiSanh;
         private static List<string> mListDonGiaBanTT;
-        static BUS_QuanLySanh()
+        private static List<string> mListMaLoaiSanh;
+        public static void Init()
         {
             GetListsInTableLoaiSanh();
         }
@@ -31,19 +32,25 @@ namespace BUS
         }
         private static void GetListsInTableLoaiSanh()
         {
-            mListMaLoaiSanh = new List<string>();
+            mListTenLoaiSanh = new List<string>();
             mListDonGiaBanTT = new List<string>();
+            mListMaLoaiSanh = new List<string>();
             
             DataTable dt = GetLoaiSanhTable();
             foreach (DataRow item in dt.Rows)
             {
                 mListMaLoaiSanh.Add(item[0].ToString());
-                mListDonGiaBanTT.Add(item[1].ToString());
+                mListTenLoaiSanh.Add(item[1].ToString());
+                mListDonGiaBanTT.Add(item[2].ToString());
             }
         }
         public static List<string> GetListMaLoaiSanh()
         {
             return mListMaLoaiSanh;
+        }
+        public static List<string> GetListTenLoaiSanh()
+        {
+            return mListTenLoaiSanh;
         }
         public static List<string> GetListDonGiaBanTT()
         {

@@ -11,6 +11,7 @@ using QuanLyTiecCuoiUI.Properties;
 using QuanLyTiecCuoiUI.ucControlFeature;
 using System.Threading;
 using System.Diagnostics;
+using QuanLyTiecCuoiUI.FormFeature.QuyDinh;
 
 namespace QuanLyTiecCuoiUI
 {
@@ -117,10 +118,10 @@ namespace QuanLyTiecCuoiUI
         {
             if (!IsOpened("frmTraCuuTiecCuoi"))
             {
-                frmTraCuuTiecCuoi tracuutieccuoi = new frmTraCuuTiecCuoi();
-                tracuutieccuoi.MdiParent = this;
-                tracuutieccuoi.Name = "frmTraCuuTiecCuoi";
-                tracuutieccuoi.Show();
+                frmThayDoiQuyDinh thaydoiquydinh = new frmThayDoiQuyDinh();
+                thaydoiquydinh.MdiParent = this;
+                thaydoiquydinh.Name = "frmThayDoiQuyDinh";
+                thaydoiquydinh.Show();
             }
         }
         private void OnbtnTraCuuTiecCuoi_MouseClick(object sender, MouseEventArgs e)

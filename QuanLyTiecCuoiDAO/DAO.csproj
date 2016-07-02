@@ -51,6 +51,7 @@
     <Compile Include="DAO_QuanLyLoaiSanh.cs" />
     <Compile Include="DAO_QuanLySanh.cs" />
     <Compile Include="DAO_QuanLyTiecCuoi.cs" />
+    <Compile Include="DAO_ThamSo.cs" />
     <Compile Include="DAO_TiepNhanSanh.cs" />
     <Compile Include="DAO_TraCuu.cs" />
     <Compile Include="DatabaseHelper.cs" />
