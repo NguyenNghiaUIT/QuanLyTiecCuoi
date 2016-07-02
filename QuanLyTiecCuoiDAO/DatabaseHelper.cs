@@ -11,6 +11,7 @@ namespace DAO
 {
     public class DatabaseHelper
     {
+        private static bool DEBUG = false;
         private static SqlConnection sCon;
         public static String CONNECTION_STRING { get; set; }
         private static SqlCommand mCommand;
@@ -61,12 +62,13 @@ namespace DAO
             {
                 rowEffect = mCommand.ExecuteNonQuery();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                if (DEBUG)
+                    Console.WriteLine(ex.Message);
                 CloseConnection();
             }
-             
+
             CloseConnection();
             return rowEffect;
         }
@@ -79,7 +81,15 @@ namespace DAO
             {
                 SqlDataAdapter adapter = new SqlDataAdapter(sql, sCon);
                 dt = new DataTable();
-                adapter.Fill(dt);
+                try
+                {
+                    adapter.Fill(dt);
+                }
+                catch (Exception ex)
+                {
+                    if (DEBUG)
+                        Console.WriteLine(ex.Message);
+                }
             }
             CloseConnection();
             return dt;
