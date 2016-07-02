@@ -36,6 +36,7 @@
             this.btnXoa = new System.Windows.Forms.Button();
             this.dgvQuanLySanh = new System.Windows.Forms.DataGridView();
             this.grpThongTinSanh = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -51,7 +52,6 @@
             this.cbbLoaiSanh = new System.Windows.Forms.ComboBox();
             this.txtTenSanh = new System.Windows.Forms.TextBox();
             this.grpDanhSachSanh = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.grpChucNang.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuanLySanh)).BeginInit();
             this.grpThongTinSanh.SuspendLayout();
@@ -172,10 +172,24 @@
             this.grpThongTinSanh.TabStop = false;
             this.grpThongTinSanh.Text = "Thông tin sảnh";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.SystemColors.Control;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.2F, System.Drawing.FontStyle.Italic);
+            this.label5.ForeColor = System.Drawing.Color.Red;
+            this.label5.Location = new System.Drawing.Point(320, 202);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(196, 16);
+            this.label5.TabIndex = 44;
+            this.label5.Text = "Các mục * không được để trống.";
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.label4.BackColor = System.Drawing.SystemColors.Control;
+            this.label4.ForeColor = System.Drawing.Color.Red;
             this.label4.Location = new System.Drawing.Point(136, 120);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(13, 17);
@@ -185,7 +199,8 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.label3.BackColor = System.Drawing.SystemColors.Control;
+            this.label3.ForeColor = System.Drawing.Color.Red;
             this.label3.Location = new System.Drawing.Point(144, 89);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(13, 17);
@@ -195,7 +210,8 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.label2.BackColor = System.Drawing.SystemColors.Control;
+            this.label2.ForeColor = System.Drawing.Color.Red;
             this.label2.Location = new System.Drawing.Point(75, 57);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(13, 17);
@@ -205,7 +221,8 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.label1.BackColor = System.Drawing.SystemColors.Control;
+            this.label1.ForeColor = System.Drawing.Color.Red;
             this.label1.Location = new System.Drawing.Point(73, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(13, 17);
@@ -322,18 +339,6 @@
             this.grpDanhSachSanh.TabIndex = 33;
             this.grpDanhSachSanh.TabStop = false;
             this.grpDanhSachSanh.Text = "Danh sách sảnh";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.2F, System.Drawing.FontStyle.Italic);
-            this.label5.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label5.Location = new System.Drawing.Point(320, 202);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(196, 16);
-            this.label5.TabIndex = 44;
-            this.label5.Text = "Các mục * không được để trống.";
             // 
             // frmQuanLySanh
             // 
