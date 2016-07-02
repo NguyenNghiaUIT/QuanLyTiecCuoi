@@ -106,7 +106,7 @@ namespace QuanLyTiecCuoiUI
                 case MODE.EDIT:
                     {
                         EnableAllInputs();
-                        btnThem.Enabled = false;
+                        btnThem.Enabled = true;
                         btnXoa.Enabled = false;
                         btnSua.Enabled = false;
                         btnLuu.Enabled = true;
