@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DAO;
 using QuanLyTiecCuoiUI.FormFeature.ConfigDatabase;
+using QuanLyTiecCuoiUI.FormFeature.QuyDinh;
 
 namespace QuanLyTiecCuoiUI
 {
@@ -28,8 +29,8 @@ namespace QuanLyTiecCuoiUI
                  Application.Run(new frmConfigDatabase());
             }else{
                 //Application.Run(new frmQuanLyDichVuNhaHang());
+                //Application.Run(new frmThayDoiQuyDinh());
                 Application.Run(new frmManHinhChinh());
-                //Application.Run(new frmQuanLyMonAn());
             } 
         }
     }
