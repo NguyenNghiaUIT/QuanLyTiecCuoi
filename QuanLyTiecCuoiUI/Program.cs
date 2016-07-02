@@ -27,12 +27,9 @@ namespace QuanLyTiecCuoiUI
             if(!openSuscess){
                  Application.Run(new frmConfigDatabase());
             }else{
-<<<<<<< HEAD
                 Application.Run(new frmQuanLyDichVuNhaHang());
-=======
-                Application.Run(new frmManHinhChinh());
+                //Application.Run(new frmManHinhChinh());
                 //Application.Run(new frmQuanLyMonAn());
->>>>>>> 5f348d10b08d0592bba2bb14142b0e2f192ff63b
             } 
         }
     }
