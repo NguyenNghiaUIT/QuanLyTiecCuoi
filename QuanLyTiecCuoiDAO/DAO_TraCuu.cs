@@ -12,8 +12,11 @@ namespace DAO
     {
         public static DataTable GetData(DTO_TraCuu key)
         {
+            //            string query = String.Format(@"SELECT TenChuRe AS 'Tên chú rể', TenCoDau AS 'Tên cô dâu', TenSanh AS 'Sảnh', Ngay AS 'Ngày', TenCa AS 'Ca', SoLuongBan AS 'Số lượng bàn' 
+            //FROM ((HoaDonTiecCuoi INNER JOIN KhachHang ON HoaDonTiecCuoi.MaKH = KhachHang.MaKH)
+            // INNER JOIN Ca ON HoaDonTiecCuoi.MaCa = Ca.MaCa) INNER JOIN Sanh ON HoaDonTiecCuoi.MaSanh = Sanh.MaSanh");
             string query = String.Format(@"SELECT TenChuRe AS 'Tên chú rể', TenCoDau AS 'Tên cô dâu', TenSanh AS 'Sảnh', Ngay AS 'Ngày', TenCa AS 'Ca', SoLuongBan AS 'Số lượng bàn' 
-FROM ((HoaDonTiecCuoi INNER JOIN KhachHang ON HoaDonTiecCuoi.MaKH =KhachHang.MaKH)
+FROM ((HoaDonTiecCuoi INNER JOIN KhachHang ON HoaDonTiecCuoi.MaKH = KhachHang.MaKH)
  INNER JOIN Ca ON HoaDonTiecCuoi.MaCa = Ca.MaCa) INNER JOIN Sanh ON HoaDonTiecCuoi.MaSanh = Sanh.MaSanh");
             return DatabaseHelper.GetData(query);
         }
