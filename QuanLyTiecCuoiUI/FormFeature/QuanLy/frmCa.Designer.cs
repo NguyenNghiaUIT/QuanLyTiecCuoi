@@ -119,6 +119,7 @@
             this.dgvTableShow.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTableShow.Location = new System.Drawing.Point(13, 174);
             this.dgvTableShow.Name = "dgvTableShow";
+            this.dgvTableShow.RowHeadersVisible = false;
             this.dgvTableShow.Size = new System.Drawing.Size(377, 150);
             this.dgvTableShow.TabIndex = 8;
             this.dgvTableShow.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTableShow_CellClick);

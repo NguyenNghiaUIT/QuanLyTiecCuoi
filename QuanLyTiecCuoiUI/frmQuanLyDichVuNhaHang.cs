@@ -23,34 +23,11 @@ namespace QuanLyTiecCuoiUI
             DEFAULT,
         }
         private STATEBUTTON StateButton = STATEBUTTON.DEFAULT;
-        private string IDTable = "DV";
         private ImageList imgListDichVu = new ImageList();
         private DataTable resultDichVuTable;
         private int itemSelect = -2;
         private string ImageLocationPath = string.Empty;
         private string ImageInstance = string.Empty;
-        #region Get Next ID
-        //Get next ID 
-        //Convert Number to string for index
-        private string ConvertNumber(int state)
-        {
-            if (state <= 9) return '0' + state.ToString();
-            else
-                return state.ToString();
-        }
-        //Get next index in table
-        private string GetNextID(DataTable result)
-        {
-            try
-            {
-                return IDTable + (ConvertNumber(Int32.Parse(result.Rows[result.Rows.Count - 1].ItemArray[0].ToString().Substring(2)) + 1));
-            }
-            catch (Exception ex)
-            {
-                return IDTable + "01";
-            }
-        }
-        #endregion
 
         #region Setup List View
         private void GetDataDichVuCurrent()
@@ -59,22 +36,23 @@ namespace QuanLyTiecCuoiUI
         }
         private void SetupImageListView()
         {
+            //lst image
             GetDataDichVuCurrent();
             lstHinhAnh.View = View.Tile;
-            lstHinhAnh.TileSize = new Size(230, 90);
+            lstHinhAnh.TileSize = new Size(260, 100);
 
             //Get list Image
             for (int i = 0; i < resultDichVuTable.Rows.Count; i++)
             {
                 try
                 {
-                    imgListDichVu.Images.Add(resultDichVuTable.Rows[i][1].ToString(), Image.FromFile(@"DanhSachDichVu\" + resultDichVuTable.Rows[i][4].ToString()));
+                    imgListDichVu.Images.Add(resultDichVuTable.Rows[i][1].ToString(), Image.FromFile(@"DanhSachDichVu\" + resultDichVuTable.Rows[i][3].ToString()));
                 }
                 catch (Exception ex)
                 {
                     imgListDichVu.Images.Add(resultDichVuTable.Rows[i][1].ToString(), Image.FromFile(@"DanhSachDichVu\unknow.png"));
                 }
-                imgListDichVu.ImageSize = new Size(70, 70);
+                imgListDichVu.ImageSize = new Size(90, 90);
                 lstHinhAnh.LargeImageList = imgListDichVu;
             }
 
@@ -92,8 +70,8 @@ namespace QuanLyTiecCuoiUI
         #region Setup Control enable and disable
         private void EnableStateButton(bool state)
         {
-            btnLuu.Enabled = btnHuy.Enabled = state;
-            btnThem.Enabled = btnXoa.Enabled = btnSua.Enabled = !state;
+            btnLuu.Enabled = btnHuy.Enabled = btnXoa.Enabled = btnSua.Enabled = state;
+            btnThem.Enabled = !state;
             btnTimHinh.Enabled = btnXoaHinh.Enabled = state;
         }
         private void EnableStateTextBox(bool state)
@@ -108,16 +86,25 @@ namespace QuanLyTiecCuoiUI
             if (StateButton == STATEBUTTON.INSERT) return;
             try
             {
-                //MessageBox.Show(itemSelect.ToString() + " " + lstHinhAnh.FocusedItem.Index.ToString());
+
+                btnSua.Enabled = btnXoa.Enabled = btnHuy.Enabled = true;
+                btnThem.Enabled = false;
+
                 if (lstHinhAnh.FocusedItem.Index == -1) return;
                 int currentItem = itemSelect = lstHinhAnh.FocusedItem.Index;
-                lblThongTinMaDichVu.Text = resultDichVuTable.Rows[currentItem][0].ToString();
                 txtTenDichVu.Text = resultDichVuTable.Rows[currentItem][1].ToString();
                 txtDonGia.Text = resultDichVuTable.Rows[currentItem][2].ToString();
-                txtGhiChu.Text = resultDichVuTable.Rows[currentItem][3].ToString();
-                lblThongTinHinhAnh.Text = resultDichVuTable.Rows[currentItem][4].ToString();
-                ptrHinhAnh.ImageLocation = @"DanhSachDichVu\" + resultDichVuTable.Rows[currentItem][4].ToString();
+                txtGhiChu.Text = resultDichVuTable.Rows[currentItem][4].ToString();
+                lblThongTinHinhAnh.Text = resultDichVuTable.Rows[currentItem][3].ToString();
+                ptrHinhAnh.ImageLocation = @"DanhSachDichVu\" + resultDichVuTable.Rows[currentItem][3].ToString();
                 ptrHinhAnh.SizeMode = PictureBoxSizeMode.StretchImage;
+                //MessageBox.Show(itemSelect.ToString() + " " + lstHinhAnh.FocusedItem.Index.ToString());
+                if (StateButton == STATEBUTTON.UPDATE || StateButton == STATEBUTTON.REMOVE)
+                {
+                    txtDonGia.ReadOnly = txtGhiChu.ReadOnly = txtTenDichVu.ReadOnly = true;
+                    btnLuu.Enabled = false;
+                    //state button
+                }
             }
             catch (Exception ex)
             {
@@ -130,13 +117,13 @@ namespace QuanLyTiecCuoiUI
         {
             //Set state Button
             StateButton = STATEBUTTON.INSERT;
-            //Enable control
+            //Enable control with insert case
             EnableStateButton(true);
             EnableStateTextBox(false);
+            btnSua.Enabled = btnXoa.Enabled = false;
             //Reset Value
             lblThongTinHinhAnh.Text = string.Empty;
             txtDonGia.Text = txtGhiChu.Text = txtTenDichVu.Text = string.Empty;
-            lblThongTinMaDichVu.Text = GetNextID(resultDichVuTable);
             ptrHinhAnh.Image = null;
         }
 
@@ -150,7 +137,9 @@ namespace QuanLyTiecCuoiUI
                 //Enable control
                 EnableStateButton(true);
                 EnableStateTextBox(false);
-                ImageInstance = resultDichVuTable.Rows[itemSelect][4].ToString();
+                btnSua.Enabled = btnXoa.Enabled = false;
+
+                ImageInstance = resultDichVuTable.Rows[itemSelect][3].ToString();
             }
         }
 
@@ -163,16 +152,15 @@ namespace QuanLyTiecCuoiUI
                 try
                 {
                     DTO_DichVu dichvu = new DTO_DichVu();
-                    dichvu.MaDichVu = resultDichVuTable.Rows[itemSelect][0].ToString();
-                    dichvu.HinhAnh = resultDichVuTable.Rows[itemSelect][4].ToString();
-
+                    dichvu.HinhAnh = resultDichVuTable.Rows[itemSelect][3].ToString();
+                    dichvu.MaDichVu = Int32.Parse(resultDichVuTable.Rows[itemSelect][0].ToString());
                     //Check State of Image 
                     int stateRowEffect = BUS_DichVuNhaHang.DeleteRecordEffect(dichvu);
                     bool DeleteState = BUS_DichVuNhaHang.Delete(dichvu);
                     if (DeleteState)
                     {
                         //Delete image in data
-                        if (stateRowEffect > 1 && dichvu.HinhAnh != "unknow")
+                        if (stateRowEffect > 1 && dichvu.HinhAnh != "unknow.png")
                         {
                             imgListDichVu.Images.RemoveAt(itemSelect);
                             lstHinhAnh.Items.RemoveAt(itemSelect);
@@ -181,6 +169,8 @@ namespace QuanLyTiecCuoiUI
                             DeleteImage();
                         resultDichVuTable = BUS_DichVuNhaHang.GetDataDichVu();
                         MessageBox.Show("Xóa thành công");
+                        btnThem.Enabled = true;
+                        btnSua.Enabled = btnXoa.Enabled = btnHuy.Enabled = btnLuu.Enabled = false;
                     }
                     else
                         MessageBox.Show("Xóa thất bại");
@@ -189,7 +179,7 @@ namespace QuanLyTiecCuoiUI
                 {
                     MessageBox.Show("Thao tác xóa thất bại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-                itemSelect = -1;
+                //itemSelect = -1;
             }         
         }
 
@@ -204,6 +194,7 @@ namespace QuanLyTiecCuoiUI
         }
         private void btnLuu_Click(object sender, EventArgs e)
         {
+            
             //Check state Insert
             if (StateButton == STATEBUTTON.INSERT)
             {
@@ -231,7 +222,6 @@ namespace QuanLyTiecCuoiUI
                 }
 
                 //Add information 
-                dichvu.MaDichVu = lblThongTinMaDichVu.Text;
                 dichvu.TenDichVu = txtTenDichVu.Text;
                 try
                 {
@@ -277,7 +267,6 @@ namespace QuanLyTiecCuoiUI
                 //Reset State Region
                 lblThongTinHinhAnh.Text = string.Empty;
                 txtDonGia.Text = txtGhiChu.Text = txtTenDichVu.Text = string.Empty;
-                lblThongTinMaDichVu.Text = string.Empty;
                 ptrHinhAnh.Image = null;
                 StateButton = STATEBUTTON.DEFAULT;
                 EnableStateButton(false);
@@ -288,15 +277,15 @@ namespace QuanLyTiecCuoiUI
             if (StateButton == STATEBUTTON.UPDATE)
             {
                 //State image now 
-                string pathImage = resultDichVuTable.Rows[itemSelect][4].ToString();
+                string pathImage = resultDichVuTable.Rows[itemSelect][3].ToString();
                 //Check state region 
                 DTO_DichVu dichvu = new DTO_DichVu();
+                dichvu.MaDichVu = Int32.Parse(resultDichVuTable.Rows[itemSelect][0].ToString());
                 if (txtTenDichVu.Text == string.Empty || txtDonGia.Text == string.Empty)
                 {
                     ShowNotification();
                     return;
                 }
-                dichvu.MaDichVu = lblThongTinMaDichVu.Text;
                 dichvu.TenDichVu = txtTenDichVu.Text;
                 try
                 {
@@ -309,14 +298,15 @@ namespace QuanLyTiecCuoiUI
                 }
                 dichvu.GhiChu = txtGhiChu.Text;
                 //Insert name Hinh Anh
-                if (lblThongTinHinhAnh.Text == "") dichvu.HinhAnh = "unknow.png";
+                if (lblThongTinHinhAnh.Text == "")
+                    dichvu.HinhAnh = "unknow.png";
                 else
                     dichvu.HinhAnh = lblThongTinHinhAnh.Text;
 
                 bool UpdateState = BUS_DichVuNhaHang.Update(dichvu);
-                DTO_DichVu PreviousDichVu = new DTO_DichVu();
-                PreviousDichVu.HinhAnh = ImageInstance;
-                int RecordEffect = BUS_DichVuNhaHang.DeleteRecordEffect(PreviousDichVu);
+                //DTO_DichVu PreviousDichVu = new DTO_DichVu();
+                //PreviousDichVu.HinhAnh = ImageInstance;
+                //int RecordEffect = BUS_DichVuNhaHang.DeleteRecordEffect(PreviousDichVu);
                 if (UpdateState)
                 {
                     //Check state image with image in DB
@@ -380,15 +370,25 @@ namespace QuanLyTiecCuoiUI
         private void btnHuy_Click(object sender, EventArgs e)
         {
             //Reset all state 
+            
+            StateButton = STATEBUTTON.DEFAULT;
+
+            btnThem.Enabled = true;
+            txtDonGia.Text = txtGhiChu.Text = txtTenDichVu.Text = string.Empty;
+            
+            lstHinhAnh.SelectedIndices.Clear();
+
             lblThongTinHinhAnh.Text = string.Empty;
             txtDonGia.Text = txtGhiChu.Text = txtTenDichVu.Text = string.Empty;
-            lblThongTinMaDichVu.Text = string.Empty;
             ptrHinhAnh.Image = null;
-            StateButton = STATEBUTTON.DEFAULT;
+
             EnableStateButton(false);
             EnableStateTextBox(true);
             HideNotification();
-            lstHinhAnh_SelectedIndexChanged(sender, e);
+            ptrHinhAnh.ImageLocation = null;
+            lblThongTinHinhAnh.Text = string.Empty;
+            //lstHinhAnh_SelectedIndexChanged(sender, e);
+
         }
         private void btnTimHinh_Click(object sender, EventArgs e)
         {
@@ -419,7 +419,7 @@ namespace QuanLyTiecCuoiUI
             try
             {
                 imgListDichVu.Images.Add(dichvu.TenDichVu, Image.FromFile(@"DanhSachDichVu\" + dichvu.HinhAnh));
-                imgListDichVu.ImageSize = new Size(70, 70);
+                imgListDichVu.ImageSize = new Size(90, 90);
                 lstHinhAnh.LargeImageList = imgListDichVu;
                 lstHinhAnh.Refresh();
             }
@@ -449,10 +449,10 @@ namespace QuanLyTiecCuoiUI
                 imgListDichVu.Images.RemoveAt(itemSelect);
                 lstHinhAnh.Items.RemoveAt(itemSelect);
 
-                string path = @"DanhSachDichVu\" + resultDichVuTable.Rows[itemSelect][4].ToString();
+                string path = @"DanhSachDichVu\" + resultDichVuTable.Rows[itemSelect][3].ToString();
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
-                if (resultDichVuTable.Rows[itemSelect][4].ToString() != "unknow.png")
+                if (resultDichVuTable.Rows[itemSelect][3].ToString() != "unknow.png")
                     File.Delete(path);
             }
             catch (IOException ex)
@@ -492,12 +492,24 @@ namespace QuanLyTiecCuoiUI
         {
             SetupImageListView();
             //Setup UI
-            lblThongTinMaDichVu.Text = string.Empty;
             lblThongTinHinhAnh.Text = string.Empty;
             EnableStateTextBox(true);
             EnableStateButton(false);
             //Set Token for important Attribute  
             HideNotification();
+        }
+
+        private void lblThongTinHinhAnh_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtDonGia_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)) 
+            {
+                e.Handled = true;
+            }
         }
     }
 }

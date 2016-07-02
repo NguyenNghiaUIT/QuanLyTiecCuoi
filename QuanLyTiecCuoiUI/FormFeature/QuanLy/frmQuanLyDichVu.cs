@@ -115,7 +115,7 @@ namespace QuanLyTiecCuoiUI
             if (confirm == DialogResult.Yes)
             {
                 int selectedRow = dgvDanhSachDichVu.SelectedRows[0].Index;
-                dichVu.MaDichVu = dgvDanhSachDichVu[0, selectedRow].Value.ToString();
+                dichVu.MaDichVu = Int32.Parse(dgvDanhSachDichVu[0, selectedRow].Value.ToString());
                 BUS_DichVu.Delete(dichVu);
                 ResultTable = BUS_DichVu.GetData();
                 dgvDanhSachDichVu.DataSource = ResultTable;
@@ -153,7 +153,6 @@ namespace QuanLyTiecCuoiUI
                     txtDonGia.ResetText();
                     return;
                 }
-                dichVu.MaDichVu = GetNextID((DataTable)dgvDanhSachDichVu.DataSource);
                 dichVu.TenDichVu = txtTenDichVu.Text;
                 dichVu.DonGia = Convert.ToDecimal(txtDonGia.Text.ToString());
                 dichVu.GhiChu = txtGhiChu.Text;
@@ -228,7 +227,7 @@ namespace QuanLyTiecCuoiUI
             txtTenDichVu.Text = dgvDanhSachDichVu[1, row].Value.ToString();
             txtDonGia.Text = dgvDanhSachDichVu[2, row].Value.ToString();
             txtGhiChu.Text = dgvDanhSachDichVu[3, row].Value.ToString();
-            dichVu.MaDichVu = dgvDanhSachDichVu[0, row].Value.ToString();
+            dichVu.MaDichVu = Int32.Parse(dgvDanhSachDichVu[0, row].Value.ToString());
         }
 
         //On Loading

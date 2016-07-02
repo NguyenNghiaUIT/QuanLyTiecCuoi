@@ -31,10 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmManHinhChinh));
             this.pnlLeft = new System.Windows.Forms.Panel();
             this.tlpMenu = new System.Windows.Forms.TableLayoutPanel();
-            this.pnlUser = new System.Windows.Forms.Panel();
-            this.lblNavigation = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.btnQuanLy = new System.Windows.Forms.PictureBox();
             this.btnTraCuu = new System.Windows.Forms.PictureBox();
             this.btnBaoCao = new System.Windows.Forms.PictureBox();
@@ -42,10 +38,13 @@
             this.pnlAdmin = new System.Windows.Forms.Panel();
             this.ptrLoGo = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pnlUser = new System.Windows.Forms.Panel();
+            this.lblNavigation = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.ovalPictureBox1 = new QuanLyTiecCuoiUI.NewAssets.OvalPictureBox();
             this.pnlLeft.SuspendLayout();
             this.tlpMenu.SuspendLayout();
-            this.pnlUser.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnQuanLy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnTraCuu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnBaoCao)).BeginInit();
@@ -53,6 +52,7 @@
             this.pnlAdmin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptrLoGo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.pnlUser.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ovalPictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -91,59 +91,6 @@
             this.tlpMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.tlpMenu.Size = new System.Drawing.Size(230, 563);
             this.tlpMenu.TabIndex = 2;
-            // 
-            // pnlUser
-            // 
-            this.pnlUser.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.pnlUser.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pnlUser.BackgroundImage")));
-            this.pnlUser.Controls.Add(this.lblNavigation);
-            this.pnlUser.Controls.Add(this.ovalPictureBox1);
-            this.pnlUser.Controls.Add(this.label3);
-            this.pnlUser.Controls.Add(this.label1);
-            this.pnlUser.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUser.Location = new System.Drawing.Point(230, 0);
-            this.pnlUser.Name = "pnlUser";
-            this.pnlUser.Size = new System.Drawing.Size(1034, 105);
-            this.pnlUser.TabIndex = 1;
-            // 
-            // lblNavigation
-            // 
-            this.lblNavigation.AutoSize = true;
-            this.lblNavigation.BackColor = System.Drawing.Color.Transparent;
-            this.lblNavigation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNavigation.ForeColor = System.Drawing.Color.White;
-            this.lblNavigation.Location = new System.Drawing.Point(3, 84);
-            this.lblNavigation.Name = "lblNavigation";
-            this.lblNavigation.Size = new System.Drawing.Size(51, 16);
-            this.lblNavigation.TabIndex = 5;
-            this.lblNavigation.Text = "label2";
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label3.Location = new System.Drawing.Point(940, 80);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(82, 20);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Đăng xuất";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(711, 44);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(175, 20);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Phạm Nguyễn Tâm Phú";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnQuanLy
             // 
@@ -226,6 +173,59 @@
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
             // 
+            // pnlUser
+            // 
+            this.pnlUser.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.pnlUser.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pnlUser.BackgroundImage")));
+            this.pnlUser.Controls.Add(this.lblNavigation);
+            this.pnlUser.Controls.Add(this.ovalPictureBox1);
+            this.pnlUser.Controls.Add(this.label3);
+            this.pnlUser.Controls.Add(this.label1);
+            this.pnlUser.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlUser.Location = new System.Drawing.Point(230, 0);
+            this.pnlUser.Name = "pnlUser";
+            this.pnlUser.Size = new System.Drawing.Size(1034, 105);
+            this.pnlUser.TabIndex = 1;
+            // 
+            // lblNavigation
+            // 
+            this.lblNavigation.AutoSize = true;
+            this.lblNavigation.BackColor = System.Drawing.Color.Transparent;
+            this.lblNavigation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNavigation.ForeColor = System.Drawing.Color.White;
+            this.lblNavigation.Location = new System.Drawing.Point(3, 84);
+            this.lblNavigation.Name = "lblNavigation";
+            this.lblNavigation.Size = new System.Drawing.Size(51, 16);
+            this.lblNavigation.TabIndex = 5;
+            this.lblNavigation.Text = "label2";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label3.Location = new System.Drawing.Point(940, 80);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(82, 20);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Đăng xuất";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label1.Location = new System.Drawing.Point(711, 44);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(175, 20);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Phạm Nguyễn Tâm Phú";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // ovalPictureBox1
             // 
             this.ovalPictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -239,7 +239,7 @@
             this.ovalPictureBox1.TabIndex = 1;
             this.ovalPictureBox1.TabStop = false;
             // 
-            // frmMain
+            // frmManHinhChinh
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -250,14 +250,12 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.MinimumSize = new System.Drawing.Size(1280, 720);
-            this.Name = "frmMain";
+            this.Name = "frmManHinhChinh";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.pnlLeft.ResumeLayout(false);
             this.tlpMenu.ResumeLayout(false);
-            this.pnlUser.ResumeLayout(false);
-            this.pnlUser.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnQuanLy)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnTraCuu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnBaoCao)).EndInit();
@@ -265,6 +263,8 @@
             this.pnlAdmin.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ptrLoGo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.pnlUser.ResumeLayout(false);
+            this.pnlUser.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ovalPictureBox1)).EndInit();
             this.ResumeLayout(false);
 

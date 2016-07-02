@@ -19,8 +19,8 @@ namespace DAO
 
         public static int Insert(DTO_DichVu dichVu)
         {
-            string query = String.Format(@"INSERT INTO DichVu (MaDichVu, TenDichVu, DonGia, GhiChu) VALUES (N'{0}', N'{1}', {2}, N'{3}')",
-                dichVu.MaDichVu,dichVu.TenDichVu, dichVu.DonGia, dichVu.GhiChu);
+            string query = String.Format(@"INSERT INTO DichVu (TenDichVu, DonGia, GhiChu) VALUES (N'{0}', '{1}', N'{2}')",
+                dichVu.TenDichVu, dichVu.DonGia, dichVu.GhiChu);
             return DatabaseHelper.ExcuteSql(query);
         }
         public static int Update(DTO_DichVu dichVu)
@@ -31,7 +31,7 @@ namespace DAO
         }
         public static int Delete(DTO_DichVu dichVu)
         {
-            string query = String.Format(@"DELETE FROM DichVu WHERE MaDichVu=N'{0}'", dichVu.MaDichVu);
+            string query = String.Format(@"DELETE FROM DichVu WHERE MaDichVu='{0}'", dichVu.MaDichVu);
             return DatabaseHelper.ExcuteSql(query);
         }
     }

@@ -17,7 +17,7 @@ namespace DAO
 
         public static bool Insert(DTO_DichVu dichvu)
         {
-            string sTruyVan = string.Format(@"Insert into DichVu(MaDichVu,TenDichVu,DonGia,GhiChu,HinhAnh) values(N'{0}',N'{1}',{2},N'{3}',N'{4}')", dichvu.MaDichVu, dichvu.TenDichVu, dichvu.DonGia, dichvu.GhiChu, dichvu.HinhAnh);
+            string sTruyVan = string.Format(@"Insert into DichVu(TenDichVu,DonGia,GhiChu,HinhAnh) values(N'{0}',{1},N'{2}',N'{3}')",dichvu.TenDichVu, dichvu.DonGia, dichvu.GhiChu, dichvu.HinhAnh);
             try
             {
                 int state = DatabaseHelper.ExcuteSql(sTruyVan);
@@ -32,7 +32,7 @@ namespace DAO
         }
         public static bool Delete(DTO_DichVu dichvu)
         {
-            string sTruyVan = string.Format(@"Delete DichVu where MaDichVu=N'{0}'", dichvu.MaDichVu);
+            string sTruyVan = string.Format(@"Delete DichVu where MaDichVu={0}", dichvu.MaDichVu);
             try
             {
                 int state = DatabaseHelper.ExcuteSql(sTruyVan);
@@ -52,7 +52,7 @@ namespace DAO
         }
         public static bool Update(DTO_DichVu dichvu)
         {
-            string sTruyVan = string.Format("Update DichVu set TenDichVu=N'{0}', DonGia='{1}', GhiChu=N'{2}', HinhAnh = N'{3}' where MaDichVu=N'{4}'", dichvu.TenDichVu, dichvu.DonGia, dichvu.GhiChu, dichvu.HinhAnh, dichvu.MaDichVu);
+            string sTruyVan = string.Format("Update DichVu set TenDichVu=N'{0}', DonGia='{1}', GhiChu=N'{2}', HinhAnh = N'{3}' where MaDichVu='{4}'", dichvu.TenDichVu, dichvu.DonGia, dichvu.GhiChu, dichvu.HinhAnh, dichvu.MaDichVu);
             try
             {
                 int state = DatabaseHelper.ExcuteSql(sTruyVan);

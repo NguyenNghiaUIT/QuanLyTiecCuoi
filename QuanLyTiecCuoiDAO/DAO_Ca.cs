@@ -29,7 +29,7 @@ namespace DAO
 
         public static bool InsertCa(DTO_Ca ca)
         {
-            string sTruyVan = string.Format("Insert into Ca(MaCa,TenCa) values (N'{0}',N'{1}')", ca.MaCa, ca.TenCa);
+            string sTruyVan = string.Format("Insert into Ca(TenCa) values (N'{0}')",ca.TenCa);
             try
             {
                 int state = DatabaseHelper.ExcuteSql(sTruyVan);
@@ -45,7 +45,7 @@ namespace DAO
 
         public static bool DeleteCa(DTO_Ca ca)
         {
-            string sTruyVan = string.Format("Delete from Ca where MaCa=N'{0}'", ca.MaCa);
+            string sTruyVan = string.Format("Delete from Ca where MaCa='{0}'", ca.MaCa);
             try
             {
                 int state = DatabaseHelper.ExcuteSql(sTruyVan);
@@ -61,7 +61,7 @@ namespace DAO
 
         public static bool UpdateCa(DTO_Ca ca)
         {
-            string sTruyVan = string.Format("Update Ca set TenCa=N'{0}' where MaCa=N'{1}'", ca.TenCa, ca.MaCa);
+            string sTruyVan = string.Format("Update Ca set TenCa=N'{0}' where MaCa='{1}'", ca.TenCa, ca.MaCa);
             try
             {
                 int state = DatabaseHelper.ExcuteSql(sTruyVan);
