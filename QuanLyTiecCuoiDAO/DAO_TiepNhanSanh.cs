@@ -17,10 +17,18 @@ namespace DAO
         }
         public static bool InsertSanh(DTO_Sanh sanh)
         {
-            string sqlCommand = string.Format(@"INSERT INTO Sanh (TenSanh, MaLoaiSanh, SoLuongBanToiDa, GhiChu) VALUES (N'{0}','{1}',{2},N'{3}')"
+            string sqlCommand = string.Format(@"INSERT INTO Sanh (TenSanh, MaLoaiSanh, SoLuongBanToiDa, GhiChu) VALUES (N'{0}', {1}, {2}, N'{3}')"
                 , sanh.tenSanh, sanh.maLoaiSanh, sanh.soLuongBanToiDa, sanh.ghiChu);
 
             if (DatabaseHelper.ExcuteSql(sqlCommand) == 1)
+                return true;
+            return false;
+        }
+
+        public static bool TenSanhIsExistInSanh(string tenSanh)
+        {
+            string sqlCommand = @"SELECT TenSanh FROM Sanh WHERE TenSanh=N'" + tenSanh + "'";
+            if (DatabaseHelper.GetData(sqlCommand).Rows.Count > 0)
                 return true;
             return false;
         }

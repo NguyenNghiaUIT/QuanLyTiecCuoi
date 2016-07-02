@@ -49,7 +49,7 @@ namespace QuanLyTiecCuoiUI
 
         void txtSoLuongBanTD_TextChanged(object sender, EventArgs e)
         {
-            if (txtSoLuongBanTD.Text == " " || txtSoLuongBanTD.Text == "0")
+            if (txtSoLuongBanTD.Text == "0")
             {
                 txtSoLuongBanTD.Text = "";
                 return;
@@ -122,7 +122,7 @@ namespace QuanLyTiecCuoiUI
                         btnXoa.Enabled = true;
                         btnSua.Enabled = true;
                         btnLuu.Enabled = false;
-                        btnHuy.Enabled = true;
+                        btnHuy.Enabled = false;
                         dgvQuanLySanh.Enabled = true;
                         break;
                     }
@@ -178,7 +178,7 @@ namespace QuanLyTiecCuoiUI
             if ((txtTenSanh.Text != "" || txtSoLuongBanTD.Text != "" || txtGhiChu.Text != "")
                 && (mCurrentMode == MODE.EDIT || mCurrentMode == MODE.INSERT))
             {
-                DialogResult dr = MessageBox.Show("Bạn có muốn hủy không?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBox.Show("Dữ liệu sẽ không được lưu, bạn có muốn hủy không?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.No)
                     return;
             }
@@ -318,7 +318,7 @@ namespace QuanLyTiecCuoiUI
         {
             if (BUS_QuanLySanh.mIsLoaiSanhDataEmpty)
             {
-                MessageBox.Show("Không có dữ liệu Loại Sảnh nào, vui lòng thêm vào để sử dụng chức năng này!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Không có dữ liệu Loại Sảnh nào, vui lòng thêm vào để sử dụng chức năng này!\n\nĐể thêm, truy cập: QUY ĐỊNH > Quản lý loại sảnh", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
             }
         }

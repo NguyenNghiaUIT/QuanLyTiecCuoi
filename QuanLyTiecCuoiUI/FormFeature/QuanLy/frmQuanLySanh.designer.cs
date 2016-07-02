@@ -181,12 +181,12 @@
             this.label5.BackColor = System.Drawing.SystemColors.Control;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.2F, System.Drawing.FontStyle.Italic);
             this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(320, 202);
+            this.label5.Location = new System.Drawing.Point(7, 201);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(196, 16);
+            this.label5.Size = new System.Drawing.Size(204, 16);
             this.label5.TabIndex = 44;
-            this.label5.Text = "Các mục * không được để trống.";
+            this.label5.Text = "Các mục (*) không được để trống.";
             // 
             // label4
             // 
