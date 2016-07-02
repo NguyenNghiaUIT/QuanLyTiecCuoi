@@ -409,7 +409,8 @@ namespace QuanLyTiecCuoiUI
         private void btnXoaHinh_Click(object sender, EventArgs e)
         {
             ImageLocationPath = lblThongTinHinhAnh.Text = string.Empty;
-            ptrHinhAnh.Image = Image.FromFile(@"DanhSachDichVu\unknow.png");
+            ptrHinhAnh.SizeMode = PictureBoxSizeMode.StretchImage;
+            ptrHinhAnh.ImageLocation = @"DanhSachDichVu\unknow.png";
         }
         #endregion
 
