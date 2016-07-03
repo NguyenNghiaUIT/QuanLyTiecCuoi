@@ -61,10 +61,10 @@
             this.rbNgay.AutoSize = true;
             this.rbNgay.Location = new System.Drawing.Point(250, 23);
             this.rbNgay.Name = "rbNgay";
-            this.rbNgay.Size = new System.Drawing.Size(59, 21);
+            this.rbNgay.Size = new System.Drawing.Size(149, 29);
             this.rbNgay.TabIndex = 2;
             this.rbNgay.TabStop = true;
-            this.rbNgay.Text = "Ngày";
+            this.rbNgay.Text = "Ngày đãi tiệc";
             this.rbNgay.UseVisualStyleBackColor = true;
             this.rbNgay.CheckedChanged += new System.EventHandler(this.rbNgay_CheckedChanged);
             // 
@@ -73,7 +73,7 @@
             this.rbTenCoDau.AutoSize = true;
             this.rbTenCoDau.Location = new System.Drawing.Point(125, 23);
             this.rbTenCoDau.Name = "rbTenCoDau";
-            this.rbTenCoDau.Size = new System.Drawing.Size(98, 21);
+            this.rbTenCoDau.Size = new System.Drawing.Size(136, 29);
             this.rbTenCoDau.TabIndex = 1;
             this.rbTenCoDau.TabStop = true;
             this.rbTenCoDau.Text = "Tên cô dâu";
@@ -85,7 +85,7 @@
             this.rbTenChuRe.AutoSize = true;
             this.rbTenChuRe.Location = new System.Drawing.Point(7, 23);
             this.rbTenChuRe.Name = "rbTenChuRe";
-            this.rbTenChuRe.Size = new System.Drawing.Size(95, 21);
+            this.rbTenChuRe.Size = new System.Drawing.Size(131, 29);
             this.rbTenChuRe.TabIndex = 0;
             this.rbTenChuRe.TabStop = true;
             this.rbTenChuRe.Text = "Tên chú rể";
@@ -106,9 +106,9 @@
             // 
             // dtpNgay
             // 
-            this.dtpNgay.Location = new System.Drawing.Point(6, 23);
+            this.dtpNgay.Location = new System.Drawing.Point(6, 22);
             this.dtpNgay.Name = "dtpNgay";
-            this.dtpNgay.Size = new System.Drawing.Size(214, 23);
+            this.dtpNgay.Size = new System.Drawing.Size(214, 30);
             this.dtpNgay.TabIndex = 5;
             this.dtpNgay.Visible = false;
             // 
@@ -126,7 +126,7 @@
             // 
             this.txtTuKhoa.Location = new System.Drawing.Point(6, 22);
             this.txtTuKhoa.Name = "txtTuKhoa";
-            this.txtTuKhoa.Size = new System.Drawing.Size(214, 23);
+            this.txtTuKhoa.Size = new System.Drawing.Size(214, 30);
             this.txtTuKhoa.TabIndex = 3;
             // 
             // gbKetQuaTraCuu
@@ -160,7 +160,7 @@
             // 
             // frmTraCuuTiecCuoi
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 311);
             this.Controls.Add(this.gbKetQuaTraCuu);

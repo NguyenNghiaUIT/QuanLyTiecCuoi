@@ -14,6 +14,7 @@ namespace BUS
         private static List<string> mListTenLoaiSanh;
         private static List<string> mListDonGiaBanTT;
         private static List<string> mListMaLoaiSanh;
+        public static bool mIsLoaiSanhDataEmpty;
         public static void Init()
         {
             GetListsInTableLoaiSanh();
@@ -32,11 +33,17 @@ namespace BUS
         }
         private static void GetListsInTableLoaiSanh()
         {
+            DataTable dt = GetLoaiSanhTable();
+            if (dt.Rows.Count == 0)
+            {
+                mIsLoaiSanhDataEmpty = true;
+                return;
+            }
+            mIsLoaiSanhDataEmpty = false;
             mListTenLoaiSanh = new List<string>();
             mListDonGiaBanTT = new List<string>();
             mListMaLoaiSanh = new List<string>();
             
-            DataTable dt = GetLoaiSanhTable();
             foreach (DataRow item in dt.Rows)
             {
                 mListMaLoaiSanh.Add(item[0].ToString());

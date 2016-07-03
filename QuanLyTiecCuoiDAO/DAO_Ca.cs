@@ -45,7 +45,7 @@ namespace DAO
 
         public static bool DeleteCa(DTO_Ca ca)
         {
-            string sTruyVan = string.Format("Delete from Ca where MaCa='{0}'", ca.MaCa);
+            string sTruyVan = string.Format("Delete from Ca where MaCa = '{0}'", ca.MaCa);
             try
             {
                 int state = DatabaseHelper.ExcuteSql(sTruyVan);

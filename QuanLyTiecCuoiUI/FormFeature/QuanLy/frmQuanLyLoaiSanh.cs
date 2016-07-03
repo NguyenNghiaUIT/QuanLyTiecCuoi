@@ -157,7 +157,7 @@ namespace QuanLyTiecCuoiUI
                         DialogResult dr = MessageBox.Show("Bạn có muốn thêm loại sảnh mới này không?", "Thêm loại sảnh", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (dr == DialogResult.No)
                             return;
-                        DTO_LoaiSanh loaiSanh = new DTO_LoaiSanh(txtMaLoaiSanh.Text[0], txtDonGiaBanTT.Text);
+                        DTO_LoaiSanh loaiSanh = new DTO_LoaiSanh(txtMaLoaiSanh.Text[0], decimal.Parse(txtDonGiaBanTT.Text));
                         if (BUS_QuanLyLoaiSanh.InsertLoaiSanh(loaiSanh))
                         {
                             dgvQuanLyLoaiSanh.DataSource = BUS_QuanLyLoaiSanh.GetLoaiSanhTable();
@@ -173,7 +173,7 @@ namespace QuanLyTiecCuoiUI
                     }
                 case MODE.EDIT:
                     {
-                        DTO_LoaiSanh loaiSanh = new DTO_LoaiSanh(txtMaLoaiSanh.Text[0], txtDonGiaBanTT.Text);
+                        DTO_LoaiSanh loaiSanh = new DTO_LoaiSanh(txtMaLoaiSanh.Text[0], decimal.Parse(txtDonGiaBanTT.Text));
                         BUS_QuanLyLoaiSanh.UpdateLoaiSanh(loaiSanh);
                         dgvQuanLyLoaiSanh.DataSource = BUS_QuanLyLoaiSanh.GetLoaiSanhTable();
                         ClearAllInputs();

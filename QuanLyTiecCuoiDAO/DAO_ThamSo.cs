@@ -25,5 +25,13 @@ namespace DAO
                return true;
            return false;
        }
+
+       public static bool UpdateThamSo(DTO_ThamSo thamSo)
+       {
+           String sql = String.Format("update ThamSo set {0} = {1} where {2} = N'{3}'", COLUMN_GIATRI, thamSo.GiaTri, COLUMN_TENQUYDINH, thamSo.TenQuyDinh);
+           if (DatabaseHelper.ExcuteSql(sql) == 1)
+               return true;
+           return false;
+       }
     }
 }

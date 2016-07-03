@@ -31,12 +31,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lblTenQuyDinh = new System.Windows.Forms.Label();
             this.lblGiaTri = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.cbApDung = new System.Windows.Forms.CheckBox();
             this.btnEditQuyDinh = new System.Windows.Forms.Button();
             this.txtGiaTri = new System.Windows.Forms.TextBox();
             this.lblApDung = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtTenQuyDinh = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,32 +69,24 @@
             this.lblGiaTri.TabIndex = 16;
             this.lblGiaTri.Text = "Giá Trị";
             // 
-            // label1
+            // cbApDung
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 69);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(139, 17);
-            this.label1.TabIndex = 19;
-            this.label1.Text = "Phí thanh toán muộn";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(357, 72);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(15, 14);
-            this.checkBox1.TabIndex = 20;
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.cbApDung.AutoSize = true;
+            this.cbApDung.Location = new System.Drawing.Point(357, 72);
+            this.cbApDung.Name = "cbApDung";
+            this.cbApDung.Size = new System.Drawing.Size(15, 14);
+            this.cbApDung.TabIndex = 20;
+            this.cbApDung.UseVisualStyleBackColor = true;
             // 
             // btnEditQuyDinh
             // 
-            this.btnEditQuyDinh.Location = new System.Drawing.Point(462, 59);
+            this.btnEditQuyDinh.Location = new System.Drawing.Point(446, 63);
             this.btnEditQuyDinh.Name = "btnEditQuyDinh";
             this.btnEditQuyDinh.Size = new System.Drawing.Size(94, 30);
             this.btnEditQuyDinh.TabIndex = 18;
             this.btnEditQuyDinh.Text = "Sửa";
             this.btnEditQuyDinh.UseVisualStyleBackColor = true;
+            this.btnEditQuyDinh.Click += new System.EventHandler(this.btnEditQuyDinh_Click);
             // 
             // txtGiaTri
             // 
@@ -115,26 +107,33 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtTenQuyDinh);
             this.groupBox1.Controls.Add(this.lblApDung);
             this.groupBox1.Controls.Add(this.txtGiaTri);
             this.groupBox1.Controls.Add(this.btnEditQuyDinh);
-            this.groupBox1.Controls.Add(this.checkBox1);
-            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.cbApDung);
             this.groupBox1.Controls.Add(this.lblGiaTri);
             this.groupBox1.Controls.Add(this.lblTenQuyDinh);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(35, 25);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(600, 175);
+            this.groupBox1.Size = new System.Drawing.Size(600, 144);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Quy định";
+            // 
+            // txtTenQuyDinh
+            // 
+            this.txtTenQuyDinh.Location = new System.Drawing.Point(18, 66);
+            this.txtTenQuyDinh.Name = "txtTenQuyDinh";
+            this.txtTenQuyDinh.Size = new System.Drawing.Size(131, 23);
+            this.txtTenQuyDinh.TabIndex = 22;
             // 
             // frmThayDoiQuyDinh
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(662, 225);
+            this.ClientSize = new System.Drawing.Size(662, 195);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label2);
             this.Name = "frmThayDoiQuyDinh";
@@ -151,12 +150,12 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblTenQuyDinh;
         private System.Windows.Forms.Label lblGiaTri;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox cbApDung;
         private System.Windows.Forms.Button btnEditQuyDinh;
         private System.Windows.Forms.TextBox txtGiaTri;
         private System.Windows.Forms.Label lblApDung;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox txtTenQuyDinh;
 
     }
 }
