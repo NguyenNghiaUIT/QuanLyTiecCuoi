@@ -19,10 +19,10 @@ namespace DAO
             return true;
         }
 
-        public bool InsertHoaDon(DTO.DTO_HoaDon hoaDon)
-        {
-
-        }
+        //public bool InsertHoaDon(DTO.DTO_HoaDon hoaDon)
+        //{
+            
+        //}
 
     }
 }

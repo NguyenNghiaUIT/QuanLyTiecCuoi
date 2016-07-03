@@ -61,10 +61,10 @@
             this.rbNgay.AutoSize = true;
             this.rbNgay.Location = new System.Drawing.Point(250, 23);
             this.rbNgay.Name = "rbNgay";
-            this.rbNgay.Size = new System.Drawing.Size(83, 29);
+            this.rbNgay.Size = new System.Drawing.Size(149, 29);
             this.rbNgay.TabIndex = 2;
             this.rbNgay.TabStop = true;
-            this.rbNgay.Text = "Ngày";
+            this.rbNgay.Text = "Ngày đãi tiệc";
             this.rbNgay.UseVisualStyleBackColor = true;
             this.rbNgay.CheckedChanged += new System.EventHandler(this.rbNgay_CheckedChanged);
             // 
