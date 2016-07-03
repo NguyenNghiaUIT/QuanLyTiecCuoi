@@ -17,14 +17,17 @@ namespace BUS
         }
         public static bool InsertLoaiSanh(DTO_LoaiSanh loaiSanh)
         {
-            if (DAO_QuanLyLoaiSanh.NumbersOfMaLoaiSanhInLoaiSanh(loaiSanh) == 1)
+            if (DAO_QuanLyLoaiSanh.NumbersOfTenLoaiSanhInLoaiSanh(loaiSanh) > 0)
                 return false;
             DAO_QuanLyLoaiSanh.InsertLoaiSanh(loaiSanh);
             return true;
         }
-        public static void UpdateLoaiSanh(DTO_LoaiSanh loaiSanh)
+        public static bool UpdateLoaiSanh(DTO_LoaiSanh loaiSanh)
         {
+            if (DAO_QuanLyLoaiSanh.NumbersOfTenLoaiSanhInLoaiSanh(loaiSanh) > 0)
+                return false;
             DAO_QuanLyLoaiSanh.UpdateLoaiSanh(loaiSanh);
+            return true;
         }
         public static bool DeleteLoaiSanh(DTO_LoaiSanh loaiSanh)
         {

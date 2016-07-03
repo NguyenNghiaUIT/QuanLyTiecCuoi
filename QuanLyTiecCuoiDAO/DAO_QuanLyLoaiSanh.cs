@@ -17,17 +17,17 @@ namespace DAO
         }
         public static void InsertLoaiSanh(DTO_LoaiSanh loaiSanh)
         {
-            string sqlCommand = string.Format(@"INSERT INTO LoaiSanh (MaLoaiSanh,DonGiaBanToiThieu) VALUES ('{0}',{1})", loaiSanh.maLoaiSanh, loaiSanh.donGiaBanToiThieu);
+            string sqlCommand = string.Format(@"INSERT INTO LoaiSanh (TenLoaiSanh,DonGiaBanToiThieu) VALUES (N'{0}',{1})", loaiSanh.tenLoaiSanh, loaiSanh.donGiaBanToiThieu);
             DatabaseHelper.ExcuteSql(sqlCommand);
         }
         public static void UpdateLoaiSanh(DTO_LoaiSanh loaiSanh)
         {
-            string sqlCommand = string.Format(@"UPDATE LoaiSanh SET DonGiaBanToiThieu={0} WHERE MaLoaiSanh='{1}'", loaiSanh.donGiaBanToiThieu, loaiSanh.maLoaiSanh);
+            string sqlCommand = string.Format(@"UPDATE LoaiSanh SET TenLoaiSanh=N'{0}', DonGiaBanToiThieu={1} WHERE MaLoaiSanh={2}", loaiSanh.tenLoaiSanh, loaiSanh.donGiaBanToiThieu, loaiSanh.maLoaiSanh);
             DatabaseHelper.ExcuteSql(sqlCommand);
         }
         public static void DeleteLoaiSanh(DTO_LoaiSanh loaiSanh)
         {
-            string sqlCommand = string.Format(@"DELETE FROM LoaiSanh WHERE MaLoaiSanh='{0}'", loaiSanh.maLoaiSanh);
+            string sqlCommand = string.Format(@"DELETE FROM LoaiSanh WHERE MaLoaiSanh={0}", loaiSanh.maLoaiSanh);
             DatabaseHelper.ExcuteSql(sqlCommand);
         }
         public static int NumbersOfMaLoaiSanhInSanh(DTO_LoaiSanh loaiSanh)
@@ -35,9 +35,9 @@ namespace DAO
             string sqlCommand = string.Format(@"SELECT COUNT(*) FROM Sanh WHERE MaLoaiSanh='{0}'", loaiSanh.maLoaiSanh);
             return DatabaseHelper.CountRecord(sqlCommand);
         }
-        public static int NumbersOfMaLoaiSanhInLoaiSanh(DTO_LoaiSanh loaiSanh)
+        public static int NumbersOfTenLoaiSanhInLoaiSanh(DTO_LoaiSanh loaiSanh)
         {
-            string sqlCommand = string.Format(@"SELECT COUNT(*) FROM LoaiSanh WHERE MaLoaiSanh='{0}'", loaiSanh.maLoaiSanh);
+            string sqlCommand = string.Format(@"SELECT COUNT(*) FROM LoaiSanh WHERE TenLoaiSanh=N'{0}'", loaiSanh.tenLoaiSanh);
             return DatabaseHelper.CountRecord(sqlCommand);
         }
     }

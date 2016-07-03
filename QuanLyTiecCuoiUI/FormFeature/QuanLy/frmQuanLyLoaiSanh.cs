@@ -14,40 +14,76 @@ namespace QuanLyTiecCuoiUI
 {
     public partial class frmQuanLyLoaiSanh : Form
     {
-        private MODE mCurrentMode = MODE.NORMAL;
+        private MODE mCurrentMode = MODE.AT_HOME;
         public frmQuanLyLoaiSanh()
         {
             InitializeComponent();
         }
         enum MODE
         {
-            NORMAL,
-            INSERT,
-            EDIT
+            AT_HOME,
+            INSERTING,
+            EDITING,
+            CELL_SELECTING
         }
         private void frmQuanLyLoaiSanh_Load(object sender, EventArgs e)
         {
-            SetDisplayControls(MODE.NORMAL);
+            SetDisplayControls(MODE.AT_HOME);
             dgvQuanLyLoaiSanh.DataSource = BUS_QuanLyLoaiSanh.GetLoaiSanhTable();
-            dgvQuanLyLoaiSanh.Columns["MaLoaiSanh"].HeaderText = "Mã loại sảnh";
+            dgvQuanLyLoaiSanh.Columns["MaLoaiSanh"].Visible = false;
+            dgvQuanLyLoaiSanh.Columns["TenLoaiSanh"].HeaderText = "Tên loại sảnh";
             dgvQuanLyLoaiSanh.Columns["DonGiaBanToiThieu"].HeaderText = "Đơn giá bàn tối thiểu";
             
         }
         private void DisableAllInputs()
         {
-            txtMaLoaiSanh.Enabled = false;
-            txtDonGiaBanTT.Enabled = false;
+            txtTenLoaiSanh.ReadOnly = true;
+            txtDonGiaBanTT.ReadOnly = true;
         }
         private void EnableAllInputs()
         {
-            txtMaLoaiSanh.Enabled = true;
-            txtDonGiaBanTT.Enabled = true;
+            txtTenLoaiSanh.ReadOnly = false;
+            txtDonGiaBanTT.ReadOnly = false;
         }
         private void SetDisplayControls(MODE mode)
         {
             switch (mode)
             {
-                case MODE.NORMAL:
+                case MODE.AT_HOME:
+                    {
+                        DisableAllInputs();
+                        btnThem.Enabled = true;
+                        btnXoa.Enabled = false;
+                        btnSua.Enabled = false;
+                        btnLuu.Enabled = false;
+                        btnHuy.Enabled = false;
+                        dgvQuanLyLoaiSanh.Enabled = true;
+                        break;
+                    }
+                case MODE.INSERTING:
+                    {
+                        EnableAllInputs();
+                        btnThem.Enabled = false;
+                        btnXoa.Enabled = false;
+                        btnSua.Enabled = false;
+                        btnLuu.Enabled = true;
+                        btnHuy.Enabled = true;
+                        txtTenLoaiSanh.Focus();
+                        dgvQuanLyLoaiSanh.Enabled = false;
+                        break;
+                    }
+                case MODE.EDITING:
+                    {
+                        EnableAllInputs();
+                        btnThem.Enabled = true;
+                        btnXoa.Enabled = false;
+                        btnSua.Enabled = false;
+                        btnLuu.Enabled = true;
+                        btnHuy.Enabled = true;
+                        dgvQuanLyLoaiSanh.Enabled = false;
+                        break;
+                    }
+                case MODE.CELL_SELECTING:
                     {
                         DisableAllInputs();
                         btnThem.Enabled = true;
@@ -55,28 +91,7 @@ namespace QuanLyTiecCuoiUI
                         btnSua.Enabled = true;
                         btnLuu.Enabled = false;
                         btnHuy.Enabled = false;
-                        break;
-                    }
-                case MODE.INSERT:
-                    {
-                        EnableAllInputs();
-                        btnThem.Enabled = false;
-                        btnXoa.Enabled = false;
-                        btnSua.Enabled = false;
-                        btnLuu.Enabled = true;
-                        btnHuy.Enabled = true;
-                        txtMaLoaiSanh.Focus();
-                        break;
-                    }
-                case MODE.EDIT:
-                    {
-                        EnableAllInputs();
-                        txtMaLoaiSanh.Enabled = false;
-                        btnThem.Enabled = false;
-                        btnXoa.Enabled = false;
-                        btnSua.Enabled = false;
-                        btnLuu.Enabled = true;
-                        btnHuy.Enabled = true;
+                        dgvQuanLyLoaiSanh.Enabled = true;
                         break;
                     }
                 default:
@@ -86,55 +101,67 @@ namespace QuanLyTiecCuoiUI
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            SetDisplayControls(MODE.INSERT);
-            mCurrentMode = MODE.INSERT;
+            SetDisplayControls(MODE.INSERTING);
+            mCurrentMode = MODE.INSERTING;
+            ClearAllInputs();
+            dgvQuanLyLoaiSanh.ClearSelection();
         }
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            SetDisplayControls(MODE.EDIT);
-            mCurrentMode = MODE.EDIT;
+            SetDisplayControls(MODE.EDITING);
+            mCurrentMode = MODE.EDITING;
 
-            dgvQuanLyLoaiSanh.Focus();
-            txtMaLoaiSanh.Text = dgvQuanLyLoaiSanh.CurrentRow.Cells["MaLoaiSanh"].Value.ToString();
-            txtDonGiaBanTT.Text = dgvQuanLyLoaiSanh.CurrentRow.Cells["DonGiaBanToiThieu"].Value.ToString();
+            //dgvQuanLyLoaiSanh.Focus();
+            //txtTenLoaiSanh.Text = dgvQuanLyLoaiSanh.CurrentRow.Cells["TenLoaiSanh"].Value.ToString();
+            //txtDonGiaBanTT.Text = dgvQuanLyLoaiSanh.CurrentRow.Cells["DonGiaBanToiThieu"].Value.ToString();
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
             dgvQuanLyLoaiSanh.Focus();
             DTO_LoaiSanh loaiSanh = new DTO_LoaiSanh();
-            loaiSanh.maLoaiSanh = dgvQuanLyLoaiSanh.CurrentRow.Cells["MaLoaiSanh"].Value.ToString()[0];
-
-            DialogResult dr = MessageBox.Show("Bạn có muốn xóa loại sảnh '" + loaiSanh.maLoaiSanh + "' không?", "Xóa loại sảnh", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            loaiSanh.tenLoaiSanh = dgvQuanLyLoaiSanh.CurrentRow.Cells["TenLoaiSanh"].Value.ToString();
+            loaiSanh.maLoaiSanh = int.Parse(dgvQuanLyLoaiSanh.CurrentRow.Cells["MaLoaiSanh"].Value.ToString());
+                        
+            DialogResult dr = MessageBox.Show(string.Format("Bạn có muốn xóa loại sảnh '{0}' không?", loaiSanh.tenLoaiSanh), "Xóa loại sảnh", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (dr == DialogResult.No)
                 return;
             if (BUS_QuanLyLoaiSanh.DeleteLoaiSanh(loaiSanh))
             {
                 dgvQuanLyLoaiSanh.DataSource = BUS_QuanLyLoaiSanh.GetLoaiSanhTable();
-                MessageBox.Show("Xóa loại sảnh " + loaiSanh.maLoaiSanh + " thành công!", "Thông báo",MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Xóa loại sảnh '" + loaiSanh.tenLoaiSanh + "' thành công!", "Thông báo",MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
-                MessageBox.Show(string.Format("Lỗi, loại sảnh '{0}' là khóa ngoại đang tồn tại trong bảng 'Sảnh'.\n\nVui lòng xóa các loại sảnh '{1}' trong bảng 'Sảnh' trước.",
-                    loaiSanh.maLoaiSanh, loaiSanh.maLoaiSanh),
+                MessageBox.Show(string.Format("Không thể xóa, vui lòng xóa dữ liệu liên qua đến loại sảnh '{0}' trong bảng 'Sảnh' trước.",
+                    loaiSanh.tenLoaiSanh),
                     "Lỗi khóa ngoại", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void btnHuy_Click(object sender, EventArgs e)
         {
-            SetDisplayControls(MODE.NORMAL);
+            if ((txtTenLoaiSanh.Text != "" || txtDonGiaBanTT.Text != "")
+                && (mCurrentMode == MODE.EDITING || mCurrentMode == MODE.INSERTING))
+            {
+                DialogResult dr = MessageBox.Show("Dữ liệu sẽ không được lưu, bạn có muốn hủy không?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.No)
+                    return;
+            }
+
+            SetDisplayControls(MODE.AT_HOME);
             ClearAllInputs();
+            dgvQuanLyLoaiSanh.ClearSelection();
         }
 
         private void ClearAllInputs()
         {
-            txtMaLoaiSanh.Text = "";
+            txtTenLoaiSanh.Text = "";
             txtDonGiaBanTT.Text = "";
         }
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
-            if (txtMaLoaiSanh.Text == "" || txtDonGiaBanTT.Text == "")
+            if (txtTenLoaiSanh.Text == "" || txtDonGiaBanTT.Text == "")
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -142,7 +169,7 @@ namespace QuanLyTiecCuoiUI
             int temp;
             if (!int.TryParse(txtDonGiaBanTT.Text, out temp))
             {
-                MessageBox.Show("'Số lượng bàn tối đa' phải là số nguyên, vui lòng nhập lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("'Đơn giá bàn tối đa' phải là số nguyên, vui lòng nhập lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtDonGiaBanTT.Focus();
                 txtDonGiaBanTT.SelectAll();
                 return;
@@ -150,47 +177,93 @@ namespace QuanLyTiecCuoiUI
 
             switch (mCurrentMode)
             {
-                case MODE.NORMAL:
+                case MODE.AT_HOME:
                     break;
-                case MODE.INSERT:
+                case MODE.INSERTING:
                     {
-                        DialogResult dr = MessageBox.Show("Bạn có muốn thêm loại sảnh mới này không?", "Thêm loại sảnh", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        DialogResult dr = MessageBox.Show("Bạn có muốn lưu loại sảnh '"+txtTenLoaiSanh.Text+"' không?", "Thêm loại sảnh", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (dr == DialogResult.No)
                             return;
-                        DTO_LoaiSanh loaiSanh = new DTO_LoaiSanh(txtMaLoaiSanh.Text[0], decimal.Parse(txtDonGiaBanTT.Text));
+                        DTO_LoaiSanh loaiSanh = new DTO_LoaiSanh(txtTenLoaiSanh.Text, decimal.Parse(txtDonGiaBanTT.Text));
                         if (BUS_QuanLyLoaiSanh.InsertLoaiSanh(loaiSanh))
                         {
                             dgvQuanLyLoaiSanh.DataSource = BUS_QuanLyLoaiSanh.GetLoaiSanhTable();
                             ClearAllInputs();
-                            MessageBox.Show("Thêm loại sảnh " + loaiSanh.maLoaiSanh + " thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            SetDisplayControls(MODE.NORMAL);
-                            mCurrentMode = MODE.NORMAL;
+                            MessageBox.Show("Thêm loại sảnh '" + loaiSanh.tenLoaiSanh + "' thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            SetDisplayControls(MODE.AT_HOME);
+                            mCurrentMode = MODE.AT_HOME;
                         }
                         else
-                            MessageBox.Show("Loại sảnh " + loaiSanh.maLoaiSanh + " đã tồn tại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                        {
+                            MessageBox.Show("Loại sảnh '" + loaiSanh.tenLoaiSanh + "' đã tồn tại. Vui lòng sửa lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            txtTenLoaiSanh.Focus();
+                            txtTenLoaiSanh.SelectAll();
+                        }
+                            
                         break;
                     }
-                case MODE.EDIT:
+                case MODE.EDITING:
                     {
-                        DTO_LoaiSanh loaiSanh = new DTO_LoaiSanh(txtMaLoaiSanh.Text[0], decimal.Parse(txtDonGiaBanTT.Text));
-                        BUS_QuanLyLoaiSanh.UpdateLoaiSanh(loaiSanh);
-                        dgvQuanLyLoaiSanh.DataSource = BUS_QuanLyLoaiSanh.GetLoaiSanhTable();
-                        ClearAllInputs();
-                        MessageBox.Show("Sửa loại sảnh " + loaiSanh.maLoaiSanh + " thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        SetDisplayControls(MODE.NORMAL);
-                        mCurrentMode = MODE.NORMAL;
+                        DialogResult dr = MessageBox.Show("Bạn có muốn lưu lại không?", "Sửa loại sảnh", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (dr == DialogResult.No)
+                            return;
+                        DTO_LoaiSanh loaiSanh = new DTO_LoaiSanh(txtTenLoaiSanh.Text, decimal.Parse(txtDonGiaBanTT.Text));
+                        loaiSanh.maLoaiSanh = int.Parse(dgvQuanLyLoaiSanh.CurrentRow.Cells["MaLoaiSanh"].Value.ToString());
+                        if (BUS_QuanLyLoaiSanh.UpdateLoaiSanh(loaiSanh))
+                        {
+                            dgvQuanLyLoaiSanh.DataSource = BUS_QuanLyLoaiSanh.GetLoaiSanhTable();
+                            ClearAllInputs();
+                            MessageBox.Show("Sửa loại sảnh '" + loaiSanh.tenLoaiSanh + "' thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            SetDisplayControls(MODE.AT_HOME);
+                            mCurrentMode = MODE.AT_HOME;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Loại sảnh '" + loaiSanh.tenLoaiSanh + "' đã tồn tại. Vui lòng sửa lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            txtTenLoaiSanh.Focus();
+                            txtTenLoaiSanh.SelectAll();
+                        }
 
                         break;
                     }
                 default:
                     break;
             }
+            dgvQuanLyLoaiSanh.ClearSelection();
         }
 
         private void txtDonGiaBanTT_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void txtTenLoaiSanh_TextChanged(object sender, EventArgs e)
+        {
+            if (txtTenLoaiSanh.Text == " ")
+                txtTenLoaiSanh.Text = "";
+        }
+
+        private void txtDonGiaBanTT_TextChanged(object sender, EventArgs e)
+        {
+            if (txtDonGiaBanTT.Text == "0")
+                txtDonGiaBanTT.Text = "";
+        }
+
+        private void dgvQuanLyLoaiSanh_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1)
+                return;
+
+            SetDisplayControls(mCurrentMode = MODE.CELL_SELECTING);
+
+            int row = e.RowIndex;
+            txtTenLoaiSanh.Text = dgvQuanLyLoaiSanh[1, row].Value.ToString();
+            txtDonGiaBanTT.Text = dgvQuanLyLoaiSanh[2, row].Value.ToString();
+        }
+
+        private void dgvQuanLyLoaiSanh_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            dgvQuanLyLoaiSanh.ClearSelection();
         }
     }
 }
