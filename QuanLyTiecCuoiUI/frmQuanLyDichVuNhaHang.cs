@@ -488,7 +488,6 @@ namespace QuanLyTiecCuoiUI
         {
             InitializeComponent();
         }
-
         private void frmQuanLyDichVuNhaHang_Load(object sender, EventArgs e)
         {
             SetupImageListView();

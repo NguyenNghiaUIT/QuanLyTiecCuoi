@@ -10,14 +10,14 @@ namespace DAO
 {
     public class DAO_NhanDatTiecCuoi
     {
-        public static DataTable GetMaKH()
-        {
-            string sTruyVan = "Select * from KhachHang";
-            return DatabaseHelper.GetData(sTruyVan);
-        }
         public static DataTable GetSanh()
         {
-            string sTruyVan = "Select * from Sanh";
+            string sTruyVan = "Select MaSanh, TenSanh, DonGiaBanToiThieu from Sanh, LoaiSanh where Sanh.MaLoaiSanh = LoaiSanh.MaLoaiSanh";
+            return DatabaseHelper.GetData(sTruyVan);
+        }
+        public static DataTable GetCa()
+        {
+            string sTruyVan = "Select * from Ca";
             return DatabaseHelper.GetData(sTruyVan);
         }
     }

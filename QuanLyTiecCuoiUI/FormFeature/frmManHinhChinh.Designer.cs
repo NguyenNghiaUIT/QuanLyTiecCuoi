@@ -40,9 +40,9 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pnlUser = new System.Windows.Forms.Panel();
             this.lblNavigation = new System.Windows.Forms.Label();
+            this.ovalPictureBox1 = new QuanLyTiecCuoiUI.NewAssets.OvalPictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.ovalPictureBox1 = new QuanLyTiecCuoiUI.NewAssets.OvalPictureBox();
             this.pnlLeft.SuspendLayout();
             this.tlpMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnQuanLy)).BeginInit();
@@ -199,6 +199,19 @@
             this.lblNavigation.TabIndex = 5;
             this.lblNavigation.Text = "label2";
             // 
+            // ovalPictureBox1
+            // 
+            this.ovalPictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ovalPictureBox1.BackColor = System.Drawing.Color.DarkGray;
+            this.ovalPictureBox1.Image = global::QuanLyTiecCuoiUI.Properties.Resources.user_group_new;
+            this.ovalPictureBox1.Location = new System.Drawing.Point(952, 12);
+            this.ovalPictureBox1.Name = "ovalPictureBox1";
+            this.ovalPictureBox1.Size = new System.Drawing.Size(70, 70);
+            this.ovalPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ovalPictureBox1.TabIndex = 1;
+            this.ovalPictureBox1.TabStop = false;
+            // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -225,19 +238,6 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Phạm Nguyễn Tâm Phú";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // ovalPictureBox1
-            // 
-            this.ovalPictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ovalPictureBox1.BackColor = System.Drawing.Color.DarkGray;
-            this.ovalPictureBox1.Image = global::QuanLyTiecCuoiUI.Properties.Resources.C360_2014_07_26_19_00_35_903;
-            this.ovalPictureBox1.Location = new System.Drawing.Point(952, 12);
-            this.ovalPictureBox1.Name = "ovalPictureBox1";
-            this.ovalPictureBox1.Size = new System.Drawing.Size(70, 70);
-            this.ovalPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ovalPictureBox1.TabIndex = 1;
-            this.ovalPictureBox1.TabStop = false;
             // 
             // frmManHinhChinh
             // 

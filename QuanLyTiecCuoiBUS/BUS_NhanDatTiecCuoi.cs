@@ -10,13 +10,13 @@ namespace BUS
 {
     public class BUS_NhanDatTiecCuoi
     {
-        public static DataTable GetMaKH()
-        {
-            return DAO_NhanDatTiecCuoi.GetMaKH();
-        }
         public static DataTable GetSanh()
         {
             return DAO_NhanDatTiecCuoi.GetSanh();
+        }
+        public static DataTable GetCa()
+        {
+            return DAO_NhanDatTiecCuoi.GetCa();
         }
     }
 }

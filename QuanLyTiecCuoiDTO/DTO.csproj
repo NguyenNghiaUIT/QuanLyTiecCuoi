@@ -41,12 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO_CT_PhieuDatBan.cs" />
     <Compile Include="DTO_DichVu.cs" />
     <Compile Include="DTO_KhachHang.cs" />
     <Compile Include="DTO_LoaiSanh.cs" />
     <Compile Include="DTO_MonAn.cs" />
+    <Compile Include="DTO_CT_PhieuDatDichVu.cs" />
     <Compile Include="DTO_Sanh.cs" />
     <Compile Include="DTO_ThamSo.cs" />
+    <Compile Include="DTO_TiecCuoi.cs" />
     <Compile Include="DTO_TraCuu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DTO_Ca.cs" />
