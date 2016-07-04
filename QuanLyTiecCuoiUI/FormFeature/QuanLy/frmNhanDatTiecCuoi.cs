@@ -138,7 +138,7 @@ namespace QuanLyTiecCuoiUI
             }
             catch(Exception ex)
             {
-                MessageBox.Show("Xảy ra lỗi trong quá trình load Combobox", "Lỗi");
+                
             }
         }
         private void cboSanh_SelectedIndexChanged(object sender, EventArgs e)
@@ -175,7 +175,7 @@ namespace QuanLyTiecCuoiUI
         }
         private void txtTenChuRe_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (char.IsDigit(e.KeyChar))
+            if (char.IsDigit(e.KeyChar)) 
             {
                 e.Handled = true;
             }
@@ -262,6 +262,8 @@ namespace QuanLyTiecCuoiUI
             //Kiểm tra thông tin phiếu;
             DTO_TiecCuoi tiec = new DTO_TiecCuoi();
             tiec.MaCa = Convert.ToInt32(cboCa.SelectedValue.ToString());
+            tiec.MaSanh = Convert.ToInt32(cboSanh.SelectedValue.ToString());
+            MessageBox.Show(dattieccuoi.MaSanh.ToString());
             tiec.NgayDaiTiec = dtpNgayDaiTiec.Value.ToString("MM/dd/yyyy");
             DataTable re = BUS_NhanDatTiecCuoi.GetDate(tiec);
             if (re.Rows.Count > 0)  
@@ -301,6 +303,23 @@ namespace QuanLyTiecCuoiUI
                 else
                     MessageBox.Show("Thêm phiếu đặt bàn ăn thất bại ", "Thông Báo");
                 MessageBox.Show("Đặt tiệc cưới thành công ");
+
+                SetupDefaultControlState();
+                SetupFormSizeDefault(true);
+                LoadSanhAndCa();
+                IsCreateContract = IsCreateMenu = IsTakeWedding = false;
+                lstChiTietDatBan = new List<DTO_CT_PhieuDatBan>();
+                lstChiTietDichVu = new List<DTO_CT_PhieuDatDichVu>();
+                imgListDichVu = null;
+                imgListMonAn = null;
+                lstDichVuTiecCuoi.Clear();
+                lstDanhSachMonThucDon.Clear();
+                btnPhieuDatDichVu.Enabled = true;
+                btnPhieuDatBan.Enabled = true;
+                IsCreateContract = IsCreateMenu = IsCreateService = IsTakeWedding = false;
+                lstDichVuInsert.Clear();
+                lstMonAnInsert.Clear();
+                ShowNotification(false);
             }
             else
                 MessageBox.Show("Đặt tiệc cưới thất bại");
@@ -316,6 +335,7 @@ namespace QuanLyTiecCuoiUI
             {
                 DTO_TiecCuoi tiec = new DTO_TiecCuoi();
                 tiec.MaCa = Convert.ToInt32(cboCa.SelectedValue.ToString());
+                tiec.MaSanh = Convert.ToInt32(cboSanh.SelectedValue.ToString());
                 tiec.NgayDaiTiec = dtpNgayDaiTiec.Value.ToString("MM/dd/yyyy");
                 DataTable re = BUS_NhanDatTiecCuoi.GetDate(tiec);
                 if (re.Rows.Count > 0)
@@ -348,6 +368,7 @@ namespace QuanLyTiecCuoiUI
             {
                 DTO_TiecCuoi tiec = new DTO_TiecCuoi();
                 tiec.MaCa = Convert.ToInt32(cboCa.SelectedValue.ToString());
+                tiec.MaSanh = Convert.ToInt32(cboSanh.SelectedValue.ToString());
                 tiec.NgayDaiTiec = dtpNgayDaiTiec.Value.ToString("MM/dd/yyyy");
                 DataTable re = BUS_NhanDatTiecCuoi.GetDate(tiec);
                 if (re.Rows.Count > 0)
@@ -435,7 +456,7 @@ namespace QuanLyTiecCuoiUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Hiển thị hình ảnh thất bại");
+
             }
             //Gán vào list
             try
@@ -448,7 +469,7 @@ namespace QuanLyTiecCuoiUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Thêm hình ảnh vào List thất bại");
+
             }      
         }
 
@@ -572,7 +593,7 @@ namespace QuanLyTiecCuoiUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Hiển thị hình ảnh thất bại");
+
             }
             //Gán vào list
             try
@@ -585,7 +606,7 @@ namespace QuanLyTiecCuoiUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Thêm hình ảnh vào List thất bại");
+
             }
         }
 

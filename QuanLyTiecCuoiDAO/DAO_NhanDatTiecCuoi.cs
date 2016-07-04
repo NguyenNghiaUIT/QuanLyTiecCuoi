@@ -27,7 +27,7 @@ namespace DAO
         }
         public static DataTable GetDate(DTO_TiecCuoi tieccuoi)
         {
-            string sTruyVan = string.Format(@"Select * from TiecCuoi  where (DAY(NgayDaiTiec) = DAY('{0}')) and (MONTH(NgayDaiTiec) = MONTH('{0}')) and (YEAR(NgayDaiTiec) = YEAR('{0}')) and MaCa={1}", tieccuoi.NgayDaiTiec, tieccuoi.MaCa);
+            string sTruyVan = string.Format(@"Select * from TiecCuoi  where (MONTH(NgayDaiTiec) = DAY('{0}')) and (DAY(NgayDaiTiec) = MONTH('{0}')) and (YEAR(NgayDaiTiec) = YEAR('{0}')) and (MaCa='{1}') and (MaSanh='{2}')", tieccuoi.NgayDaiTiec, tieccuoi.MaCa,tieccuoi.MaSanh);
             return DatabaseHelper.GetData(sTruyVan);
         }
         public static DataTable GetLastID()

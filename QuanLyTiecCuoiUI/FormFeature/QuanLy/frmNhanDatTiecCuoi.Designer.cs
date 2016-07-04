@@ -537,7 +537,7 @@
             this.pnlPhieuBanAn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlPhieuBanAn.Location = new System.Drawing.Point(514, 0);
             this.pnlPhieuBanAn.Name = "pnlPhieuBanAn";
-            this.pnlPhieuBanAn.Size = new System.Drawing.Size(305, 531);
+            this.pnlPhieuBanAn.Size = new System.Drawing.Size(0, 531);
             this.pnlPhieuBanAn.TabIndex = 1;
             // 
             // pnlPhieuDichVu
@@ -551,7 +551,7 @@
             this.pnlPhieuDichVu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlPhieuDichVu.Location = new System.Drawing.Point(0, 0);
             this.pnlPhieuDichVu.Name = "pnlPhieuDichVu";
-            this.pnlPhieuDichVu.Size = new System.Drawing.Size(305, 531);
+            this.pnlPhieuDichVu.Size = new System.Drawing.Size(0, 531);
             this.pnlPhieuDichVu.TabIndex = 2;
             // 
             // btnHuyPhieuDichVu
@@ -821,7 +821,7 @@
             this.grpThongTinBanAn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.grpThongTinBanAn.Location = new System.Drawing.Point(12, 35);
             this.grpThongTinBanAn.Name = "grpThongTinBanAn";
-            this.grpThongTinBanAn.Size = new System.Drawing.Size(305, 88);
+            this.grpThongTinBanAn.Size = new System.Drawing.Size(0, 88);
             this.grpThongTinBanAn.TabIndex = 1;
             this.grpThongTinBanAn.TabStop = false;
             this.grpThongTinBanAn.Text = "Thông tin bàn ăn ";
@@ -881,13 +881,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(819, 531);
+            this.ClientSize = new System.Drawing.Size(514, 531);
             this.Controls.Add(this.pnlPhieuBanAn);
             this.Controls.Add(this.pnlLeft);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(835, 570);
+            this.MaximumSize = new System.Drawing.Size(530, 570);
             this.MinimumSize = new System.Drawing.Size(530, 570);
             this.Name = "frmNhanDatTiecCuoi";
             this.ShowIcon = false;
