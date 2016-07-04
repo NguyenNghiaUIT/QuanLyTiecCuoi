@@ -48,6 +48,7 @@
     <Compile Include="DTO_LoaiSanh.cs" />
     <Compile Include="DTO_MonAn.cs" />
     <Compile Include="DTO_CT_PhieuDatDichVu.cs" />
+    <Compile Include="DTO_PhieuDatBan.cs" />
     <Compile Include="DTO_Sanh.cs" />
     <Compile Include="DTO_ThamSo.cs" />
     <Compile Include="DTO_TiecCuoi.cs" />

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pnlLeft = new System.Windows.Forms.Panel();
             this.btnHuyTatCa = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
@@ -101,6 +102,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lblPhieuDatBanAn = new System.Windows.Forms.Label();
+            this.toolTipInfor = new System.Windows.Forms.ToolTip(this.components);
             this.pnlLeft.SuspendLayout();
             this.grpTiecCuoi.SuspendLayout();
             this.grpLapPhieu.SuspendLayout();
@@ -202,6 +204,7 @@
             this.btnXuatHopDong.TabIndex = 22;
             this.btnXuatHopDong.Text = "Hợp đồng";
             this.btnXuatHopDong.UseVisualStyleBackColor = true;
+            this.btnXuatHopDong.Click += new System.EventHandler(this.btnXuatHopDong_Click);
             // 
             // btnDatTiec
             // 
@@ -585,7 +588,7 @@
             // 
             this.lstDichVuTiecCuoi.Location = new System.Drawing.Point(10, 22);
             this.lstDichVuTiecCuoi.Name = "lstDichVuTiecCuoi";
-            this.lstDichVuTiecCuoi.Size = new System.Drawing.Size(258, 227);
+            this.lstDichVuTiecCuoi.Size = new System.Drawing.Size(260, 230);
             this.lstDichVuTiecCuoi.TabIndex = 0;
             this.lstDichVuTiecCuoi.UseCompatibleStateImageBehavior = false;
             this.lstDichVuTiecCuoi.SelectedIndexChanged += new System.EventHandler(this.lstDichVuTiecCuoi_SelectedIndexChanged);
@@ -624,6 +627,7 @@
             this.txtSoLuongDichVuDat.TabIndex = 6;
             this.txtSoLuongDichVuDat.Click += new System.EventHandler(this.txtSoLuongDichVuDat_Click);
             this.txtSoLuongDichVuDat.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSoLuongDichVuDat_KeyPress);
+            this.txtSoLuongDichVuDat.MouseLeave += new System.EventHandler(this.txtSoLuongDichVuDat_MouseLeave);
             // 
             // label4
             // 
@@ -756,7 +760,9 @@
             this.txtDonGiaYeuCau.Name = "txtDonGiaYeuCau";
             this.txtDonGiaYeuCau.Size = new System.Drawing.Size(124, 23);
             this.txtDonGiaYeuCau.TabIndex = 6;
+            this.txtDonGiaYeuCau.Click += new System.EventHandler(this.txtDonGiaYeuCau_Click);
             this.txtDonGiaYeuCau.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDonGiaYeuCau_KeyPress);
+            this.txtDonGiaYeuCau.MouseLeave += new System.EventHandler(this.txtDonGiaYeuCau_MouseLeave);
             // 
             // label6
             // 
@@ -826,6 +832,9 @@
             this.txtSoLuongBanDuTru.Name = "txtSoLuongBanDuTru";
             this.txtSoLuongBanDuTru.Size = new System.Drawing.Size(100, 23);
             this.txtSoLuongBanDuTru.TabIndex = 3;
+            this.txtSoLuongBanDuTru.Click += new System.EventHandler(this.txtSoLuongBanDuTru_Click);
+            this.txtSoLuongBanDuTru.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSoLuongBanDuTru_KeyPress);
+            this.txtSoLuongBanDuTru.MouseLeave += new System.EventHandler(this.txtSoLuongBanDuTru_MouseLeave);
             // 
             // txtSoLuongBan
             // 
@@ -833,6 +842,9 @@
             this.txtSoLuongBan.Name = "txtSoLuongBan";
             this.txtSoLuongBan.Size = new System.Drawing.Size(100, 23);
             this.txtSoLuongBan.TabIndex = 2;
+            this.txtSoLuongBan.Click += new System.EventHandler(this.txtSoLuongBan_Click);
+            this.txtSoLuongBan.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSoLuongBan_KeyPress);
+            this.txtSoLuongBan.MouseLeave += new System.EventHandler(this.txtSoLuongBan_MouseLeave);
             // 
             // label2
             // 
@@ -876,7 +888,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(835, 570);
-            this.MinimumSize = new System.Drawing.Size(835, 570);
+            this.MinimumSize = new System.Drawing.Size(530, 570);
             this.Name = "frmNhanDatTiecCuoi";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -983,5 +995,6 @@
         private System.Windows.Forms.Label NotTienDatCoc;
         private System.Windows.Forms.Label NotCoDau;
         private System.Windows.Forms.Label NotChuRe;
+        private System.Windows.Forms.ToolTip toolTipInfor;
     }
 }

@@ -20,5 +20,79 @@ namespace DAO
             string sTruyVan = "Select * from Ca";
             return DatabaseHelper.GetData(sTruyVan);
         }
+        public static bool CheckStateTiecCuoi(DTO_TiecCuoi tieccuoi)
+        {
+            string sTruyVan = string.Format(@"Select * from TiecCuoi where MaCa={0} and NgayDaiTiec={1}",tieccuoi.MaCa, tieccuoi.NgayDaiTiec);
+            return DatabaseHelper.CheckIfExists(sTruyVan);
+        }
+        public static DataTable GetDate(DTO_TiecCuoi tieccuoi)
+        {
+            string sTruyVan = string.Format(@"Select * from TiecCuoi  where (DAY(NgayDaiTiec) = DAY('{0}')) and (MONTH(NgayDaiTiec) = MONTH('{0}')) and (YEAR(NgayDaiTiec) = YEAR('{0}')) and MaCa={1}", tieccuoi.NgayDaiTiec, tieccuoi.MaCa);
+            return DatabaseHelper.GetData(sTruyVan);
+        }
+        public static DataTable GetLastID()
+        {
+            string struyvan = @"select MaTiecCuoi from TiecCuoi WHERE MaTiecCuoi = (SELECT MAX(MaTiecCuoi)  FROM TiecCuoi)";
+            return DatabaseHelper.GetData(struyvan);
+        }
+        public static bool InsertTiecCuoi(DTO_TiecCuoi tieccuoi)
+        {
+            string sTruyVan = string.Format("Insert into TiecCuoi(TenChuRe,TenCoDau,DienThoai, NgayDatTiec,NgayDaiTiec,MaCa,MaSanh, TienCoc,GhiChu, MaNV) values (N'{0}',N'{1}',N'{2}','{3}','{4}',{5},{6},{7},N'{8}',{9})", 
+                tieccuoi.TenChuRe, tieccuoi.TenCoDau, tieccuoi.DienThoai, tieccuoi.NgayDatTiec, tieccuoi.NgayDaiTiec, tieccuoi.MaCa, tieccuoi.MaSanh, tieccuoi.TienCoc, tieccuoi.GhiChu, tieccuoi.MaNV);
+            try
+            {
+                int state = DatabaseHelper.ExcuteSql(sTruyVan);
+                if (state > 0)
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            return false;
+        }
+        public static bool InsertPhieuDatBan(DTO_PhieuDatBan phieudatban)
+        {
+            string sTruyVan = string.Format("Insert into PhieuDatBan(MaTiecCuoi, SoBan,SoBanDuTru,DonGiaBan,GhiChu) values({0},{1},{2},{3},N'{4}')",
+                phieudatban.MaTiecCuoi, phieudatban.SoBan, phieudatban.SoBanDuTru, phieudatban.DonGiaBan, phieudatban.GhiChu);
+            try
+            {
+                int state = DatabaseHelper.ExcuteSql(sTruyVan);
+                if (state > 0)
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            return false;
+        }
+        public static DataTable GetLastIDPhieu()
+        {
+            string struyvan = @"select MaPhieuDatBan from PhieuDatBan WHERE MaPhieuDatBan = (SELECT MAX(MaPhieuDatBan)  FROM PhieuDatBan)";
+            return DatabaseHelper.GetData(struyvan);
+        }
+        public static bool InsertChiTietDatBan(DTO_CT_PhieuDatBan ctphieudatban)
+        {
+            string sTruyVan = string.Format("Insert into CT_PHIEUDATBAN(MaPhieuDatBan, MaMonAn,DonGia, SoLuong, GhiChu) values({0},{1},{2},{3},N'{4}')",
+                ctphieudatban.MaPhieuDatBan, ctphieudatban.MaMonAn, ctphieudatban.DonGia, ctphieudatban.SoLuong, ctphieudatban.GhiChu);
+            try
+            {
+                int state = DatabaseHelper.ExcuteSql(sTruyVan);
+                if (state > 0)
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            return false;
+        }
     }
 }

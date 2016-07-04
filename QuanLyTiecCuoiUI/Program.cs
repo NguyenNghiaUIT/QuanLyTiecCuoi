@@ -27,8 +27,8 @@ namespace QuanLyTiecCuoiUI
             DatabaseHelper.CloseConnection();
             if(!openSuscess){
                  Application.Run(new frmConfigDatabase());
-            }else{
-                //Application.Run(new frmQuanLyDichVuNhaHang());
+            }else{               
+                //Application.Run(new frmNhanDatTiecCuoi());
                 //Application.Run(new frmThayDoiQuyDinh());
                 Application.Run(new frmManHinhChinh());
             } 
