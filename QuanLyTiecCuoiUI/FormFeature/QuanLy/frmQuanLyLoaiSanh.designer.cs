@@ -32,8 +32,11 @@
             this.lblMaLoaiSanh = new System.Windows.Forms.Label();
             this.dgvQuanLyLoaiSanh = new System.Windows.Forms.DataGridView();
             this.grpThongTinLoaiSanh = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.txtDonGiaBanTT = new System.Windows.Forms.TextBox();
-            this.txtMaLoaiSanh = new System.Windows.Forms.TextBox();
+            this.txtTenLoaiSanh = new System.Windows.Forms.TextBox();
             this.btnHuy = new System.Windows.Forms.Button();
             this.btnLuu = new System.Windows.Forms.Button();
             this.btnThem = new System.Windows.Forms.Button();
@@ -63,9 +66,9 @@
             this.lblMaLoaiSanh.Location = new System.Drawing.Point(7, 29);
             this.lblMaLoaiSanh.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMaLoaiSanh.Name = "lblMaLoaiSanh";
-            this.lblMaLoaiSanh.Size = new System.Drawing.Size(92, 17);
+            this.lblMaLoaiSanh.Size = new System.Drawing.Size(98, 17);
             this.lblMaLoaiSanh.TabIndex = 35;
-            this.lblMaLoaiSanh.Text = "Mã loại sảnh:";
+            this.lblMaLoaiSanh.Text = "Tên loại sảnh:";
             // 
             // dgvQuanLyLoaiSanh
             // 
@@ -82,13 +85,18 @@
             this.dgvQuanLyLoaiSanh.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvQuanLyLoaiSanh.Size = new System.Drawing.Size(394, 154);
             this.dgvQuanLyLoaiSanh.TabIndex = 7;
+            this.dgvQuanLyLoaiSanh.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQuanLyLoaiSanh_CellClick);
+            this.dgvQuanLyLoaiSanh.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvQuanLyLoaiSanh_DataBindingComplete);
             // 
             // grpThongTinLoaiSanh
             // 
+            this.grpThongTinLoaiSanh.Controls.Add(this.label1);
+            this.grpThongTinLoaiSanh.Controls.Add(this.label5);
+            this.grpThongTinLoaiSanh.Controls.Add(this.label4);
             this.grpThongTinLoaiSanh.Controls.Add(this.txtDonGiaBanTT);
             this.grpThongTinLoaiSanh.Controls.Add(this.lblDonGiaBanToiThieu);
             this.grpThongTinLoaiSanh.Controls.Add(this.lblMaLoaiSanh);
-            this.grpThongTinLoaiSanh.Controls.Add(this.txtMaLoaiSanh);
+            this.grpThongTinLoaiSanh.Controls.Add(this.txtTenLoaiSanh);
             this.grpThongTinLoaiSanh.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.grpThongTinLoaiSanh.Location = new System.Drawing.Point(12, 12);
             this.grpThongTinLoaiSanh.Name = "grpThongTinLoaiSanh";
@@ -97,23 +105,61 @@
             this.grpThongTinLoaiSanh.TabStop = false;
             this.grpThongTinLoaiSanh.Text = "Thông tin loại sảnh";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.SystemColors.Control;
+            this.label1.ForeColor = System.Drawing.Color.Red;
+            this.label1.Location = new System.Drawing.Point(148, 85);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(13, 17);
+            this.label1.TabIndex = 47;
+            this.label1.Text = "*";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.SystemColors.Control;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.2F, System.Drawing.FontStyle.Italic);
+            this.label5.ForeColor = System.Drawing.Color.Red;
+            this.label5.Location = new System.Drawing.Point(7, 190);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(204, 16);
+            this.label5.TabIndex = 46;
+            this.label5.Text = "Các mục (*) không được để trống.";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.SystemColors.Control;
+            this.label4.ForeColor = System.Drawing.Color.Red;
+            this.label4.Location = new System.Drawing.Point(103, 29);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(13, 17);
+            this.label4.TabIndex = 45;
+            this.label4.Text = "*";
+            // 
             // txtDonGiaBanTT
             // 
             this.txtDonGiaBanTT.Location = new System.Drawing.Point(10, 106);
             this.txtDonGiaBanTT.Margin = new System.Windows.Forms.Padding(4);
+            this.txtDonGiaBanTT.MaxLength = 18;
             this.txtDonGiaBanTT.Name = "txtDonGiaBanTT";
             this.txtDonGiaBanTT.Size = new System.Drawing.Size(196, 23);
             this.txtDonGiaBanTT.TabIndex = 1;
+            this.txtDonGiaBanTT.TextChanged += new System.EventHandler(this.txtDonGiaBanTT_TextChanged);
             this.txtDonGiaBanTT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDonGiaBanTT_KeyPress);
             // 
-            // txtMaLoaiSanh
+            // txtTenLoaiSanh
             // 
-            this.txtMaLoaiSanh.Location = new System.Drawing.Point(10, 50);
-            this.txtMaLoaiSanh.Margin = new System.Windows.Forms.Padding(4);
-            this.txtMaLoaiSanh.MaxLength = 1;
-            this.txtMaLoaiSanh.Name = "txtMaLoaiSanh";
-            this.txtMaLoaiSanh.Size = new System.Drawing.Size(197, 23);
-            this.txtMaLoaiSanh.TabIndex = 0;
+            this.txtTenLoaiSanh.Location = new System.Drawing.Point(10, 50);
+            this.txtTenLoaiSanh.Margin = new System.Windows.Forms.Padding(4);
+            this.txtTenLoaiSanh.MaxLength = 100;
+            this.txtTenLoaiSanh.Name = "txtTenLoaiSanh";
+            this.txtTenLoaiSanh.Size = new System.Drawing.Size(197, 23);
+            this.txtTenLoaiSanh.TabIndex = 0;
+            this.txtTenLoaiSanh.TextChanged += new System.EventHandler(this.txtTenLoaiSanh_TextChanged);
             // 
             // btnHuy
             // 
@@ -227,7 +273,7 @@
         private System.Windows.Forms.Label lblMaLoaiSanh;
         private System.Windows.Forms.DataGridView dgvQuanLyLoaiSanh;
         private System.Windows.Forms.GroupBox grpThongTinLoaiSanh;
-        private System.Windows.Forms.TextBox txtMaLoaiSanh;
+        private System.Windows.Forms.TextBox txtTenLoaiSanh;
         private System.Windows.Forms.Button btnHuy;
         private System.Windows.Forms.Button btnLuu;
         private System.Windows.Forms.Button btnThem;
@@ -236,5 +282,8 @@
         private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.GroupBox grpDanhSachLoaiSanh;
         private System.Windows.Forms.TextBox txtDonGiaBanTT;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
     }
 }

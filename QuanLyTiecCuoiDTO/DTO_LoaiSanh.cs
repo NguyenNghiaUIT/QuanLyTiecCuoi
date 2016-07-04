@@ -9,12 +9,13 @@ namespace DTO
     public class DTO_LoaiSanh
     {
         public DTO_LoaiSanh() { }
-        public DTO_LoaiSanh(char maLoaiSanh, decimal donGiaBanToiThieu)
+        public DTO_LoaiSanh(string tenLoaiSanh, decimal donGiaBanToiThieu)
         {
-            this.maLoaiSanh = maLoaiSanh;
+            this.tenLoaiSanh = tenLoaiSanh;
             this.donGiaBanToiThieu = donGiaBanToiThieu;
         }
-        public char maLoaiSanh { get; set; }
+        public int maLoaiSanh;
+        public string tenLoaiSanh { get; set; }
         public decimal donGiaBanToiThieu { get; set; }
     }
 }
