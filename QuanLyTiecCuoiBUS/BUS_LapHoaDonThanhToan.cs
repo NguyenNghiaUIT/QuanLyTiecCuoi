@@ -53,7 +53,21 @@ namespace BUS
             return DAO.DAO_LapHoaDonThanhToan.UpdateSoTienConLai(hoaDon);
         }
 
-     
+        public static DTO.DTO_PhieuDatBan GetPhieuDatBan(int maTiecCuoi)
+        {
+            return DAO.DAO_LapHoaDonThanhToan.GetPhieuDatBan(maTiecCuoi);
+        }
+
+        public static DataTable GetChiTietDichVu(int maTiecCuoi)
+        {
+            return DAO.DAO_LapHoaDonThanhToan.GetChiTietDichVu(maTiecCuoi);
+        }
+
+        public static DataTable GetChiTietDatBan(int maPhieuDatBan)
+        {
+            return DAO.DAO_LapHoaDonThanhToan.GetChiTietDatBan(maPhieuDatBan);
+        }
+
         static BUS_LapHoaDonThanhToan()
         {
             DataTable dt = DAO_LapHoaDonThanhToan.GetTableTenChuReAndTenCoDau();

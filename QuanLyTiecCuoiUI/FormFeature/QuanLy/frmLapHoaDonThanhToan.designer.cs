@@ -425,7 +425,7 @@
             // 
             // btnLapHoaDon
             // 
-            this.btnLapHoaDon.Location = new System.Drawing.Point(279, 77);
+            this.btnLapHoaDon.Location = new System.Drawing.Point(461, 47);
             this.btnLapHoaDon.Name = "btnLapHoaDon";
             this.btnLapHoaDon.Size = new System.Drawing.Size(100, 30);
             this.btnLapHoaDon.TabIndex = 5;
@@ -454,7 +454,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(664, 511);
+            this.ClientSize = new System.Drawing.Size(664, 512);
             this.Controls.Add(this.cbbNgayDatTiec);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.btnLapHoaDon);
