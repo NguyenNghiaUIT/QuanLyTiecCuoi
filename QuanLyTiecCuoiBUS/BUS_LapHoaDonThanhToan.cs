@@ -22,6 +22,38 @@ namespace BUS
         private static Int64 mTienDatCoc;
         private static Int64 mTienConLai;
 
+
+        public static DataTable GetAllTiecCuoi()
+        {
+            return DAO.DAO_LapHoaDonThanhToan.GetAllTiecCuoi();
+        }
+
+        public static DTO.DTO_TiecCuoi GetTiecCuoi(String tenChuRe, String tenCoDau)
+        {
+            return DAO.DAO_LapHoaDonThanhToan.GetTiecCuoi(tenChuRe, tenCoDau);
+        }
+
+        public static DataTable GetAllHoaDon()
+        {
+            return DAO.DAO_LapHoaDonThanhToan.GetAllHoaDon();
+        }
+
+        public static bool InsertHoaDon(DTO.DTO_HoaDon hoaDon)
+        {
+            return DAO.DAO_LapHoaDonThanhToan.InsertHoaDon(hoaDon);
+        }
+
+        public static bool UpdateHoaDon(DTO.DTO_HoaDon hoaDon)
+        {
+            return DAO.DAO_LapHoaDonThanhToan.UpdateHoaDon(hoaDon);
+        }
+
+        public static bool UpdateSoTienConLai(DTO.DTO_HoaDon hoaDon)
+        {
+            return DAO.DAO_LapHoaDonThanhToan.UpdateSoTienConLai(hoaDon);
+        }
+
+     
         static BUS_LapHoaDonThanhToan()
         {
             DataTable dt = DAO_LapHoaDonThanhToan.GetTableTenChuReAndTenCoDau();
@@ -44,8 +76,8 @@ namespace BUS
         {
             List<string> listNgayDatTiec = new List<string>();
             DataTable dt = DAO_LapHoaDonThanhToan.GetNgayDatTiec(tenChuRe);
-            foreach(DataRow dr in dt.Rows)
-                listNgayDatTiec.Add(dr["Ngay"].ToString()+"/" + dr["Thang"].ToString()+"/" + dr["Nam"].ToString());
+            foreach (DataRow dr in dt.Rows)
+                listNgayDatTiec.Add(dr["Ngay"].ToString() + "/" + dr["Thang"].ToString() + "/" + dr["Nam"].ToString());
             return listNgayDatTiec;
         }
         public static string GetSoLuongBan()
@@ -85,14 +117,14 @@ namespace BUS
             ngayDatTiec = ConvertNgayDatTiec(ngayDatTiec);
             // MaSanh,SoLuongBan,MaiHD,TienCoc
             DataTable dt = DAO_LapHoaDonThanhToan.GetTableHDTCCustom(mListMaKH[mListTenChuRe.IndexOf(tenChuRe)], ngayDatTiec);
-            
+
             mSoLuongBan = int.Parse(dt.Rows[0]["SoLuongBan"].ToString());
-            
+
             string maSanh = dt.Rows[0]["MaSanh"].ToString();
             mDonGiaBan = Int64.Parse(DAO_LapHoaDonThanhToan.GetDonGiaBanTT(maSanh));
 
-            mTongTienBan = mSoLuongBan*mDonGiaBan;
-            
+            mTongTienBan = mSoLuongBan * mDonGiaBan;
+
             string maHD = dt.Rows[0]["MaHD"].ToString();
             mTableCacDichVu = DAO_LapHoaDonThanhToan.GetCacDichVu(maHD);
 
@@ -112,7 +144,7 @@ namespace BUS
         private static string ConvertNgayDatTiec(string ngayDatTiec)
         {
             List<string> list = ngayDatTiec.Split('/').ToList();
-            return list[2] + '/' + list[1] + '/' + list[0]; 
+            return list[2] + '/' + list[1] + '/' + list[0];
         }
     }
 }
