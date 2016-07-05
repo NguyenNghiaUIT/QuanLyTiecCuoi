@@ -131,6 +131,7 @@ namespace QuanLyTiecCuoiUI
             {
                 dgvQuanLyLoaiSanh.DataSource = BUS_QuanLyLoaiSanh.GetLoaiSanhTable();
                 MessageBox.Show("Xóa loại sảnh '" + loaiSanh.tenLoaiSanh + "' thành công!", "Thông báo",MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ClearAllInputs();
             }
             else
                 MessageBox.Show(string.Format("Không thể xóa, vui lòng xóa dữ liệu liên qua đến loại sảnh '{0}' trong bảng 'Sảnh' trước.",
