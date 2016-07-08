@@ -156,7 +156,7 @@
             this.Controls.Add(this.btnQuanLySanh);
             this.Controls.Add(this.btnTiepNhanSanh);
             this.Name = "ItemQuanLy";
-            this.Size = new System.Drawing.Size(230, 312);
+            this.Size = new System.Drawing.Size(230, 310);
             ((System.ComponentModel.ISupportInitialize)(this.btnQuanLyDichVu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnQuanLyMonAn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnQuanLyKhachHang)).EndInit();

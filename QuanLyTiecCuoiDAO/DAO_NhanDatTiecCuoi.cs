@@ -12,7 +12,7 @@ namespace DAO
     {
         public static DataTable GetSanh()
         {
-            string sTruyVan = "Select MaSanh, TenSanh, DonGiaBanToiThieu from Sanh, LoaiSanh where Sanh.MaLoaiSanh = LoaiSanh.MaLoaiSanh";
+            string sTruyVan = "Select MaSanh, TenSanh, DonGiaBanToiThieu,SoLuongBanToiDa from Sanh, LoaiSanh where Sanh.MaLoaiSanh = LoaiSanh.MaLoaiSanh";
             return DatabaseHelper.GetData(sTruyVan);
         }
         public static DataTable GetCa()
@@ -27,7 +27,7 @@ namespace DAO
         }
         public static DataTable GetDate(DTO_TiecCuoi tieccuoi)
         {
-            string sTruyVan = string.Format(@"Select * from TiecCuoi  where (MONTH(NgayDaiTiec) = DAY('{0}')) and (DAY(NgayDaiTiec) = MONTH('{0}')) and (YEAR(NgayDaiTiec) = YEAR('{0}')) and (MaCa='{1}') and (MaSanh='{2}')", tieccuoi.NgayDaiTiec, tieccuoi.MaCa,tieccuoi.MaSanh);
+            string sTruyVan = string.Format(@"Select * from TiecCuoi  where (DAY(NgayDaiTiec) = DAY('{0}')) and (MONTH(NgayDaiTiec) = MONTH('{0}')) and (YEAR(NgayDaiTiec) = YEAR('{0}')) and (MaCa='{1}') and (MaSanh='{2}')", tieccuoi.NgayDaiTiec, tieccuoi.MaCa,tieccuoi.MaSanh);
             return DatabaseHelper.GetData(sTruyVan);
         }
         public static DataTable GetLastID()
@@ -37,8 +37,8 @@ namespace DAO
         }
         public static bool InsertTiecCuoi(DTO_TiecCuoi tieccuoi)
         {
-            string sTruyVan = string.Format("Insert into TiecCuoi(TenChuRe,TenCoDau,DienThoai, NgayDatTiec,NgayDaiTiec,MaCa,MaSanh, TienCoc,GhiChu, MaNV) values (N'{0}',N'{1}',N'{2}','{3}','{4}',{5},{6},{7},N'{8}',{9})", 
-                tieccuoi.TenChuRe, tieccuoi.TenCoDau, tieccuoi.DienThoai, tieccuoi.NgayDatTiec, tieccuoi.NgayDaiTiec, tieccuoi.MaCa, tieccuoi.MaSanh, tieccuoi.TienCoc, tieccuoi.GhiChu, tieccuoi.MaNV);
+            string sTruyVan = string.Format("Insert into TiecCuoi(TenChuRe,TenCoDau,DienThoai, NgayDatTiec,NgayDaiTiec,MaCa,MaSanh, TienCoc,GhiChu, MaNV, TinhTrangTiec) values (N'{0}',N'{1}',N'{2}','{3}','{4}',{5},{6},{7},N'{8}',{9},{10})", 
+                tieccuoi.TenChuRe, tieccuoi.TenCoDau, tieccuoi.DienThoai, tieccuoi.NgayDatTiec, tieccuoi.NgayDaiTiec, tieccuoi.MaCa, tieccuoi.MaSanh, tieccuoi.TienCoc, tieccuoi.GhiChu, tieccuoi.MaNV,tieccuoi.TinhTrangTiec);
             try
             {
                 int state = DatabaseHelper.ExcuteSql(sTruyVan);
@@ -80,6 +80,24 @@ namespace DAO
         {
             string sTruyVan = string.Format("Insert into CT_PHIEUDATBAN(MaPhieuDatBan, MaMonAn,DonGia, SoLuong, GhiChu) values({0},{1},{2},{3},N'{4}')",
                 ctphieudatban.MaPhieuDatBan, ctphieudatban.MaMonAn, ctphieudatban.DonGia, ctphieudatban.SoLuong, ctphieudatban.GhiChu);
+            try
+            {
+                int state = DatabaseHelper.ExcuteSql(sTruyVan);
+                if (state > 0)
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            return false;
+        }
+        public static bool InsertChiTietDatDichVu(DTO_CT_PhieuDatDichVu ctphieudatdichvu)
+        {
+            string sTruyVan = string.Format("Insert into CT_PHIEUDATDICHVU(MaTiecCuoi, MaDichVu, Soluong, DonGia) values({0},{1},{2},{3})",
+                ctphieudatdichvu.MaTiecCuoi, ctphieudatdichvu.MaDichVu, ctphieudatdichvu.SoLuong, ctphieudatdichvu.DonGia);
             try
             {
                 int state = DatabaseHelper.ExcuteSql(sTruyVan);

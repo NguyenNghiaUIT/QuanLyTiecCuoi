@@ -144,11 +144,29 @@
     <Compile Include="FormFeature\LapBaoCao\frmLapBaoCaoThang.designer.cs">
       <DependentUpon>frmLapBaoCaoThang.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmChaoUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChaoUser.Designer.cs">
+      <DependentUpon>frmChaoUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmQuanLyDichVuNhaHang.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmQuanLyDichVuNhaHang.Designer.cs">
       <DependentUpon>frmQuanLyDichVuNhaHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmQuanLyNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQuanLyNhanVien.Designer.cs">
+      <DependentUpon>frmQuanLyNhanVien.cs</DependentUpon>
     </Compile>
     <Compile Include="ucControlFeature\ItemBaoCao.cs">
       <SubType>UserControl</SubType>
@@ -173,6 +191,12 @@
     </Compile>
     <Compile Include="ucControlFeature\ItemTraCuu.Designer.cs">
       <DependentUpon>ItemTraCuu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucControlFeature\menuQuanLy.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucControlFeature\menuQuanLy.Designer.cs">
+      <DependentUpon>menuQuanLy.cs</DependentUpon>
     </Compile>
     <Compile Include="ucControlFeature\OvalPictureBox.cs">
       <SubType>Component</SubType>
@@ -227,8 +251,17 @@
     <EmbeddedResource Include="FormFeature\LapBaoCao\frmLapBaoCaoThang.resx">
       <DependentUpon>frmLapBaoCaoThang.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmChaoUser.resx">
+      <DependentUpon>frmChaoUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmQuanLyDichVuNhaHang.resx">
       <DependentUpon>frmQuanLyDichVuNhaHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmQuanLyNhanVien.resx">
+      <DependentUpon>frmQuanLyNhanVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -251,6 +284,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucControlFeature\ItemTraCuu.resx">
       <DependentUpon>ItemTraCuu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucControlFeature\menuQuanLy.resx">
+      <DependentUpon>menuQuanLy.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -419,6 +455,54 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Ca_QuanLyCa1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\06_menu_bullet-512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menu_start_taskbar_and_window_panel_list-512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Search-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sales-report-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\settings-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logongang-min.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logongang-min1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1960134_949521035140282_400450135062527931_n.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\magnifying-glass.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Actions-insert-horizontal-rule-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit-validated-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Alarm-Error-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Save-as-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete-file-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

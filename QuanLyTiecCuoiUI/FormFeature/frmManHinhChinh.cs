@@ -12,16 +12,30 @@ using QuanLyTiecCuoiUI.ucControlFeature;
 using System.Threading;
 using System.Diagnostics;
 using QuanLyTiecCuoiUI.FormFeature.QuyDinh;
+using DTO;
 
 namespace QuanLyTiecCuoiUI
 {
     public partial class frmManHinhChinh : Form
     {
+        public static DTO_NhanVien CurrentNhanVienLogin = new DTO_NhanVien();
         private int StateClickMenuItem = -1;
         private ItemQuanLy itemQuanly = new ItemQuanLy();
         private ItemTraCuu itemTraCuu = new ItemTraCuu();
         private ItemBaoCao itemBaoCao = new ItemBaoCao();
         private ItemQuyDinh itemQuyDinh = new ItemQuyDinh();
+
+        private DTO_NhanVien CurrentNhanVien = new DTO_NhanVien();
+        private int RolesNhanVien;
+        public void SetRolesUser(DTO_NhanVien nhanvien, int RolesIndex)
+        {
+            CurrentNhanVien = nhanvien;
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            ovalAvatar.Image = Image.FromFile(@"DanhSachNhanVien\" + CurrentNhanVien.AnhDaiDien);
+            RolesNhanVien = RolesIndex;
+        }
+
         private string NavigationStatus = string.Empty;
 
         public void UpdateNavigation(string ActionName)
@@ -31,14 +45,14 @@ namespace QuanLyTiecCuoiUI
         public frmManHinhChinh()
         {
             InitializeComponent();
-            label1.BackColor = Color.Transparent;
             ptrLoGo.BackColor = Color.Transparent;
-            label3.BackColor = Color.Transparent;
-            if (label1.Text.Length > 18) label1.Text = "Xin chào, " + label1.Text.Substring(0, 18) + "...";
-            else
-                label1.Text = "      Xin chào, " + label1.Text;
+            lblDangXuat.BackColor = Color.Transparent;
+            //if (label1.Text.Length > 18) label1.Text = "Xin chào, " + label1.Text.Substring(0, 18) + "...";
+            //else
+            //    label1.Text = "      Xin chào, " + label1.Text;
             //Setup status 
-            lblNavigation.Text = "QUẢN LÝ - Nhận đặt tiệc cưới, Quản lý khách hàng";
+            lblNavigation.Text = "";
+            SetStateMenuDefault();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -46,21 +60,16 @@ namespace QuanLyTiecCuoiUI
 
         }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Bạn đã đăng xuất");
-        }
-
         private void label3_MouseHover(object sender, EventArgs e)
         {
             Cursor = Cursors.Hand;
-            label3.ForeColor = Color.AntiqueWhite;
+            lblDangXuat.ForeColor = Color.AntiqueWhite;
         }
 
         private void label3_MouseLeave(object sender, EventArgs e)
         {
             Cursor = Cursors.Default;
-            label3.ForeColor = Color.Black;
+            lblDangXuat.ForeColor = Color.Black;
         }
 
         private void EnablePanel(Panel temp, bool a)
@@ -256,7 +265,18 @@ namespace QuanLyTiecCuoiUI
         #endregion
 
         #region Menu Item events
-
+        public void SetStateMenuDefault()
+        {
+            tlpMenu.RowStyles[0].Height = 10;
+            tlpMenu.RowStyles[1].Height = 0;
+            tlpMenu.RowStyles[2].Height = 10;
+            tlpMenu.RowStyles[3].Height = 0;
+            tlpMenu.RowStyles[4].Height = 10;
+            tlpMenu.RowStyles[5].Height = 0;
+            tlpMenu.RowStyles[6].Height = 10;
+            tlpMenu.RowStyles[7].Height = 0;
+            tlpMenu.RowStyles[8].Height = 60;
+        }
 
         private void SelectButtonUnCheck(int type)
         {
@@ -300,7 +320,6 @@ namespace QuanLyTiecCuoiUI
             {
                 tlpMenu.RowStyles[StateClickMenuItem].Height = 0;
                 tlpMenu.RowStyles[8].Height = 60;
-
                 btnQuanLy.Image = Resources.button_quanly_default;
 
                 itemQuanly.Enabled = false;
@@ -427,6 +446,52 @@ namespace QuanLyTiecCuoiUI
             StateClickMenuItem = 7;
         }
         #endregion
+
+        private void ovalAvatar_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(RolesNhanVien.ToString());
+        }
+        private void frmManHinhChinh_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult r = MessageBox.Show("Bạn muốn đăng xuất và thoát ứng dụng ? ", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (r == DialogResult.Yes)
+            {
+                SetStateMenuDefault();
+                this.Hide();
+                Program.dangnhapform.Dispose();
+                Program.manhinhchinh.Dispose();
+                Program.chaouser.Dispose();
+                Application.Exit();
+            }
+            else
+                e.Cancel = true;
+        }
+
+        private void lblDangXuat_Click(object sender, EventArgs e)
+        {
+            DialogResult r = MessageBox.Show("Bạn muốn đăng xuất ? ", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (r == DialogResult.Yes)
+            {
+                SetStateMenuDefault();
+                foreach (Form form in this.MdiChildren)
+                {
+                    form.Hide();
+                }
+                this.Hide();
+                Program.dangnhapform.SetFormStart();
+                Program.dangnhapform.Show();
+            }
+        }
+
+        private void lblDangXuat_MouseHover(object sender, EventArgs e)
+        {
+            lblDangXuat.Font = new Font("Microsoft Sans Serif", lblDangXuat.Font.Size, FontStyle.Bold);
+        }
+
+        private void lblDangXuat_MouseLeave(object sender, EventArgs e)
+        {
+            lblDangXuat.Font = new Font("Microsoft Sans Serif", lblDangXuat.Font.Size, FontStyle.Regular);
+        }
     }
 }
 

@@ -19,5 +19,6 @@ namespace DTO
         public decimal TienCoc { get; set; }
         public string GhiChu { get; set; }
         public int MaNV { get; set; }
+        public int TinhTrangTiec { get; set; }
     }
 }

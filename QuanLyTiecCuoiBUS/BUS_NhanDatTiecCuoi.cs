@@ -46,5 +46,9 @@ namespace BUS
         {
             return DAO_NhanDatTiecCuoi.InsertChiTietDatBan(ctphieudatban);
         }
+        public static bool InsertChiTietDatDichVu(DTO_CT_PhieuDatDichVu ctphieudatdichvu)
+        {
+            return DAO_NhanDatTiecCuoi.InsertChiTietDatDichVu(ctphieudatdichvu);
+        }
     }
 }

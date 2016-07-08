@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAO_DangNhap.cs" />
     <Compile Include="DAO_DichVu.cs" />
     <Compile Include="DAO_DichVuNhaHang.cs" />
     <Compile Include="DAO_HoaDon.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="DAO_MonAn.cs" />
     <Compile Include="DAO_NhanDatTiecCuoi.cs" />
     <Compile Include="DAO_QuanLyLoaiSanh.cs" />
+    <Compile Include="DAO_QuanLyNhanVien.cs" />
     <Compile Include="DAO_QuanLySanh.cs" />
     <Compile Include="DAO_QuanLyTiecCuoi.cs" />
     <Compile Include="DAO_ThamSo.cs" />
