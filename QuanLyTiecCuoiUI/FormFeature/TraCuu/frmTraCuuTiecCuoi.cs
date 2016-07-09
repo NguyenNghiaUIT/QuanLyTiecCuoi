@@ -20,6 +20,7 @@ namespace QuanLyTiecCuoiUI
         {
             TenChuRe,
             TenCoDau,
+            SoDT,
             Ngay
         }
 
@@ -28,24 +29,26 @@ namespace QuanLyTiecCuoiUI
             InitializeComponent();
             rbTenChuRe.Select();
             //txtTuKhoa.Focus();
+
+            dtpNgay.Format = DateTimePickerFormat.Custom;
+            dtpNgay.CustomFormat = "dddd d/M/yyyy";
         }
 
         private bool InputIsNull()
         {
-            if (txtTuKhoa.Text == "")
+            if (this.selected == SELECTED.TenChuRe || this.selected == SELECTED.TenCoDau)
             {
-                if (this.selected == SELECTED.Ngay)
-                {
-                    return false;
-                }
-                return true;
+                if (txtTuKhoa.Text == "")
+                    return true;
+                return false;
+            }
+            else if (this.selected == SELECTED.SoDT)
+            {
+                if (txtSoDT.Text == "")
+                    return true;
+                return false;
             }
             return false;
-        }
-
-        private void dgvKetQuaTraCuu_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
 
         //Events
@@ -55,29 +58,38 @@ namespace QuanLyTiecCuoiUI
             {
                 MessageBox.Show("Từ khóa không hợp lệ!");
             }
-            else if (this.selected == SELECTED.TenChuRe)
+            else
             {
-                traCuu.key = txtTuKhoa.Text;
-                dgvKetQuaTraCuu.DataSource = BUS_TraCuu.TraCuuTenChuRe(traCuu);
-            }
-            else if (this.selected == SELECTED.TenCoDau)
-            {
-                traCuu.key = txtTuKhoa.Text;
-                dgvKetQuaTraCuu.DataSource = BUS_TraCuu.TraCuuTenCoDau(traCuu);
-            }
-            else if (this.selected == SELECTED.Ngay)
-            {
-                //Chưa check điều kiện Ngay hợp lệ nhá ku!
-                txtTuKhoa.Text = dtpNgay.Value.ToString("yyyy-MM-dd");
-                traCuu.key = txtTuKhoa.Text;
-                dgvKetQuaTraCuu.DataSource = BUS_TraCuu.TraCuuNgay(traCuu);
+                if (this.selected == SELECTED.TenChuRe)
+                {
+                    traCuu.key = txtTuKhoa.Text;
+                    dgvKetQuaTraCuu.DataSource = BUS_TraCuu.TraCuuTenChuRe(traCuu);
+                    //dgvKetQuaTraCuu.Refresh();
+                }
+                else if (this.selected == SELECTED.TenCoDau)
+                {
+                    traCuu.key = txtTuKhoa.Text;
+                    dgvKetQuaTraCuu.DataSource = BUS_TraCuu.TraCuuTenCoDau(traCuu);
+                }
+                else if (this.selected == SELECTED.SoDT)
+                {
+                    traCuu.key = txtSoDT.Text;
+                    dgvKetQuaTraCuu.DataSource = BUS_TraCuu.TraCuuSoDT(traCuu);
+                }
+                else if (this.selected == SELECTED.Ngay)
+                {
+                    traCuu.key = dtpNgay.Value.ToString("MM/dd/yyyy");
+                    dgvKetQuaTraCuu.DataSource = BUS_TraCuu.TraCuuNgay(traCuu);
+                    //dgvKetQuaTraCuu.Columns["Ngày đãi tiệc"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                }
             }
         }
 
+        #region Radio Button
         private void rbTenChuRe_CheckedChanged(object sender, EventArgs e)
         {
             this.selected = SELECTED.TenChuRe;
-            dtpNgay.Visible = false;
+            dtpNgay.Visible = txtSoDT.Visible = false;
             txtTuKhoa.Visible = true;
             txtTuKhoa.Focus();
         }
@@ -85,17 +97,53 @@ namespace QuanLyTiecCuoiUI
         private void rbTenCoDau_CheckedChanged(object sender, EventArgs e)
         {
             this.selected = SELECTED.TenCoDau;
-            dtpNgay.Visible = false;
+            dtpNgay.Visible = txtSoDT.Visible = false;
             txtTuKhoa.Visible = true;
             txtTuKhoa.Focus();
+        }
+
+        private void rbSoDT_CheckedChanged(object sender, EventArgs e)
+        {
+            this.selected = SELECTED.SoDT;
+            dtpNgay.Visible = txtTuKhoa.Visible = false;
+            txtSoDT.Visible = true;
+            txtSoDT.Focus();
         }
 
         private void rbNgay_CheckedChanged(object sender, EventArgs e)
         {
             this.selected = SELECTED.Ngay;
-            txtTuKhoa.Visible = false;
+            txtTuKhoa.Visible = txtTuKhoa.Visible = false;
             dtpNgay.Visible = true;
             dtpNgay.Focus();
+        }
+        #endregion
+
+        private void txtSoDT_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //chiều dài số điện thoại, quá 11 thì xóa
+            if (txtSoDT.Text.Length > 10)
+            {
+                e.KeyChar = (char)Keys.Back;
+                return;
+            }
+
+            //first keys
+            if ((sender as TextBox).SelectionStart == 0)
+            {
+                e.Handled = (e.KeyChar == (char)Keys.Space);
+                //first key = 0
+                if (e.KeyChar != (char)Keys.D0)
+                {
+                    e.Handled = true;
+                    return;
+                }
+            }
+            //check state not char
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

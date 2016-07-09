@@ -29,12 +29,14 @@
         private void InitializeComponent()
         {
             this.gbTraCuuTheo = new System.Windows.Forms.GroupBox();
-            this.rbNgay = new System.Windows.Forms.RadioButton();
+            this.rbNgayDaiTiec = new System.Windows.Forms.RadioButton();
+            this.rbSoDT = new System.Windows.Forms.RadioButton();
             this.rbTenCoDau = new System.Windows.Forms.RadioButton();
             this.rbTenChuRe = new System.Windows.Forms.RadioButton();
             this.gbNhapTuKhoa = new System.Windows.Forms.GroupBox();
             this.dtpNgay = new System.Windows.Forms.DateTimePicker();
             this.btnTraCuu = new System.Windows.Forms.Button();
+            this.txtSoDT = new System.Windows.Forms.TextBox();
             this.txtTuKhoa = new System.Windows.Forms.TextBox();
             this.gbKetQuaTraCuu = new System.Windows.Forms.GroupBox();
             this.dgvKetQuaTraCuu = new System.Windows.Forms.DataGridView();
@@ -46,34 +48,47 @@
             // 
             // gbTraCuuTheo
             // 
-            this.gbTraCuuTheo.Controls.Add(this.rbNgay);
+            this.gbTraCuuTheo.Controls.Add(this.rbNgayDaiTiec);
+            this.gbTraCuuTheo.Controls.Add(this.rbSoDT);
             this.gbTraCuuTheo.Controls.Add(this.rbTenCoDau);
             this.gbTraCuuTheo.Controls.Add(this.rbTenChuRe);
             this.gbTraCuuTheo.Location = new System.Drawing.Point(12, 12);
             this.gbTraCuuTheo.Name = "gbTraCuuTheo";
-            this.gbTraCuuTheo.Size = new System.Drawing.Size(312, 57);
+            this.gbTraCuuTheo.Size = new System.Drawing.Size(437, 57);
             this.gbTraCuuTheo.TabIndex = 0;
             this.gbTraCuuTheo.TabStop = false;
             this.gbTraCuuTheo.Text = "Tra cứu theo";
             // 
-            // rbNgay
+            // rbNgayDaiTiec
             // 
-            this.rbNgay.AutoSize = true;
-            this.rbNgay.Location = new System.Drawing.Point(250, 23);
-            this.rbNgay.Name = "rbNgay";
-            this.rbNgay.Size = new System.Drawing.Size(149, 29);
-            this.rbNgay.TabIndex = 2;
-            this.rbNgay.TabStop = true;
-            this.rbNgay.Text = "Ngày đãi tiệc";
-            this.rbNgay.UseVisualStyleBackColor = true;
-            this.rbNgay.CheckedChanged += new System.EventHandler(this.rbNgay_CheckedChanged);
+            this.rbNgayDaiTiec.AutoSize = true;
+            this.rbNgayDaiTiec.Location = new System.Drawing.Point(323, 23);
+            this.rbNgayDaiTiec.Name = "rbNgayDaiTiec";
+            this.rbNgayDaiTiec.Size = new System.Drawing.Size(108, 21);
+            this.rbNgayDaiTiec.TabIndex = 2;
+            this.rbNgayDaiTiec.TabStop = true;
+            this.rbNgayDaiTiec.Text = "Ngày đãi tiệc";
+            this.rbNgayDaiTiec.UseVisualStyleBackColor = true;
+            this.rbNgayDaiTiec.CheckedChanged += new System.EventHandler(this.rbNgay_CheckedChanged);
+            // 
+            // rbSoDT
+            // 
+            this.rbSoDT.AutoSize = true;
+            this.rbSoDT.Location = new System.Drawing.Point(235, 23);
+            this.rbSoDT.Name = "rbSoDT";
+            this.rbSoDT.Size = new System.Drawing.Size(66, 21);
+            this.rbSoDT.TabIndex = 2;
+            this.rbSoDT.TabStop = true;
+            this.rbSoDT.Text = "Số ĐT";
+            this.rbSoDT.UseVisualStyleBackColor = true;
+            this.rbSoDT.CheckedChanged += new System.EventHandler(this.rbSoDT_CheckedChanged);
             // 
             // rbTenCoDau
             // 
             this.rbTenCoDau.AutoSize = true;
-            this.rbTenCoDau.Location = new System.Drawing.Point(125, 23);
+            this.rbTenCoDau.Location = new System.Drawing.Point(120, 23);
             this.rbTenCoDau.Name = "rbTenCoDau";
-            this.rbTenCoDau.Size = new System.Drawing.Size(136, 29);
+            this.rbTenCoDau.Size = new System.Drawing.Size(98, 21);
             this.rbTenCoDau.TabIndex = 1;
             this.rbTenCoDau.TabStop = true;
             this.rbTenCoDau.Text = "Tên cô dâu";
@@ -85,7 +100,7 @@
             this.rbTenChuRe.AutoSize = true;
             this.rbTenChuRe.Location = new System.Drawing.Point(7, 23);
             this.rbTenChuRe.Name = "rbTenChuRe";
-            this.rbTenChuRe.Size = new System.Drawing.Size(131, 29);
+            this.rbTenChuRe.Size = new System.Drawing.Size(95, 21);
             this.rbTenChuRe.TabIndex = 0;
             this.rbTenChuRe.TabStop = true;
             this.rbTenChuRe.Text = "Tên chú rể";
@@ -96,8 +111,9 @@
             // 
             this.gbNhapTuKhoa.Controls.Add(this.dtpNgay);
             this.gbNhapTuKhoa.Controls.Add(this.btnTraCuu);
+            this.gbNhapTuKhoa.Controls.Add(this.txtSoDT);
             this.gbNhapTuKhoa.Controls.Add(this.txtTuKhoa);
-            this.gbNhapTuKhoa.Location = new System.Drawing.Point(340, 12);
+            this.gbNhapTuKhoa.Location = new System.Drawing.Point(455, 12);
             this.gbNhapTuKhoa.Name = "gbNhapTuKhoa";
             this.gbNhapTuKhoa.Size = new System.Drawing.Size(332, 57);
             this.gbNhapTuKhoa.TabIndex = 1;
@@ -108,7 +124,7 @@
             // 
             this.dtpNgay.Location = new System.Drawing.Point(6, 22);
             this.dtpNgay.Name = "dtpNgay";
-            this.dtpNgay.Size = new System.Drawing.Size(214, 30);
+            this.dtpNgay.Size = new System.Drawing.Size(214, 23);
             this.dtpNgay.TabIndex = 5;
             this.dtpNgay.Visible = false;
             // 
@@ -122,11 +138,20 @@
             this.btnTraCuu.UseVisualStyleBackColor = true;
             this.btnTraCuu.Click += new System.EventHandler(this.btnTraCuu_Click);
             // 
+            // txtSoDT
+            // 
+            this.txtSoDT.Location = new System.Drawing.Point(6, 22);
+            this.txtSoDT.Name = "txtSoDT";
+            this.txtSoDT.Size = new System.Drawing.Size(214, 23);
+            this.txtSoDT.TabIndex = 3;
+            this.txtSoDT.Visible = false;
+            this.txtSoDT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSoDT_KeyPress);
+            // 
             // txtTuKhoa
             // 
             this.txtTuKhoa.Location = new System.Drawing.Point(6, 22);
             this.txtTuKhoa.Name = "txtTuKhoa";
-            this.txtTuKhoa.Size = new System.Drawing.Size(214, 30);
+            this.txtTuKhoa.Size = new System.Drawing.Size(214, 23);
             this.txtTuKhoa.TabIndex = 3;
             // 
             // gbKetQuaTraCuu
@@ -134,7 +159,7 @@
             this.gbKetQuaTraCuu.Controls.Add(this.dgvKetQuaTraCuu);
             this.gbKetQuaTraCuu.Location = new System.Drawing.Point(12, 75);
             this.gbKetQuaTraCuu.Name = "gbKetQuaTraCuu";
-            this.gbKetQuaTraCuu.Size = new System.Drawing.Size(660, 224);
+            this.gbKetQuaTraCuu.Size = new System.Drawing.Size(775, 224);
             this.gbKetQuaTraCuu.TabIndex = 2;
             this.gbKetQuaTraCuu.TabStop = false;
             this.gbKetQuaTraCuu.Text = "Kết quả tra cứu";
@@ -154,15 +179,14 @@
             this.dgvKetQuaTraCuu.RowHeadersVisible = false;
             this.dgvKetQuaTraCuu.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
             this.dgvKetQuaTraCuu.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvKetQuaTraCuu.Size = new System.Drawing.Size(647, 195);
+            this.dgvKetQuaTraCuu.Size = new System.Drawing.Size(762, 195);
             this.dgvKetQuaTraCuu.TabIndex = 0;
-            this.dgvKetQuaTraCuu.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvKetQuaTraCuu_CellContentClick);
             // 
             // frmTraCuuTiecCuoi
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 311);
+            this.ClientSize = new System.Drawing.Size(799, 309);
             this.Controls.Add(this.gbKetQuaTraCuu);
             this.Controls.Add(this.gbNhapTuKhoa);
             this.Controls.Add(this.gbTraCuuTheo);
@@ -187,7 +211,7 @@
         #endregion
 
         private System.Windows.Forms.GroupBox gbTraCuuTheo;
-        private System.Windows.Forms.RadioButton rbNgay;
+        private System.Windows.Forms.RadioButton rbSoDT;
         private System.Windows.Forms.RadioButton rbTenCoDau;
         private System.Windows.Forms.RadioButton rbTenChuRe;
         private System.Windows.Forms.GroupBox gbNhapTuKhoa;
@@ -196,5 +220,7 @@
         private System.Windows.Forms.GroupBox gbKetQuaTraCuu;
         private System.Windows.Forms.DataGridView dgvKetQuaTraCuu;
         private System.Windows.Forms.DateTimePicker dtpNgay;
+        private System.Windows.Forms.RadioButton rbNgayDaiTiec;
+        private System.Windows.Forms.TextBox txtSoDT;
     }
 }
