@@ -8,6 +8,6 @@ namespace DTO
 {
     public class DTO_TraCuu
     {
-        public String key { get; set; }
+        public string key { get; set; }
     }
 }
