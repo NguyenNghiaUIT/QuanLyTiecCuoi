@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.gbDanhSachMonAn = new System.Windows.Forms.GroupBox();
-            this.dgvDanhSachMonAn = new System.Windows.Forms.DataGridView();
+            this.lstHinhAnh = new System.Windows.Forms.ListView();
             this.gbChucNang = new System.Windows.Forms.GroupBox();
             this.btnHuy = new System.Windows.Forms.Button();
             this.btnLuu = new System.Windows.Forms.Button();
@@ -42,46 +42,40 @@
             this.lbGhiChu = new System.Windows.Forms.Label();
             this.lbTenMonAn = new System.Windows.Forms.Label();
             this.gbThongTinMonAn = new System.Windows.Forms.GroupBox();
+            this.lbCaution = new System.Windows.Forms.Label();
+            this.lbThongTinHinhAnh = new System.Windows.Forms.Label();
+            this.ptrHinhAnh = new System.Windows.Forms.PictureBox();
+            this.lbCautionDonGia = new System.Windows.Forms.Label();
+            this.lbCautionTenMonAn = new System.Windows.Forms.Label();
             this.txtDonGia = new System.Windows.Forms.TextBox();
+            this.btnXoaAnh = new System.Windows.Forms.Button();
+            this.btnChonAnh = new System.Windows.Forms.Button();
+            this.lbHinhAnh = new System.Windows.Forms.Label();
             this.gbDanhSachMonAn.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDanhSachMonAn)).BeginInit();
             this.gbChucNang.SuspendLayout();
             this.gbThongTinMonAn.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptrHinhAnh)).BeginInit();
             this.SuspendLayout();
             // 
             // gbDanhSachMonAn
             // 
-            this.gbDanhSachMonAn.Controls.Add(this.dgvDanhSachMonAn);
-            this.gbDanhSachMonAn.Location = new System.Drawing.Point(12, 222);
+            this.gbDanhSachMonAn.Controls.Add(this.lstHinhAnh);
+            this.gbDanhSachMonAn.Location = new System.Drawing.Point(458, 12);
             this.gbDanhSachMonAn.Name = "gbDanhSachMonAn";
-            this.gbDanhSachMonAn.Size = new System.Drawing.Size(515, 226);
+            this.gbDanhSachMonAn.Size = new System.Drawing.Size(314, 450);
             this.gbDanhSachMonAn.TabIndex = 5;
             this.gbDanhSachMonAn.TabStop = false;
             this.gbDanhSachMonAn.Text = "Danh sách món ăn";
             // 
-            // dgvDanhSachMonAn
+            // lstHinhAnh
             // 
-            this.dgvDanhSachMonAn.AllowUserToAddRows = false;
-            this.dgvDanhSachMonAn.AllowUserToDeleteRows = false;
-            this.dgvDanhSachMonAn.AllowUserToResizeRows = false;
-            this.dgvDanhSachMonAn.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvDanhSachMonAn.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDanhSachMonAn.EnableHeadersVisualStyles = false;
-            this.dgvDanhSachMonAn.Location = new System.Drawing.Point(6, 22);
-            this.dgvDanhSachMonAn.MultiSelect = false;
-            this.dgvDanhSachMonAn.Name = "dgvDanhSachMonAn";
-            this.dgvDanhSachMonAn.ReadOnly = true;
-            this.dgvDanhSachMonAn.RowHeadersVisible = false;
-            this.dgvDanhSachMonAn.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
-            this.dgvDanhSachMonAn.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDanhSachMonAn.ShowCellErrors = false;
-            this.dgvDanhSachMonAn.ShowCellToolTips = false;
-            this.dgvDanhSachMonAn.ShowEditingIcon = false;
-            this.dgvDanhSachMonAn.ShowRowErrors = false;
-            this.dgvDanhSachMonAn.Size = new System.Drawing.Size(501, 198);
-            this.dgvDanhSachMonAn.TabIndex = 1;
-            this.dgvDanhSachMonAn.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDanhSachMonAn_CellClick);
-            this.dgvDanhSachMonAn.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvDanhSachMonAn_DataBindingComplete);
+            this.lstHinhAnh.BackColor = System.Drawing.Color.Gainsboro;
+            this.lstHinhAnh.Location = new System.Drawing.Point(6, 22);
+            this.lstHinhAnh.Name = "lstHinhAnh";
+            this.lstHinhAnh.Size = new System.Drawing.Size(302, 422);
+            this.lstHinhAnh.TabIndex = 0;
+            this.lstHinhAnh.UseCompatibleStateImageBehavior = false;
+            this.lstHinhAnh.SelectedIndexChanged += new System.EventHandler(this.lstHinhAnh_SelectedIndexChanged);
             // 
             // gbChucNang
             // 
@@ -90,7 +84,7 @@
             this.gbChucNang.Controls.Add(this.btnXoa);
             this.gbChucNang.Controls.Add(this.btnSua);
             this.gbChucNang.Controls.Add(this.btnThem);
-            this.gbChucNang.Location = new System.Drawing.Point(415, 12);
+            this.gbChucNang.Location = new System.Drawing.Point(340, 12);
             this.gbChucNang.Name = "gbChucNang";
             this.gbChucNang.Size = new System.Drawing.Size(112, 204);
             this.gbChucNang.TabIndex = 3;
@@ -151,7 +145,7 @@
             // lbDonGia
             // 
             this.lbDonGia.AutoSize = true;
-            this.lbDonGia.Location = new System.Drawing.Point(6, 72);
+            this.lbDonGia.Location = new System.Drawing.Point(33, 51);
             this.lbDonGia.Name = "lbDonGia";
             this.lbDonGia.Size = new System.Drawing.Size(57, 17);
             this.lbDonGia.TabIndex = 0;
@@ -159,23 +153,23 @@
             // 
             // txtTenMonAn
             // 
-            this.txtTenMonAn.Location = new System.Drawing.Point(111, 40);
+            this.txtTenMonAn.Location = new System.Drawing.Point(110, 22);
             this.txtTenMonAn.Name = "txtTenMonAn";
-            this.txtTenMonAn.Size = new System.Drawing.Size(280, 23);
+            this.txtTenMonAn.Size = new System.Drawing.Size(206, 23);
             this.txtTenMonAn.TabIndex = 1;
             // 
             // txtGhiChu
             // 
-            this.txtGhiChu.Location = new System.Drawing.Point(111, 98);
+            this.txtGhiChu.Location = new System.Drawing.Point(110, 80);
             this.txtGhiChu.Multiline = true;
             this.txtGhiChu.Name = "txtGhiChu";
-            this.txtGhiChu.Size = new System.Drawing.Size(280, 81);
+            this.txtGhiChu.Size = new System.Drawing.Size(206, 81);
             this.txtGhiChu.TabIndex = 3;
             // 
             // lbGhiChu
             // 
             this.lbGhiChu.AutoSize = true;
-            this.lbGhiChu.Location = new System.Drawing.Point(6, 101);
+            this.lbGhiChu.Location = new System.Drawing.Point(33, 83);
             this.lbGhiChu.Name = "lbGhiChu";
             this.lbGhiChu.Size = new System.Drawing.Size(57, 17);
             this.lbGhiChu.TabIndex = 0;
@@ -184,7 +178,7 @@
             // lbTenMonAn
             // 
             this.lbTenMonAn.AutoSize = true;
-            this.lbTenMonAn.Location = new System.Drawing.Point(6, 43);
+            this.lbTenMonAn.Location = new System.Drawing.Point(6, 25);
             this.lbTenMonAn.Name = "lbTenMonAn";
             this.lbTenMonAn.Size = new System.Drawing.Size(84, 17);
             this.lbTenMonAn.TabIndex = 0;
@@ -192,32 +186,126 @@
             // 
             // gbThongTinMonAn
             // 
+            this.gbThongTinMonAn.Controls.Add(this.lbCaution);
+            this.gbThongTinMonAn.Controls.Add(this.lbThongTinHinhAnh);
+            this.gbThongTinMonAn.Controls.Add(this.ptrHinhAnh);
+            this.gbThongTinMonAn.Controls.Add(this.lbCautionDonGia);
+            this.gbThongTinMonAn.Controls.Add(this.lbCautionTenMonAn);
             this.gbThongTinMonAn.Controls.Add(this.txtDonGia);
+            this.gbThongTinMonAn.Controls.Add(this.btnXoaAnh);
+            this.gbThongTinMonAn.Controls.Add(this.btnChonAnh);
             this.gbThongTinMonAn.Controls.Add(this.txtGhiChu);
+            this.gbThongTinMonAn.Controls.Add(this.lbHinhAnh);
             this.gbThongTinMonAn.Controls.Add(this.lbGhiChu);
             this.gbThongTinMonAn.Controls.Add(this.lbDonGia);
             this.gbThongTinMonAn.Controls.Add(this.txtTenMonAn);
             this.gbThongTinMonAn.Controls.Add(this.lbTenMonAn);
             this.gbThongTinMonAn.Location = new System.Drawing.Point(12, 12);
             this.gbThongTinMonAn.Name = "gbThongTinMonAn";
-            this.gbThongTinMonAn.Size = new System.Drawing.Size(397, 204);
+            this.gbThongTinMonAn.Size = new System.Drawing.Size(322, 450);
             this.gbThongTinMonAn.TabIndex = 4;
             this.gbThongTinMonAn.TabStop = false;
             this.gbThongTinMonAn.Text = "Thông tin món ăn";
             // 
+            // lbCaution
+            // 
+            this.lbCaution.AutoSize = true;
+            this.lbCaution.ForeColor = System.Drawing.Color.Red;
+            this.lbCaution.Location = new System.Drawing.Point(6, 426);
+            this.lbCaution.Name = "lbCaution";
+            this.lbCaution.Size = new System.Drawing.Size(200, 17);
+            this.lbCaution.TabIndex = 7;
+            this.lbCaution.Text = "(*) là những thông tin bắt buộc";
+            // 
+            // lbThongTinHinhAnh
+            // 
+            this.lbThongTinHinhAnh.AutoSize = true;
+            this.lbThongTinHinhAnh.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbThongTinHinhAnh.Location = new System.Drawing.Point(107, 410);
+            this.lbThongTinHinhAnh.Name = "lbThongTinHinhAnh";
+            this.lbThongTinHinhAnh.Size = new System.Drawing.Size(0, 16);
+            this.lbThongTinHinhAnh.TabIndex = 6;
+            // 
+            // ptrHinhAnh
+            // 
+            this.ptrHinhAnh.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.ptrHinhAnh.Location = new System.Drawing.Point(110, 203);
+            this.ptrHinhAnh.Name = "ptrHinhAnh";
+            this.ptrHinhAnh.Size = new System.Drawing.Size(206, 206);
+            this.ptrHinhAnh.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ptrHinhAnh.TabIndex = 5;
+            this.ptrHinhAnh.TabStop = false;
+            // 
+            // lbCautionDonGia
+            // 
+            this.lbCautionDonGia.AutoSize = true;
+            this.lbCautionDonGia.BackColor = System.Drawing.SystemColors.Control;
+            this.lbCautionDonGia.ForeColor = System.Drawing.Color.Red;
+            this.lbCautionDonGia.Location = new System.Drawing.Point(86, 51);
+            this.lbCautionDonGia.Name = "lbCautionDonGia";
+            this.lbCautionDonGia.Size = new System.Drawing.Size(13, 17);
+            this.lbCautionDonGia.TabIndex = 4;
+            this.lbCautionDonGia.Text = "*";
+            // 
+            // lbCautionTenMonAn
+            // 
+            this.lbCautionTenMonAn.AutoSize = true;
+            this.lbCautionTenMonAn.BackColor = System.Drawing.SystemColors.Control;
+            this.lbCautionTenMonAn.ForeColor = System.Drawing.Color.Red;
+            this.lbCautionTenMonAn.Location = new System.Drawing.Point(86, 25);
+            this.lbCautionTenMonAn.Name = "lbCautionTenMonAn";
+            this.lbCautionTenMonAn.Size = new System.Drawing.Size(13, 17);
+            this.lbCautionTenMonAn.TabIndex = 4;
+            this.lbCautionTenMonAn.Text = "*";
+            // 
             // txtDonGia
             // 
-            this.txtDonGia.Location = new System.Drawing.Point(111, 69);
+            this.txtDonGia.Location = new System.Drawing.Point(110, 51);
             this.txtDonGia.Name = "txtDonGia";
-            this.txtDonGia.Size = new System.Drawing.Size(280, 23);
+            this.txtDonGia.Size = new System.Drawing.Size(206, 23);
             this.txtDonGia.TabIndex = 2;
             this.txtDonGia.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDonGia_KeyPress);
+            // 
+            // btnXoaAnh
+            // 
+            this.btnXoaAnh.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnXoaAnh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnXoaAnh.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXoaAnh.Location = new System.Drawing.Point(216, 167);
+            this.btnXoaAnh.Name = "btnXoaAnh";
+            this.btnXoaAnh.Size = new System.Drawing.Size(100, 30);
+            this.btnXoaAnh.TabIndex = 4;
+            this.btnXoaAnh.Text = "Xoá ảnh";
+            this.btnXoaAnh.UseVisualStyleBackColor = true;
+            this.btnXoaAnh.Click += new System.EventHandler(this.btnXoaAnh_Click);
+            // 
+            // btnChonAnh
+            // 
+            this.btnChonAnh.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnChonAnh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnChonAnh.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChonAnh.Location = new System.Drawing.Point(110, 167);
+            this.btnChonAnh.Name = "btnChonAnh";
+            this.btnChonAnh.Size = new System.Drawing.Size(100, 30);
+            this.btnChonAnh.TabIndex = 4;
+            this.btnChonAnh.Text = "Chọn ảnh";
+            this.btnChonAnh.UseVisualStyleBackColor = true;
+            this.btnChonAnh.Click += new System.EventHandler(this.btnChonAnh_Click);
+            // 
+            // lbHinhAnh
+            // 
+            this.lbHinhAnh.AutoSize = true;
+            this.lbHinhAnh.Location = new System.Drawing.Point(25, 174);
+            this.lbHinhAnh.Name = "lbHinhAnh";
+            this.lbHinhAnh.Size = new System.Drawing.Size(65, 17);
+            this.lbHinhAnh.TabIndex = 0;
+            this.lbHinhAnh.Text = "Hình ảnh";
             // 
             // frmQuanLyMonAn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(539, 461);
+            this.ClientSize = new System.Drawing.Size(784, 474);
             this.Controls.Add(this.gbDanhSachMonAn);
             this.Controls.Add(this.gbChucNang);
             this.Controls.Add(this.gbThongTinMonAn);
@@ -231,10 +319,10 @@
             this.Text = "Quản Lý Món Ăn";
             this.Load += new System.EventHandler(this.frmQuanLyMonAn_Load);
             this.gbDanhSachMonAn.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDanhSachMonAn)).EndInit();
             this.gbChucNang.ResumeLayout(false);
             this.gbThongTinMonAn.ResumeLayout(false);
             this.gbThongTinMonAn.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptrHinhAnh)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -242,7 +330,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox gbDanhSachMonAn;
-        private System.Windows.Forms.DataGridView dgvDanhSachMonAn;
         private System.Windows.Forms.GroupBox gbChucNang;
         private System.Windows.Forms.Button btnHuy;
         private System.Windows.Forms.Button btnLuu;
@@ -256,5 +343,14 @@
         private System.Windows.Forms.Label lbTenMonAn;
         private System.Windows.Forms.GroupBox gbThongTinMonAn;
         private System.Windows.Forms.TextBox txtDonGia;
+        private System.Windows.Forms.Label lbCautionTenMonAn;
+        private System.Windows.Forms.Label lbCautionDonGia;
+        private System.Windows.Forms.PictureBox ptrHinhAnh;
+        private System.Windows.Forms.Label lbHinhAnh;
+        private System.Windows.Forms.Button btnChonAnh;
+        private System.Windows.Forms.Button btnXoaAnh;
+        private System.Windows.Forms.Label lbThongTinHinhAnh;
+        private System.Windows.Forms.Label lbCaution;
+        private System.Windows.Forms.ListView lstHinhAnh;
     }
 }
