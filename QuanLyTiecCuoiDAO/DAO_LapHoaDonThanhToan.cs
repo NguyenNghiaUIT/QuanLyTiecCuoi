@@ -63,7 +63,7 @@ namespace DAO
 
         public static DataTable GetChiTietDichVu(int maTiecCuoi)
         {
-            String sqlCommand = @"Select DV.TenDichVu, DV.DonGia, CT.SoLuong, CT.DonGia AS ThanhTien from DICHVU AS DV INNER JOIN CT_PHIEUDATDICHVU CT ON DV.MaDichVu = CT.MaDichVu WHERE CT.MaTiecCuoi = " + maTiecCuoi + "";
+            String sqlCommand = @"Select DV.TenDichVu, CT.DonGia, CT.SoLuong, (CT.DonGia * CT.SoLuong) AS ThanhTien from DICHVU AS DV INNER JOIN CT_PHIEUDATDICHVU CT ON DV.MaDichVu = CT.MaDichVu WHERE CT.MaTiecCuoi = " + maTiecCuoi + "";
             return DatabaseHelper.GetData(sqlCommand);
         }
 
@@ -93,7 +93,7 @@ namespace DAO
         public static decimal GetTongTienDichVu(int maTiecCuoi)
         {
             decimal tongTien = 0;
-            String sqlCommand = @"Select SUM(DonGia) AS TongTien from CT_PHIEUDATDICHVU where MaTiecCuoi = " +maTiecCuoi + "";
+            String sqlCommand = @"Select SUM(CT.DonGia * CT.SoLuong) AS TongTien from CT_PHIEUDATDICHVU AS CT where CT.MaTiecCuoi = " +maTiecCuoi + "";
             DataTable dataTable = DatabaseHelper.GetData(sqlCommand);
             if(dataTable != null && dataTable.Rows.Count > 0)
             {
@@ -137,15 +137,7 @@ namespace DAO
             DataTable dt = DatabaseHelper.GetData(@"SELECT DonGiaBanToiThieu FROM LoaiSanh WHERE MaLoaiSanh=(SELECT MaLoaiSanh FROM Sanh WHERE MaSanh='" + maSanh + "')");
             return dt.Rows[0]["DonGiaBanToiThieu"].ToString();
         }
-        public static DataTable GetCacDichVu(string MaHD)
-        {
-            string sqlCommand = string.Format(
-               "SELECT TenDichVu,SoLuong,DonGia,SoLuong*DonGia AS 'ThanhTien' FROM ChiTietDichVuTiecCuoi INNER JOIN DichVu ON ChiTietDichVuTiecCuoi.MaDichVu = DichVu.MaDichVu WHERE MaHD={0}"
-               , MaHD
-           );
-
-            return DatabaseHelper.GetData(sqlCommand);
-        }
+      
 
         public static bool UpdateTiecCuoi(DTO_TiecCuoi tiecCuoiInfo)
         {
