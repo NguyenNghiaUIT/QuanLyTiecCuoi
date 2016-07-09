@@ -11,21 +11,25 @@ namespace BUS
 {
     public class BUS_DichVu
     {
-        public static DataTable GetData()
+        public static DataTable GetDataTableDichVu()
         {
-            return DAO_DichVu.GetData();
+            return DAO_DichVu.GetDataTableDichVu();
         }
-        public static int Insert(DTO_DichVu dichVu)
+        public static bool InsertDichVu(DTO_DichVu dichVu)
         {
-            return DAO_DichVu.Insert(dichVu);
+            return DAO_DichVu.InsertDichVu(dichVu);
         }
-        public static int Update(DTO_DichVu dichVu)
+        public static bool UpdateDichVu(DTO_DichVu dichVu)
         {
-            return DAO_DichVu.Update(dichVu);
+            return DAO_DichVu.UpdateDichVu(dichVu);
         }
-        public static int Delete(DTO_DichVu dichVu)
+        public static bool DeleteDichVu(DTO_DichVu dichVu)
         {
-            return DAO_DichVu.Delete(dichVu);
+            return DAO_DichVu.DeleteDichVu(dichVu);
+        }
+        public static int LastIndex()
+        {
+            return DAO_DichVu.LastIndex();
         }
     }
 }

@@ -15,17 +15,21 @@ namespace BUS
         {
             return DAO_MonAn.GetDataTableMonAn();
         }
-        public static int InsertMonAn(DTO_MonAn monAn)
+        public static bool InsertMonAn(DTO_MonAn monAn)
         {
             return DAO_MonAn.InsertMonAn(monAn);
         }
-        public static int UpdateMonAn(DTO_MonAn monAn)
+        public static bool UpdateMonAn(DTO_MonAn monAn)
         {
             return DAO_MonAn.UpdateMonAn(monAn);
         }
-        public static int DeleteMonAn(DTO_MonAn monAn)
+        public static bool DeleteMonAn(DTO_MonAn monAn)
         {
             return DAO_MonAn.DeleteMonAn(monAn);
+        }
+        public static int LastIndex()
+        {
+            return DAO_MonAn.LastIndex();
         }
     }
 }

@@ -15,6 +15,7 @@ namespace BUS
         {
             return DAO_TraCuu.GetData(key);
         }
+        #region TraCuu_TiecCuoi
         public static DataTable TraCuuTenChuRe(DTO_TraCuu key)
         {
             return DAO_TraCuu.TraCuuTenChuRe(key);
@@ -23,9 +24,22 @@ namespace BUS
         {
             return DAO_TraCuu.TraCuuTenCoDau(key);
         }
+        public static DataTable TraCuuSoDT(DTO_TraCuu key)
+        {
+            return DAO_TraCuu.TraCuuSoDT(key);
+        }
         public static DataTable TraCuuNgay(DTO_TraCuu key)
         {
             return DAO_TraCuu.TraCuuNgay(key);
         }
+        #endregion
+
+        #region TraCuu_MonAn
+        public static DataTable TraCuuMonAn(DTO_TraCuu key)
+        {
+            return DAO_TraCuu.TraCuuMonAn(key);
+        }
+        #endregion
+
     }
 }
