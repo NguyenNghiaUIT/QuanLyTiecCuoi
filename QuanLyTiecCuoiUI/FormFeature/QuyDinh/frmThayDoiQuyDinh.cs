@@ -50,7 +50,7 @@ namespace QuanLyTiecCuoiUI.FormFeature.QuyDinh
             cbApDung.Enabled = false;
             
            
-            DTO_ThamSo thamSo = BUS.BUS_ThamSo.GetAllThamSo();
+            DTO_ThamSo thamSo = BUS.BUS_ThamSo.GetThamSo();
             txtTenQuyDinh.Text = thamSo.TenQuyDinh;
             txtGiaTri.Text = thamSo.GiaTri.ToString();
 
@@ -96,7 +96,7 @@ namespace QuanLyTiecCuoiUI.FormFeature.QuyDinh
                             mStateMode = STATE_MODE.EDIT;
                             btnEditQuyDinh.Text = "Sửa";
 
-                            DTO_ThamSo thamSo = BUS.BUS_ThamSo.GetAllThamSo();
+                            DTO_ThamSo thamSo = BUS.BUS_ThamSo.GetThamSo();
                             txtGiaTri.Text = thamSo.GiaTri.ToString();
                             cbApDung.Checked = cbApDung.Checked;
                         }

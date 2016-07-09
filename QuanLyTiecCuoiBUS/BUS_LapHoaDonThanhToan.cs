@@ -10,9 +10,6 @@ namespace BUS
 {
     public class BUS_LapHoaDonThanhToan
     {
-        private static List<string> mListTenChuRe = new List<string>();
-        private static List<string> mListTenCoDau = new List<string>();
-        private static List<string> mListMaKH = new List<string>();
         private static int mSoLuongBan;
         private static Int64 mDonGiaBan;
         private static DataTable mTableCacDichVu;
@@ -23,30 +20,28 @@ namespace BUS
         private static Int64 mTienConLai;
 
 
+        public static DataTable GetAllTiecCuoi(string ngayDaiTiec)
+        {
+            return DAO.DAO_LapHoaDonThanhToan.GetAllTiecCuoi(ngayDaiTiec);
+        }
+
+       
+
+        public static DTO.DTO_TiecCuoi GetTiecCuoi(String tenChuRe, String tenCoDau, String ngayDaiTiec)
+        {
+            return DAO.DAO_LapHoaDonThanhToan.GetTiecCuoi(tenChuRe, tenCoDau, ngayDaiTiec);
+        }
         public static DataTable GetAllTiecCuoi()
         {
             return DAO.DAO_LapHoaDonThanhToan.GetAllTiecCuoi();
         }
 
-        public static DTO.DTO_TiecCuoi GetTiecCuoi(String tenChuRe, String tenCoDau)
-        {
-            return DAO.DAO_LapHoaDonThanhToan.GetTiecCuoi(tenChuRe, tenCoDau);
-        }
+        //public static DTO.DTO_TiecCuoi GetTiecCuoi(String tenChuRe, String tenCoDau)
+        //{
+        //    return DAO.DAO_LapHoaDonThanhToan.GetTiecCuoi(tenChuRe, tenCoDau);
+        //}
 
-        public static DataTable GetAllHoaDon()
-        {
-            return DAO.DAO_LapHoaDonThanhToan.GetAllHoaDon();
-        }
-
-        public static bool InsertHoaDon(DTO.DTO_HoaDon hoaDon)
-        {
-            return DAO.DAO_LapHoaDonThanhToan.InsertHoaDon(hoaDon);
-        }
-
-        public static bool UpdateHoaDon(DTO.DTO_HoaDon hoaDon)
-        {
-            return DAO.DAO_LapHoaDonThanhToan.UpdateHoaDon(hoaDon);
-        }
+      
 
         public static bool UpdateSoTienConLai(DTO.DTO_HoaDon hoaDon)
         {
@@ -58,6 +53,11 @@ namespace BUS
             return DAO.DAO_LapHoaDonThanhToan.GetPhieuDatBan(maTiecCuoi);
         }
 
+
+         public static decimal GetTongTienDichVu(int maTiecCuoi)
+        {
+            return DAO.DAO_LapHoaDonThanhToan.GetTongTienDichVu(maTiecCuoi);
+        }
         public static DataTable GetChiTietDichVu(int maTiecCuoi)
         {
             return DAO.DAO_LapHoaDonThanhToan.GetChiTietDichVu(maTiecCuoi);
@@ -68,24 +68,8 @@ namespace BUS
             return DAO.DAO_LapHoaDonThanhToan.GetChiTietDatBan(maPhieuDatBan);
         }
 
-        static BUS_LapHoaDonThanhToan()
-        {
-            DataTable dt = DAO_LapHoaDonThanhToan.GetTableTenChuReAndTenCoDau();
-            foreach (DataRow dr in dt.Rows)
-            {
-                mListMaKH.Add(dr["MaKH"].ToString());
-                mListTenChuRe.Add(dr["TenChuRe"].ToString());
-                mListTenCoDau.Add(dr["TenCoDau"].ToString());
-            }
-        }
-        public static List<string> GetListTenChuRe()
-        {
-            return mListTenChuRe;
-        }
-        public static List<string> GetListTenCoDau()
-        {
-            return mListTenCoDau;
-        }
+     
+    
         public static List<string> GetListNgayDatTiec(string tenChuRe)
         {
             List<string> listNgayDatTiec = new List<string>();
@@ -126,39 +110,16 @@ namespace BUS
         {
             return mTienConLai;
         }
-        public static void GetHoaDon(string tenChuRe, string ngayDatTiec)
+
+
+        public static bool UpdateTiecCuoi(DTO.DTO_TiecCuoi tiecCuoiInfo)
         {
-            ngayDatTiec = ConvertNgayDatTiec(ngayDatTiec);
-            // MaSanh,SoLuongBan,MaiHD,TienCoc
-            DataTable dt = DAO_LapHoaDonThanhToan.GetTableHDTCCustom(mListMaKH[mListTenChuRe.IndexOf(tenChuRe)], ngayDatTiec);
-
-            mSoLuongBan = int.Parse(dt.Rows[0]["SoLuongBan"].ToString());
-
-            string maSanh = dt.Rows[0]["MaSanh"].ToString();
-            mDonGiaBan = Int64.Parse(DAO_LapHoaDonThanhToan.GetDonGiaBanTT(maSanh));
-
-            mTongTienBan = mSoLuongBan * mDonGiaBan;
-
-            string maHD = dt.Rows[0]["MaHD"].ToString();
-            mTableCacDichVu = DAO_LapHoaDonThanhToan.GetCacDichVu(maHD);
-
-            mTongTienDichVu = 0;
-            foreach (DataRow dr in mTableCacDichVu.Rows)
-            {
-                mTongTienDichVu += Int64.Parse(dr["ThanhTien"].ToString());
-            }
-
-            mTongTienHoaDon = mTongTienBan + mTongTienDichVu;
-
-            mTienDatCoc = Int64.Parse(dt.Rows[0]["TienCoc"].ToString());
-
-            mTienConLai = mTongTienHoaDon - mTienDatCoc;
+           return DAO.DAO_LapHoaDonThanhToan.UpdateTiecCuoi(tiecCuoiInfo);
         }
 
-        private static string ConvertNgayDatTiec(string ngayDatTiec)
+        public static bool IsLapHoaDonThanhToan(int maTiecCuoi)
         {
-            List<string> list = ngayDatTiec.Split('/').ToList();
-            return list[2] + '/' + list[1] + '/' + list[0];
+            return DAO.DAO_LapHoaDonThanhToan.IsLapHoaDonThanhToan(maTiecCuoi);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace BUS
 
         public static bool IsLoaded = false;
         public static DTO_ThamSo ThamSo;
-        public static DTO_ThamSo GetAllThamSo()
+        public static DTO_ThamSo GetThamSo()
         {
             //DataTable dataTable = DAO.DAO_ThamSo.GetAllThamSo();
             //if (dataTable != null)
@@ -23,20 +23,22 @@ namespace BUS
             //IsLoaded = true;
             if (!IsLoaded)
             {
-                DataTable dataTable = DAO.DAO_ThamSo.GetAllThamSo();
+                DataTable dataTable = DAO.DAO_ThamSo.GetThamSo();
                 if (dataTable != null)
                 {
                     if (ThamSo == null)
                         ThamSo = new DTO_ThamSo();
                     try
                     {
-                        //ThamSo.TenQuyDinh = dataTable.Rows[0].ClColumns[0].ToString();
-                        //ThamSo.GiaTri = float.Parse(dataTable.Rows[0].Columns[1].ToString());
-                        DataRow row = dataTable.Rows[0];
-                        ThamSo.TenQuyDinh = row.ItemArray[0].ToString();
-                        ThamSo.GiaTri = float.Parse(row.ItemArray[1].ToString());
+                        if (dataTable.Rows.Count > 0)
+                        {
+                            DataRow row = dataTable.Rows[0];
+                            ThamSo.TenQuyDinh = row.ItemArray[0].ToString();
+                            ThamSo.GiaTri = float.Parse(row.ItemArray[1].ToString());
 
-                        IsLoaded = true;
+                            IsLoaded = true;
+                        }
+                     
                     }
                     catch (Exception)
                     {

@@ -12,7 +12,7 @@ namespace DAO
     {
         public const String COLUMN_TENQUYDINH = "TenQuyDinh";
         public const String COLUMN_GIATRI = "GiaTri";
-       public static DataTable GetAllThamSo(){
+       public static DataTable GetThamSo(){
            DataTable data = DatabaseHelper.GetData(@"select * from ThamSo");
            return data;
        }

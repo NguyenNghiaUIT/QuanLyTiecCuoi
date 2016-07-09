@@ -11,6 +11,11 @@ namespace DAO
     public class DAO_LapHoaDonThanhToan
     {
 
+        public static DataTable GetAllTiecCuoi(string ngayDaiTiec)
+        {
+            string sqlCommand = String.Format(@"Select * from TIECCUOI where NgayDaiTiec = '{0}'", ngayDaiTiec);
+            return DatabaseHelper.GetData(sqlCommand);
+        }
 
         public static DataTable GetAllTiecCuoi()
         {
@@ -18,54 +23,35 @@ namespace DAO
             return DatabaseHelper.GetData(sqlCommand);
         }
 
-        public static DTO.DTO_TiecCuoi GetTiecCuoi(String tenChuRe, String tenCoDau)
+        public static DTO.DTO_TiecCuoi GetTiecCuoi(String tenChuRe, String tenCoDau, string ngayDaiTiec)
         {
             DTO_TiecCuoi tiecCuoi = null;
-            String sqlCommand = String.Format("Select * form TiecCuoi where TenChuRe = N'{0}' AND TenCoDau = N'{1}'", tenChuRe, tenCoDau);
+            String sqlCommand = String.Format("Select * from TIECCUOI where TenChuRe = N'{0}' AND TenCoDau = N'{1}' AND NgayDaiTiec = '{2}'", tenChuRe, tenCoDau, ngayDaiTiec);
             DataTable dataTable = DatabaseHelper.GetData(sqlCommand);
             if (dataTable != null)
             {
-                tiecCuoi = new DTO_TiecCuoi();
-
-                DataRow dataRow = dataTable.Rows[0];
-                tiecCuoi.MaTiecCuoi = int.Parse(dataRow["MaTiecCuoi"].ToString());
-                tiecCuoi.TenChuRe = dataRow["TenChuRe"].ToString();
-                tiecCuoi.TenCoDau = dataRow["TenCoDau"].ToString();
-                tiecCuoi.DienThoai = dataRow["DienThoai"].ToString();
-                tiecCuoi.NgayDatTiec = dataRow["NgayDatTiec"].ToString();
-                tiecCuoi.NgayDaiTiec = dataRow["NgayDaiTiec"].ToString();
-                tiecCuoi.MaCa = int.Parse(dataRow["MaCa"].ToString());
-                tiecCuoi.MaSanh = int.Parse(dataRow["MaSanh"].ToString());
-                tiecCuoi.TienCoc = decimal.Parse(dataRow["TienCoc"].ToString());
-                tiecCuoi.GhiChu = dataRow["GhiChu"].ToString();
-                tiecCuoi.MaNV = int.Parse(dataRow["MaNV"].ToString());
+                if (dataTable.Rows.Count > 0)
+                {
+                    tiecCuoi = new DTO_TiecCuoi();
+                    DataRow dataRow = dataTable.Rows[0];
+                    tiecCuoi.MaTiecCuoi = int.Parse(dataRow["MaTiecCuoi"].ToString());
+                    tiecCuoi.TenChuRe = dataRow["TenChuRe"].ToString();
+                    tiecCuoi.TenCoDau = dataRow["TenCoDau"].ToString();
+                    tiecCuoi.DienThoai = dataRow["DienThoai"].ToString();
+                    tiecCuoi.NgayDatTiec = dataRow["NgayDatTiec"].ToString();
+                    tiecCuoi.NgayDaiTiec = dataRow["NgayDaiTiec"].ToString();
+                    tiecCuoi.MaCa = int.Parse(dataRow["MaCa"].ToString());
+                    tiecCuoi.MaSanh = int.Parse(dataRow["MaSanh"].ToString());
+                    tiecCuoi.TienCoc = decimal.Parse(dataRow["TienCoc"].ToString());
+                    tiecCuoi.GhiChu = dataRow["GhiChu"].ToString();
+                    tiecCuoi.MaNV = int.Parse(dataRow["MaNV"].ToString());
+                }
+               
             }
             return tiecCuoi;
         }
 
-        public static DataTable GetAllHoaDon()
-        {
-            String sqlCommand = @"Select * from HoaDon";
-            return DatabaseHelper.GetData(sqlCommand);
-        }
 
-        public static bool InsertHoaDon(DTO.DTO_HoaDon hoaDon)
-        {
-            String sqlCommand = String.Format(@"INSERT INTO HoaDon (SoHoadon, MaTiecCuoi, NgayThanhToan, TongTienBan, TongTienDichVu, TongTienHoaDon, ConLai)" +
-                "VALUES ({0}, {1}, '{2}', {3}, {4}, {5}, {6})", hoaDon.SoHoaDon, hoaDon.MaTiecCuoi, hoaDon.NgayThanhToan, hoaDon.TongTienBan, hoaDon.TongTienDichVu, hoaDon.TongTienHoaDon, hoaDon.ConLai);
-
-            if (DatabaseHelper.ExcuteSql(sqlCommand) == 1)
-                return true;
-            return false;
-        }
-
-        public static bool UpdateHoaDon(DTO.DTO_HoaDon hoaDon)
-        {
-            String sqlCommand = String.Format("UPDATE HoaDon set MATIECCUOI ={0}, NgayThanhToan = {1}, TongTienBan = {2}, TongTienDichVu = {3}, TongTienHoaDon = {4} ConLai = {5} WHERE SoHoaDon = {6}", hoaDon.MaTiecCuoi, hoaDon.NgayThanhToan, hoaDon.TongTienBan, hoaDon.TongTienDichVu, hoaDon.TongTienHoaDon, hoaDon.ConLai, hoaDon.SoHoaDon);
-            if (DatabaseHelper.ExcuteSql(sqlCommand) > 0)
-                return true;
-            return false;
-        }
 
         public static bool UpdateSoTienConLai(DTO.DTO_HoaDon hoaDon)
         {
@@ -77,7 +63,7 @@ namespace DAO
 
         public static DataTable GetChiTietDichVu(int maTiecCuoi)
         {
-            String sqlCommand = @"Select * from DICHVU INNER JOIN CT_PHIEUDATDICHVU ON DICHVU.MaDichVu = CT_PHIEUDATDICHVU.MaDichVu WHERE CT_PHIEUDATDICHVU.MaTiecCuoi = " + maTiecCuoi + "";
+            String sqlCommand = @"Select DV.TenDichVu, DV.DonGia, CT.SoLuong, CT.DonGia AS ThanhTien from DICHVU AS DV INNER JOIN CT_PHIEUDATDICHVU CT ON DV.MaDichVu = CT.MaDichVu WHERE CT.MaTiecCuoi = " + maTiecCuoi + "";
             return DatabaseHelper.GetData(sqlCommand);
         }
 
@@ -89,22 +75,36 @@ namespace DAO
             DataTable dataTable = DatabaseHelper.GetData(sqlCommand);
             if (dataTable != null)
             {
-                DataRow dataRow = dataTable.Rows[0];
-                phieuDatBan = new DTO_PhieuDatBan();
-                phieuDatBan.MaTiecCuoi = maTiecCuoi;
-                phieuDatBan.MaPhieuDatBan = int.Parse(dataRow["MaPhieuDatBan"].ToString());
-                phieuDatBan.SoBan = int.Parse(dataRow["SoBan"].ToString());
-                phieuDatBan.SoBanDuTru = int.Parse(dataRow["SoBanDuTru"].ToString());
-                phieuDatBan.GhiChu = dataRow["GhiChu"].ToString();
-                phieuDatBan.DonGiaBan = decimal.Parse(dataRow["DonGiaBan"].ToString());
-
+                if (dataTable.Rows.Count > 0)
+                {
+                    DataRow dataRow = dataTable.Rows[0];
+                    phieuDatBan = new DTO_PhieuDatBan();
+                    phieuDatBan.MaTiecCuoi = maTiecCuoi;
+                    phieuDatBan.MaPhieuDatBan = int.Parse(dataRow["MaPhieuDatBan"].ToString());
+                    phieuDatBan.SoBan = int.Parse(dataRow["SoBan"].ToString());
+                    phieuDatBan.SoBanDuTru = int.Parse(dataRow["SoBanDuTru"].ToString());
+                    phieuDatBan.GhiChu = dataRow["GhiChu"].ToString();
+                    phieuDatBan.DonGiaBan = decimal.Parse(dataRow["DonGiaBan"].ToString());
+                }
             }
             return phieuDatBan;
         }
 
+        public static decimal GetTongTienDichVu(int maTiecCuoi)
+        {
+            decimal tongTien = 0;
+            String sqlCommand = @"Select SUM(DonGia) AS TongTien from CT_PHIEUDATDICHVU where MaTiecCuoi = " +maTiecCuoi + "";
+            DataTable dataTable = DatabaseHelper.GetData(sqlCommand);
+            if(dataTable != null && dataTable.Rows.Count > 0)
+            {
+                tongTien = decimal.Parse(dataTable.Rows[0]["TongTien"].ToString());
+            }
+            return tongTien;
+        }
+
         public static DataTable GetChiTietDatBan(int maPhieuDatBan)
         {
-            String sqlCommand = String.Format(@"SELECT * FROM CT_PHIEUDATBAN INNER JOIN MONAN ON CT_PHIEUDATBAN.MaMonAn = MonAn.MaMonAn WHERE CT_PHIEUDATBAN.MaPhieuDatBan = {0}", maPhieuDatBan);
+            String sqlCommand = String.Format(@"SELECT MA.TenMonAn, MA.DonGia, CT.DonGia  FROM CT_PHIEUDATBAN AS CT INNER JOIN MONAN AS MA ON CT.MaMonAn = MA.MaMonAn WHERE CT.MaPhieuDatBan = {0}", maPhieuDatBan);
             return DatabaseHelper.GetData(sqlCommand);
         }
 
@@ -130,7 +130,6 @@ namespace DAO
                 "SELECT MaSanh,SoLuongBan,MaHD,TienCoc FROM HoaDonTiecCuoi WHERE MaKH={0} AND CAST(Ngay AS DATE)='{1}'"
                 , MaKH, ngayDatTiec
             );
-
             return DatabaseHelper.GetData(sqlCommand);
         }
         public static string GetDonGiaBanTT(string maSanh)
@@ -146,6 +145,25 @@ namespace DAO
            );
 
             return DatabaseHelper.GetData(sqlCommand);
+        }
+
+        public static bool UpdateTiecCuoi(DTO_TiecCuoi tiecCuoiInfo)
+        {
+            String sqlCommand = String.Format(@"UPDATE TIECCUOI SET TinhTrangTiec = {0} WHERE MaTiecCuoi = {1}", tiecCuoiInfo.TinhTrangTiec, tiecCuoiInfo.MaTiecCuoi);
+            if (DatabaseHelper.ExcuteSql(sqlCommand) > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public static bool IsLapHoaDonThanhToan(int maTiecCuoi)
+        {
+           List<DTO.DTO_HoaDon> hoaDons = DAO_HoaDon.GetAllHoaDon(maTiecCuoi);
+           if (hoaDons != null && hoaDons.Count > 0)
+               return true;
+           return false;
+
         }
     }
 }

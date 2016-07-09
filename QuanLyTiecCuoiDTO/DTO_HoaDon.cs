@@ -10,10 +10,11 @@ namespace DTO
     {
         public int SoHoaDon { get; set; }
         public int MaTiecCuoi { get; set; }
-        public DateTime NgayThanhToan { get; set; }
+        public String NgayThanhToan { get; set; }
         public decimal TongTienBan { get; set; }
         public decimal TongTienDichVu { get; set; }
         public decimal TongTienHoaDon { get; set; }
+        public decimal TienDaThanhToan { get; set; }
         public decimal ConLai { get; set; }
         public DTO_HoaDon()
         {
