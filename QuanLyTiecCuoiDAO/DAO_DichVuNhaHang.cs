@@ -11,7 +11,7 @@ namespace DAO
     {
         public static DataTable GetDataDichVu()
         {
-            string sTruyVan = @"Select * from DichVu";
+            string sTruyVan = @"Select * from DICHVU";
             return DatabaseHelper.GetData(sTruyVan);
         }
 

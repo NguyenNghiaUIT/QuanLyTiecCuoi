@@ -12,26 +12,62 @@ namespace DAO
     {
         public static DataTable GetDataTableMonAn()
         {
-            string query = @"SELECT * FROM MonAn";
+            string query = @"SELECT * FROM MONAN";
             return DatabaseHelper.GetData(query);
         }
 
-        public static int InsertMonAn(DTO_MonAn monAn)
+        public static bool InsertMonAn(DTO_MonAn monAn)
         {
-            string query = String.Format(@"INSERT INTO MonAn (TenMonAn, DonGia, GhiChu) VALUES (N'{0}', {1}, N'{2}')",
-                monAn.TenMonAn, monAn.DonGia, monAn.GhiChu);
-            return DatabaseHelper.ExcuteSql(query);
+            string query = String.Format(@"INSERT INTO MONAN (TenMonAn, DonGia, GhiChu, HinhAnh) VALUES (N'{0}', {1}, N'{2}', N'{3}')",
+                monAn.TenMonAn, monAn.DonGia, monAn.GhiChu, monAn.HinhAnh);
+            try
+            {
+                int state = DatabaseHelper.ExcuteSql(query);
+                if (state > 0)
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            return false;
         }
-        public static int UpdateMonAn(DTO_MonAn monAn)
+
+        public static bool UpdateMonAn(DTO_MonAn monAn)
         {
-            string query = String.Format(@"UPDATE MonAn SET TenMonAn=N'{0}', DonGia={1}, GhiChu=N'{2}' WHERE MaMonAn={3}",
-                monAn.TenMonAn, monAn.DonGia, monAn.GhiChu, monAn.MaMonAn);
-            return DatabaseHelper.ExcuteSql(query);
+            string query = String.Format(@"UPDATE MONAN SET TenMonAn=N'{0}', DonGia={1}, GhiChu=N'{2}', HinhAnh=N'{3}' WHERE MaMonAn={4}",
+                monAn.TenMonAn, monAn.DonGia, monAn.GhiChu, monAn.HinhAnh, monAn.MaMonAn);
+            try
+            {
+                int state = DatabaseHelper.ExcuteSql(query);
+                if (state > 0)
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            return false;
         }
-        public static int DeleteMonAn(DTO_MonAn monAn)
+        public static bool DeleteMonAn(DTO_MonAn monAn)
         {
             string query = String.Format(@"DELETE FROM MonAn WHERE MaMonAn={0}", monAn.MaMonAn);
-            return DatabaseHelper.ExcuteSql(query);
+            try
+            {
+                int state = DatabaseHelper.ExcuteSql(query);
+                if (state > 0)
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            return false;
+        }
+        public static int LastIndex()
+        {
+            string query = string.Format(@"SELECT TOP 1 MaMonAn FROM MONAN ORDER BY MaMonAn DESC");
+            return (int)DatabaseHelper.GetData(query).Rows[0].ItemArray[0];
         }
     }
 }
